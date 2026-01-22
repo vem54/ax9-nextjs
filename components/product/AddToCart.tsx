@@ -6,19 +6,21 @@ import Button from '@/components/ui/Button';
 interface AddToCartProps {
   variantId: string;
   availableForSale: boolean;
+  quantity?: number;
 }
 
-export default function AddToCart({ variantId, availableForSale }: AddToCartProps) {
+export default function AddToCart({ variantId, availableForSale, quantity = 1 }: AddToCartProps) {
   const { addToCart, isLoading } = useCartStore();
 
   const handleAddToCart = () => {
-    addToCart(variantId);
+    addToCart(variantId, quantity);
   };
 
-  if (!availableForSale) {
+  if (!variantId || !availableForSale) {
+    const label = !variantId ? 'Select Option' : 'Sold Out';
     return (
       <Button variant="secondary" disabled className="w-full">
-        Sold Out
+        {label}
       </Button>
     );
   }

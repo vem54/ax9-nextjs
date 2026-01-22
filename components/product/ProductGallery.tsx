@@ -31,6 +31,8 @@ export default function ProductGallery({ images, productTitle }: ProductGalleryP
             <button
               key={image.url}
               onClick={() => setSelectedIndex(index)}
+              aria-label={`View image ${index + 1}`}
+              aria-pressed={selectedIndex === index}
               className={`shrink-0 w-16 h-[85px] md:w-20 md:h-[107px] border ${
                 selectedIndex === index ? 'border-black' : 'border-transparent'
               }`}

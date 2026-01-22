@@ -126,6 +126,7 @@ export default async function HomePage() {
                     loop
                     muted
                     playsInline
+                    preload="none"
                     poster={products[0].featuredImage.url}
                   >
                     <source src={heroVideoSrc} type="video/mp4" />

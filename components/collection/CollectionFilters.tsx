@@ -49,19 +49,19 @@ export default function CollectionFilters({
   };
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
+    <div className="flex flex-col gap-4 mb-6 pb-4 border-b border-gray-100 md:flex-row md:items-center md:justify-between">
       {/* Product count */}
-      <p className="text-sm text-gray-500">{productCount} products</p>
+      <p className="text-xs uppercase tracking-widest text-gray-500">{productCount} products</p>
 
       {/* Filters */}
-      <div className="flex items-center gap-4">
+      <div className="flex flex-wrap items-center gap-4">
         {/* Availability filter */}
         <div className="flex items-center gap-2">
-          <label className="text-sm text-gray-500">Availability:</label>
+          <label className="text-xs uppercase tracking-widest text-gray-500">Availability</label>
           <select
             value={currentAvailability || ''}
             onChange={(e) => handleAvailabilityChange(e.target.value)}
-            className="text-sm border border-black px-2 py-1 bg-white"
+            className="select text-sm"
           >
             <option value="">All</option>
             <option value="in-stock">In Stock</option>
@@ -70,11 +70,11 @@ export default function CollectionFilters({
 
         {/* Sort */}
         <div className="flex items-center gap-2">
-          <label className="text-sm text-gray-500">Sort by:</label>
+          <label className="text-xs uppercase tracking-widest text-gray-500">Sort</label>
           <select
             value={currentSort || ''}
             onChange={(e) => handleSortChange(e.target.value)}
-            className="text-sm border border-black px-2 py-1 bg-white"
+            className="select text-sm"
           >
             {sortOptions.map((option) => (
               <option key={option.value} value={option.value}>

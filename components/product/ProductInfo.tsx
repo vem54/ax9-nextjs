@@ -34,6 +34,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
   });
 
   const [selectedOptions, setSelectedOptions] = useState(initialOptions);
+  const [quantity, setQuantity] = useState(1);
 
   // Find the selected variant
   const selectedVariant = useMemo(() => {
@@ -51,6 +52,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
   const price = selectedVariant?.price || product.priceRange.minVariantPrice;
   const compareAtPrice = selectedVariant?.compareAtPrice;
   const hasDiscount = compareAtPrice && parseFloat(compareAtPrice.amount) > parseFloat(price.amount);
+  const displayCurrency = price.currencyCode === 'THB' ? 'USD' : price.currencyCode;
 
   const sizeChartData = useMemo<SizeChartData | null>(() => {
     if (!product.sizeChart?.value) return null;
@@ -85,6 +87,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           <p className="text-xl md:text-2xl">
             {formatPrice(price.amount, price.currencyCode)}
           </p>
+          <span className="text-xs text-gray-500">{displayCurrency}</span>
           {hasDiscount && (
             <p className="text-sm text-gray-500 line-through">
               {formatPrice(compareAtPrice.amount, compareAtPrice.currencyCode)}
@@ -92,16 +95,6 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           )}
         </div>
       </div>
-
-      {/* Description */}
-      {product.descriptionHtml && (
-        <div className="border-b border-gray-100 py-6">
-          <div
-            className="product-richtext text-sm text-gray-500 leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
-          />
-        </div>
-      )}
 
       {/* Variant selector */}
       <div className="border-b border-gray-100 py-6">
@@ -113,18 +106,41 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         />
       </div>
 
-      {/* Add to cart */}
-      <div className="border-b border-gray-100 py-6">
+      {/* Quantity + Add to cart */}
+      <div className="border-b border-gray-100 py-6 space-y-4">
+        <div className="flex items-center justify-between">
+          <span className="text-xs uppercase tracking-widest text-gray-500">Quantity</span>
+          <div className="flex items-center border border-black">
+            <button
+              type="button"
+              onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
+              className="w-10 h-10 flex items-center justify-center text-sm hover:bg-gray-100"
+              aria-label="Decrease quantity"
+            >
+              -
+            </button>
+            <span className="w-10 text-center text-sm">{quantity}</span>
+            <button
+              type="button"
+              onClick={() => setQuantity((prev) => Math.min(10, prev + 1))}
+              className="w-10 h-10 flex items-center justify-center text-sm hover:bg-gray-100"
+              aria-label="Increase quantity"
+            >
+              +
+            </button>
+          </div>
+        </div>
         <AddToCart
           variantId={selectedVariant?.id || ''}
           availableForSale={selectedVariant?.availableForSale || false}
+          quantity={quantity}
         />
       </div>
 
       {/* Fit and sizing */}
       <div className="border-b border-gray-100 py-6">
         <p className="text-xs uppercase tracking-widest text-gray-500 mb-3">
-          Fit and Sizing
+          Size and Fit
         </p>
         <div className="flex items-center justify-between">
           <span className="text-xs text-gray-500">Size guide</span>
@@ -162,6 +178,19 @@ export default function ProductInfo({ product }: ProductInfoProps) {
               </div>
             ))}
           </dl>
+        </div>
+      )}
+
+      {/* Details */}
+      {product.descriptionHtml && (
+        <div className="border-b border-gray-100 py-6">
+          <p className="text-xs uppercase tracking-widest text-gray-500 mb-3">
+            Product Details
+          </p>
+          <div
+            className="product-richtext text-sm text-gray-500 leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+          />
         </div>
       )}
 

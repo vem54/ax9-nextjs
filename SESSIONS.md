@@ -557,6 +557,39 @@ Refined PDP layout, hierarchy, and content structure to remove clutter and impro
 
 ---
 
+## Session 18 - 2026-01-22
+
+### Summary
+Polished PDP, collections, and search with breadcrumbs, quantity controls, and cleaner filters.
+
+### Accomplishments
+- Added quantity control and product details section on PDP
+- Added breadcrumbs for PDP, collections, and search pages
+- Displayed price ranges on product cards
+- Restyled collection filters to match system select styles
+- Added thumbnail accessibility labels and video preload optimization
+
+### Technical Discoveries
+- None
+
+### Files Modified
+- `components/product/ProductInfo.tsx`
+- `components/product/AddToCart.tsx`
+- `components/product/ProductGallery.tsx`
+- `components/product/ProductCard.tsx`
+- `components/collection/CollectionFilters.tsx`
+- `app/products/[handle]/page.tsx`
+- `app/collections/[handle]/page.tsx`
+- `app/search/page.tsx`
+- `app/page.tsx`
+- `PROGRESS.md`
+- `SESSIONS.md`
+
+### Next Session Priorities
+- Verify live PDP/PLP/search updates and continue luxury-grade polish
+
+---
+
 *Template for future sessions:*
 
 ## Session N - YYYY-MM-DD

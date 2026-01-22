@@ -41,6 +41,11 @@ export default async function SearchPage({ searchParams }: Props) {
 
   return (
     <div className="container py-6">
+      <nav className="text-xs text-gray-500 mb-4 flex flex-wrap items-center gap-2">
+        <Link href="/" className="hover:text-black">Home</Link>
+        <span>/</span>
+        <span className="text-black">Search</span>
+      </nav>
       <div className="max-w-2xl mx-auto mb-8">
         <h1 className="text-2xl font-medium text-center mb-6">Search</h1>
         <SearchForm initialQuery={q} />

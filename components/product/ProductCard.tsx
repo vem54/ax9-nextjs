@@ -9,8 +9,10 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const price = product.priceRange.minVariantPrice;
+  const maxPrice = product.priceRange.maxVariantPrice;
   const compareAtPrice = product.variants.edges[0]?.node.compareAtPrice;
   const hasDiscount = compareAtPrice && parseFloat(compareAtPrice.amount) > parseFloat(price.amount);
+  const hasRange = maxPrice && parseFloat(maxPrice.amount) > parseFloat(price.amount);
 
   return (
     <Link href={`/products/${product.handle}`} className="group block">
@@ -44,7 +46,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         </h3>
         <div className="flex items-center gap-2">
           <p className="text-sm">
-            {formatPrice(price.amount, price.currencyCode)}
+            {hasRange ? `From ${formatPrice(price.amount, price.currencyCode)}` : formatPrice(price.amount, price.currencyCode)}
           </p>
           {hasDiscount && (
             <p className="text-sm text-gray-500 line-through">

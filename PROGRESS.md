@@ -146,6 +146,14 @@
 - [x] Simplified PDP to remove redundant tabs while keeping composition/care
 - [x] Deployed to Vercel and verified live PDP markup updates
 
+### End-to-End Polish (Session 18 - 2026-01-22)
+- [x] Added PDP quantity selector and product details section
+- [x] Added breadcrumbs on PDP, collections, and search
+- [x] Updated PLP card price display to show ranges
+- [x] Refined collection filters styling for consistency
+- [x] Added accessibility labels to PDP thumbnails
+- [x] Added hero video preload optimization
+
 ### Batch Product Import (Session 5 - 2026-01-22)
 - [x] Found Products.xlsx with 4,763 Taobao Item IDs mapped to Shopify products
 - [x] Created batch-import.ts script for importing by brand

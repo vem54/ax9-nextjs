@@ -1,11 +1,12 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { shopifyFetch, formatPrice } from '@/lib/shopify/client';
+import { shopifyFetch } from '@/lib/shopify/client';
 import { GET_PRODUCT_BY_HANDLE, GET_PRODUCTS } from '@/lib/shopify/queries';
 import { Product } from '@/lib/shopify/types';
 import ProductGallery from '@/components/product/ProductGallery';
 import ProductInfo from '@/components/product/ProductInfo';
 import ProductGrid from '@/components/product/ProductGrid';
+import Link from 'next/link';
 
 const STORE_COUNTRY = 'US';
 
@@ -79,6 +80,13 @@ export default async function ProductPage({ params }: Props) {
 
   return (
     <div className="container py-6">
+      <nav className="text-xs text-gray-500 mb-4 flex flex-wrap items-center gap-2">
+        <Link href="/" className="hover:text-black">Home</Link>
+        <span>/</span>
+        <Link href="/collections/all" className="hover:text-black">Shop</Link>
+        <span>/</span>
+        <span className="text-black">{product.title}</span>
+      </nav>
       {/* Main product section */}
       <div className="grid md:grid-cols-2 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] gap-6 lg:gap-12 items-start">
         {/* Gallery */}

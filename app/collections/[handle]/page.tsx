@@ -5,6 +5,7 @@ import { GET_COLLECTION_BY_HANDLE, GET_PRODUCTS } from '@/lib/shopify/queries';
 import { Collection, Product } from '@/lib/shopify/types';
 import ProductGrid from '@/components/product/ProductGrid';
 import CollectionFilters from '@/components/collection/CollectionFilters';
+import Link from 'next/link';
 
 const STORE_COUNTRY = 'US';
 
@@ -191,6 +192,13 @@ export default async function CollectionPage({ params, searchParams }: Props) {
 
   return (
     <div className="container py-6">
+      <nav className="text-xs text-gray-500 mb-4 flex flex-wrap items-center gap-2">
+        <Link href="/" className="hover:text-black">Home</Link>
+        <span>/</span>
+        <Link href="/collections" className="hover:text-black">Collections</Link>
+        <span>/</span>
+        <span className="text-black">{title}</span>
+      </nav>
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-2xl font-medium mb-2">{title}</h1>
