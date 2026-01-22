@@ -26,6 +26,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       'font-medium uppercase tracking-wide',
       'transition-colors duration-200',
       'disabled:opacity-50 disabled:cursor-not-allowed',
+      'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black',
       fullWidth ? 'w-full' : '',
     ].join(' ');
 

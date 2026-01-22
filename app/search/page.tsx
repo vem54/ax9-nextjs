@@ -6,6 +6,8 @@ import { Product } from '@/lib/shopify/types';
 import ProductGrid from '@/components/product/ProductGrid';
 import SearchForm from '@/components/search/SearchForm';
 
+const STORE_COUNTRY = 'US';
+
 interface Props {
   searchParams: Promise<{ q?: string }>;
 }
@@ -23,7 +25,7 @@ async function searchProducts(query: string): Promise<Product[]> {
       products: { edges: { node: Product }[] };
     }>({
       query: SEARCH_PRODUCTS,
-      variables: { query, first: 24 },
+      variables: { query, first: 24, country: STORE_COUNTRY },
       cache: 'no-store',
     });
     return response.data.products.edges.map((edge) => edge.node);

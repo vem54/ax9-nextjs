@@ -1,0 +1,38 @@
+{
+  "name": "axent-pipeline",
+  "version": "1.0.0",
+  "description": "Product ingestion pipeline for Axent - Taobao to Shopify",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "test": "tsx src/test/connections.test.ts",
+    "test:connections": "tsx src/test/connections.test.ts"
+  },
+  "keywords": [
+    "axent",
+    "taobao",
+    "shopify",
+    "pipeline"
+  ],
+  "author": "Jason",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.52.0",
+    "@shopify/shopify-api": "^11.0.0",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^16.4.5",
+    "googleapis": "^144.0.0",
+    "sharp": "^0.34.5"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.2.2",
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "xlsx": "^0.18.5"
+  }
+}

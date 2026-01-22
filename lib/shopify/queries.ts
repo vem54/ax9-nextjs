@@ -62,7 +62,7 @@ const FRAGMENTS = `
 
 // Products
 export const GET_PRODUCTS = `
-  query GetProducts($first: Int!, $after: String, $sortKey: ProductSortKeys, $reverse: Boolean) {
+  query GetProducts($first: Int!, $after: String, $sortKey: ProductSortKeys, $reverse: Boolean, $country: CountryCode) @inContext(country: $country) {
     products(first: $first, after: $after, sortKey: $sortKey, reverse: $reverse) {
       edges {
         node {
@@ -86,7 +86,7 @@ export const GET_PRODUCTS = `
 `;
 
 export const GET_PRODUCT_BY_HANDLE = `
-  query GetProductByHandle($handle: String!) {
+  query GetProductByHandle($handle: String!, $country: CountryCode) @inContext(country: $country) {
     product(handle: $handle) {
       ...ProductFields
       images(first: 10) {
@@ -140,7 +140,7 @@ export const GET_COLLECTIONS = `
 `;
 
 export const GET_COLLECTION_BY_HANDLE = `
-  query GetCollectionByHandle($handle: String!, $first: Int!, $after: String, $sortKey: ProductCollectionSortKeys, $reverse: Boolean) {
+  query GetCollectionByHandle($handle: String!, $first: Int!, $after: String, $sortKey: ProductCollectionSortKeys, $reverse: Boolean, $country: CountryCode) @inContext(country: $country) {
     collection(handle: $handle) {
       id
       handle
@@ -232,7 +232,7 @@ const CART_FRAGMENT = `
 `;
 
 export const CREATE_CART = `
-  mutation CreateCart($input: CartInput!) {
+  mutation CreateCart($input: CartInput!, $country: CountryCode) @inContext(country: $country) {
     cartCreate(input: $input) {
       cart {
         ...CartFields
@@ -243,7 +243,7 @@ export const CREATE_CART = `
 `;
 
 export const GET_CART = `
-  query GetCart($cartId: ID!) {
+  query GetCart($cartId: ID!, $country: CountryCode) @inContext(country: $country) {
     cart(id: $cartId) {
       ...CartFields
     }
@@ -252,7 +252,7 @@ export const GET_CART = `
 `;
 
 export const ADD_TO_CART = `
-  mutation AddToCart($cartId: ID!, $lines: [CartLineInput!]!) {
+  mutation AddToCart($cartId: ID!, $lines: [CartLineInput!]!, $country: CountryCode) @inContext(country: $country) {
     cartLinesAdd(cartId: $cartId, lines: $lines) {
       cart {
         ...CartFields
@@ -263,7 +263,7 @@ export const ADD_TO_CART = `
 `;
 
 export const UPDATE_CART_LINE = `
-  mutation UpdateCartLine($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
+  mutation UpdateCartLine($cartId: ID!, $lines: [CartLineUpdateInput!]!, $country: CountryCode) @inContext(country: $country) {
     cartLinesUpdate(cartId: $cartId, lines: $lines) {
       cart {
         ...CartFields
@@ -274,7 +274,7 @@ export const UPDATE_CART_LINE = `
 `;
 
 export const REMOVE_FROM_CART = `
-  mutation RemoveFromCart($cartId: ID!, $lineIds: [ID!]!) {
+  mutation RemoveFromCart($cartId: ID!, $lineIds: [ID!]!, $country: CountryCode) @inContext(country: $country) {
     cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
       cart {
         ...CartFields
@@ -286,7 +286,7 @@ export const REMOVE_FROM_CART = `
 
 // Search
 export const SEARCH_PRODUCTS = `
-  query SearchProducts($query: String!, $first: Int!) {
+  query SearchProducts($query: String!, $first: Int!, $country: CountryCode) @inContext(country: $country) {
     products(first: $first, query: $query) {
       edges {
         node {

@@ -6,6 +6,8 @@ import { Collection, Product } from '@/lib/shopify/types';
 import ProductGrid from '@/components/product/ProductGrid';
 import CollectionFilters from '@/components/collection/CollectionFilters';
 
+const STORE_COUNTRY = 'US';
+
 interface Props {
   params: Promise<{ handle: string }>;
   searchParams: Promise<{ sort?: string; availability?: string }>;
@@ -61,8 +63,10 @@ async function getCollection(handle: string, sortKey: string, reverse: boolean):
         first: 48,
         sortKey: sortKey === 'CREATED_AT' ? 'CREATED' : sortKey,
         reverse,
+        country: STORE_COUNTRY,
       },
       tags: ['collections', handle],
+      revalidate: 60,
     });
     return response.data.collection;
   } catch (error) {
@@ -81,8 +85,10 @@ async function getAllProducts(sortKey: string, reverse: boolean): Promise<Produc
         first: 48,
         sortKey,
         reverse,
+        country: STORE_COUNTRY,
       },
       tags: ['products'],
+      revalidate: 60,
     });
     return response.data.products.edges.map((edge) => edge.node);
   } catch (error) {

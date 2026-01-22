@@ -10,11 +10,13 @@ export async function shopifyFetch<T>({
   variables,
   cache = 'force-cache',
   tags,
+  revalidate,
 }: {
   query: string;
   variables?: Record<string, unknown>;
   cache?: RequestCache;
   tags?: string[];
+  revalidate?: number;
 }): Promise<ShopifyResponse<T>> {
   const response = await fetch(endpoint, {
     method: 'POST',
@@ -27,7 +29,9 @@ export async function shopifyFetch<T>({
       variables,
     }),
     cache,
-    next: tags ? { tags } : undefined,
+    next: tags || typeof revalidate === 'number'
+      ? { tags, revalidate }
+      : undefined,
   });
 
   if (!response.ok) {

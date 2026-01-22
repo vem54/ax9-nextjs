@@ -40,3 +40,12 @@ next-env.d.ts
 # OS
 .DS_Store
 Thumbs.db
+
+# Data files
+Products.xlsx
+import-results-*.json
+logs/
+
+# Pipeline env
+pipeline/.env
+pipeline/node_modules

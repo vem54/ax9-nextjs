@@ -7,6 +7,8 @@ import ProductGallery from '@/components/product/ProductGallery';
 import ProductInfo from '@/components/product/ProductInfo';
 import ProductGrid from '@/components/product/ProductGrid';
 
+const STORE_COUNTRY = 'US';
+
 interface Props {
   params: Promise<{ handle: string }>;
 }
@@ -15,8 +17,9 @@ async function getProduct(handle: string): Promise<Product | null> {
   try {
     const response = await shopifyFetch<{ product: Product }>({
       query: GET_PRODUCT_BY_HANDLE,
-      variables: { handle },
+      variables: { handle, country: STORE_COUNTRY },
       tags: ['products', handle],
+      revalidate: 60,
     });
     return response.data.product;
   } catch (error) {
@@ -31,8 +34,9 @@ async function getRelatedProducts(productId: string): Promise<Product[]> {
       products: { edges: { node: Product }[] };
     }>({
       query: GET_PRODUCTS,
-      variables: { first: 4, sortKey: 'BEST_SELLING' },
+      variables: { first: 4, sortKey: 'BEST_SELLING', country: STORE_COUNTRY },
       tags: ['products'],
+      revalidate: 60,
     });
     return response.data.products.edges
       .map((edge) => edge.node)

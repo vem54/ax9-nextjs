@@ -44,18 +44,22 @@ export default function ProductInfo({ product }: ProductInfoProps) {
   return (
     <div className="flex flex-col">
       {/* Vendor */}
-      <p className="text-sm text-gray-500 mb-1">{product.vendor}</p>
+      <p className="text-xs uppercase tracking-widest text-gray-500 mb-2">
+        {product.vendor}
+      </p>
 
       {/* Title */}
-      <h1 className="text-2xl font-medium mb-3">{product.title}</h1>
+      <h1 className="text-3xl md:text-4xl font-medium leading-tight mb-4">
+        {product.title}
+      </h1>
 
       {/* Price */}
-      <div className="flex items-center gap-3 mb-6">
-        <p className="text-lg">
+      <div className="flex items-baseline gap-3 mb-6">
+        <p className="text-xl md:text-2xl">
           {formatPrice(price.amount, price.currencyCode)}
         </p>
         {hasDiscount && (
-          <p className="text-lg text-gray-500 line-through">
+          <p className="text-sm text-gray-500 line-through">
             {formatPrice(compareAtPrice.amount, compareAtPrice.currencyCode)}
           </p>
         )}
@@ -63,7 +67,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
       {/* Description */}
       {product.description && (
-        <p className="text-sm text-gray-500 mb-6 leading-relaxed">
+        <p className="text-sm text-gray-500 mb-6 leading-relaxed max-w-xl">
           {product.description}
         </p>
       )}
@@ -91,6 +95,26 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           variantId={selectedVariant?.id || ''}
           availableForSale={selectedVariant?.availableForSale || false}
         />
+      </div>
+
+      {/* Trust module */}
+      <div className="border-t border-gray-100 pt-4 mb-6">
+        <p className="text-xs uppercase tracking-widest text-gray-500 mb-3">
+          Shipping and Returns
+        </p>
+        <ul className="text-xs text-gray-500 space-y-2">
+          <li>Fast, free shipping. All customs and taxes prepaid.</li>
+          <li>14-day refunds on eligible items.</li>
+          <li>100% original, curated Chinese designers.</li>
+        </ul>
+        <div className="flex gap-4 mt-3">
+          <a href="/pages/shipping" className="text-xs underline hover:no-underline">
+            Shipping
+          </a>
+          <a href="/pages/returns" className="text-xs underline hover:no-underline">
+            Returns
+          </a>
+        </div>
       </div>
 
       {/* Product tabs */}

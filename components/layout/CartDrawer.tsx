@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCartStore } from '@/lib/store/cart';
@@ -16,10 +16,59 @@ export default function CartDrawer() {
     removeLineItem,
     initializeCart,
   } = useCartStore();
+  const drawerRef = useRef<HTMLDivElement | null>(null);
+  const lastActiveRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     initializeCart();
   }, [initializeCart]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    lastActiveRef.current = document.activeElement as HTMLElement | null;
+    document.body.style.overflow = 'hidden';
+
+    const drawer = drawerRef.current;
+    if (drawer) {
+      const focusable = drawer.querySelectorAll<HTMLElement>(
+        'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      (focusable[0] || drawer).focus();
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeCart();
+        return;
+      }
+
+      if (event.key !== 'Tab' || !drawerRef.current) return;
+      const focusable = drawerRef.current.querySelectorAll<HTMLElement>(
+        'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+      lastActiveRef.current?.focus();
+    };
+  }, [isOpen, closeCart]);
 
   const lines = cart?.lines.edges.map((edge) => edge.node) || [];
 
@@ -34,10 +83,19 @@ export default function CartDrawer() {
       />
 
       {/* Drawer */}
-      <div className="fixed right-0 top-0 h-full w-full max-w-md bg-white z-50 flex flex-col">
+      <div
+        ref={drawerRef}
+        className="fixed right-0 top-0 h-full w-full max-w-md bg-white z-50 flex flex-col"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cart-drawer-title"
+        tabIndex={-1}
+      >
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-4 border-b border-black">
-          <h2 className="text-lg font-medium">Cart ({cart?.totalQuantity || 0})</h2>
+          <h2 id="cart-drawer-title" className="text-lg font-medium">
+            Cart ({cart?.totalQuantity || 0})
+          </h2>
           <button
             onClick={closeCart}
             className="text-sm hover:text-gray-500"

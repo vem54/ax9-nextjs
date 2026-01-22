@@ -6,6 +6,7 @@ interface Tab {
   id: string;
   label: string;
   content: string;
+  isHtml?: boolean;
 }
 
 interface ProductTabsProps {
@@ -22,7 +23,12 @@ export default function ProductTabs({
   const tabs: Tab[] = [];
 
   if (description) {
-    tabs.push({ id: 'description', label: 'Description', content: description });
+    tabs.push({
+      id: 'description',
+      label: 'Description',
+      content: description,
+      isHtml: true,
+    });
   }
   if (materials) {
     tabs.push({ id: 'materials', label: 'Materials', content: materials });
@@ -36,16 +42,17 @@ export default function ProductTabs({
   if (tabs.length === 0) return null;
 
   const activeContent = tabs.find((tab) => tab.id === activeTab)?.content;
+  const activeIsHtml = tabs.find((tab) => tab.id === activeTab)?.isHtml;
 
   return (
     <div className="border-t border-black mt-6 pt-6">
       {/* Tab headers */}
-      <div className="flex gap-6 border-b border-gray-100 mb-4">
+      <div className="flex flex-wrap gap-6 border-b border-gray-100 mb-4">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`pb-2 text-sm ${
+            className={`pb-2 text-xs uppercase tracking-widest ${
               activeTab === tab.id
                 ? 'border-b-2 border-black font-medium'
                 : 'text-gray-500 hover:text-black'
@@ -57,8 +64,12 @@ export default function ProductTabs({
       </div>
 
       {/* Tab content */}
-      <div className="text-sm text-gray-500 leading-relaxed">
-        {activeContent}
+      <div className="product-richtext text-sm text-gray-500 leading-relaxed">
+        {activeIsHtml ? (
+          <div dangerouslySetInnerHTML={{ __html: activeContent || '' }} />
+        ) : (
+          activeContent
+        )}
       </div>
     </div>
   );

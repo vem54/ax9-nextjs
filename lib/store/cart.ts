@@ -12,6 +12,8 @@ import {
   REMOVE_FROM_CART,
 } from '@/lib/shopify/queries';
 
+const STORE_COUNTRY = 'US';
+
 interface CartState {
   cart: Cart | null;
   isOpen: boolean;
@@ -42,7 +44,7 @@ export const useCartStore = create<CartState>()(
           try {
             const response = await shopifyFetch<{ cart: Cart }>({
               query: GET_CART,
-              variables: { cartId: cart.id },
+              variables: { cartId: cart.id, country: STORE_COUNTRY },
               cache: 'no-store',
             });
             if (response.data.cart) {
@@ -70,6 +72,7 @@ export const useCartStore = create<CartState>()(
                 input: {
                   lines: [{ merchandiseId: variantId, quantity }],
                 },
+                country: STORE_COUNTRY,
               },
               cache: 'no-store',
             });
@@ -85,6 +88,7 @@ export const useCartStore = create<CartState>()(
               variables: {
                 cartId: cart.id,
                 lines: [{ merchandiseId: variantId, quantity }],
+                country: STORE_COUNTRY,
               },
               cache: 'no-store',
             });
@@ -114,6 +118,7 @@ export const useCartStore = create<CartState>()(
             variables: {
               cartId: cart.id,
               lines: [{ id: lineId, quantity }],
+              country: STORE_COUNTRY,
             },
             cache: 'no-store',
           });
@@ -141,6 +146,7 @@ export const useCartStore = create<CartState>()(
             variables: {
               cartId: cart.id,
               lineIds: [lineId],
+              country: STORE_COUNTRY,
             },
             cache: 'no-store',
           });

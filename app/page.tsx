@@ -6,14 +6,22 @@ import { Product, Collection } from '@/lib/shopify/types';
 import ProductGrid from '@/components/product/ProductGrid';
 import { ProductGridSkeleton } from '@/components/ui/Skeleton';
 
+const STORE_COUNTRY = 'US';
+
 async function getProducts(): Promise<Product[]> {
   try {
     const response = await shopifyFetch<{
       products: { edges: { node: Product }[] };
     }>({
       query: GET_PRODUCTS,
-      variables: { first: 8, sortKey: 'CREATED_AT', reverse: true },
+      variables: {
+        first: 8,
+        sortKey: 'CREATED_AT',
+        reverse: true,
+        country: STORE_COUNTRY,
+      },
       tags: ['products'],
+      revalidate: 60,
     });
     return response.data.products.edges.map((edge) => edge.node);
   } catch (error) {
@@ -30,6 +38,7 @@ async function getCollections(): Promise<Collection[]> {
       query: GET_COLLECTIONS,
       variables: { first: 6 },
       tags: ['collections'],
+      revalidate: 300,
     });
     return response.data.collections.edges
       .map((edge) => edge.node)
@@ -75,6 +84,31 @@ export default async function HomePage() {
                 <Link href="/collections/new-arrivals" className="btn-secondary">
                   New Arrivals
                 </Link>
+              </div>
+
+              {/* Mobile featured image */}
+              <div className="relative mt-6 lg:hidden">
+                {products[0]?.featuredImage ? (
+                  <Link href={`/products/${products[0].handle}`} className="block">
+                    <div className="relative aspect-product bg-gray-100">
+                      <Image
+                        src={products[0].featuredImage.url}
+                        alt={products[0].featuredImage.altText || products[0].title}
+                        fill
+                        className="object-cover"
+                        priority
+                      />
+                    </div>
+                    <div className="mt-3">
+                      <p className="text-xs text-gray-500 mb-1">{products[0].vendor}</p>
+                      <p className="text-sm font-medium">{products[0].title}</p>
+                    </div>
+                  </Link>
+                ) : (
+                  <div className="aspect-product bg-gray-100 flex items-center justify-center">
+                    <span className="text-gray-500">Featured Product</span>
+                  </div>
+                )}
               </div>
             </div>
 

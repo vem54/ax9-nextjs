@@ -35,7 +35,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             'bg-white border',
             'placeholder:text-gray-500',
             'transition-colors duration-200',
-            'focus:outline-none',
+            'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black',
             error
               ? 'border-black bg-red-50'
               : 'border-black focus:border-gray-500',
@@ -80,7 +80,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             'bg-white border',
             'placeholder:text-gray-500',
             'transition-colors duration-200',
-            'focus:outline-none',
+            'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black',
             'resize-none',
             error
               ? 'border-black bg-red-50'

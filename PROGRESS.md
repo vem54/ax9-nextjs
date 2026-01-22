@@ -87,12 +87,48 @@
 - [x] Refined Button/Input components with transitions
 - [x] Updated globals.css with utilities
 
+### Review (Session 3 - 2026-01-22)
+- [x] Delivered design + UX + frontend code quality review
+
+### Review (Session 4 - 2026-01-22)
+- [x] Validated and reissued final review
+- [x] Stored review in REVIEW.md
+
+### Critical Fixes (Session 5 - 2026-01-22)
+- [x] Added Shopify country context to enforce USD pricing
+- [x] Reduced stale storefront data with revalidation
+- [x] Fixed PDP HTML rendering
+- [x] Added focus-visible styles and dialog accessibility
+- [x] Restored mobile hero imagery
+
+### Critical Fixes (Session 6 - 2026-01-22)
+- [x] Switched font loading to next/font for performance
+- [x] Added app-level loading and error boundaries
+
+### Critical Fixes (Session 7 - 2026-01-22)
+- [x] Added PDP trust module for shipping/returns/duties near ATC
+
+### Critical Fixes (Session 8 - 2026-01-22)
+- [x] Tightened PDP hierarchy and typography rhythm
+- [x] Added product rich text styling for descriptions
+
+### Batch Product Import (Session 5 - 2026-01-22)
+- [x] Found Products.xlsx with 4,763 Taobao Item IDs mapped to Shopify products
+- [x] Created batch-import.ts script for importing by brand
+- [x] Imported 14 Y OFFICIAL products via pipeline
+- [x] Fixed protocol-relative URL issue in taobao.ts (description images)
+- [x] Published all products to Headless channel via GraphQL
+- [x] Created publish-products.js utility script
+- [x] Created brands/ folder with context files
+- [x] Added y-official.md brand context
+- [x] Copied flowery-bubble.md from axent project
+
 ## Pending
 
 ### Pipeline Improvements
-- [ ] Auto-publish to Headless channel after product creation
+- [x] ~~Auto-publish to Headless channel after product creation~~ (use publish-products.js)
 - [ ] Auto-refresh Admin API token (expires every 24 hours)
-- [ ] Batch import multiple products
+- [x] ~~Batch import multiple products~~ (batch-import.ts created)
 
 ### Frontend Enhancements
 - [ ] Error boundaries
@@ -128,6 +164,58 @@
 1. **Admin API Token Expiry**: Tokens expire every 24 hours. Must refresh using client credentials grant before running pipeline.
 
 2. **Product Publishing**: Products created via Admin API are not automatically visible on Storefront API. Must publish to "Nextjsax9 Headless" publication.
+
+## Pipeline Notes
+
+### Running the Pipeline
+
+```bash
+cd pipeline
+
+# Test connections
+npx tsx src/index.ts --test
+
+# Import single product
+npx tsx src/index.ts --item <TAOBAO_ITEM_ID>
+
+# Batch import by brand
+npx tsx batch-import.ts --brand "Y OFFICIAL" --limit 10
+npx tsx batch-import.ts --list-brands
+
+# Publish products to Headless channel (required for Storefront API visibility)
+node publish-products.js
+```
+
+### Critical: Brand Context Files
+
+**Always create a brand context file before importing a new brand!**
+
+1. Create `pipeline/brands/<brand-name>.md` (lowercase, hyphens)
+2. Include: Brand Summary, Aesthetic & Style, Materials & Quality, Brand Voice for Copy
+3. See `flowery-bubble.md` or `y-official.md` as templates
+
+Without brand context, product descriptions will be generic.
+
+### Critical: Publishing to Headless Channel
+
+Products created via Admin API are **NOT visible** on Storefront API until published to the Headless channel.
+
+After importing products, run:
+```bash
+node publish-products.js
+```
+
+### Rate Limits
+
+- **Parallel imports**: Max 3-5 at a time to avoid API rate limits
+- **Sequential imports**: ~40-50 seconds per product
+- Running 10+ in parallel causes ~40% failure rate
+
+### Item IDs Source
+
+- `Products.xlsx` contains 4,763 Taobao Item IDs from the Axent store
+- Filter by "Shop Name" column to get brand-specific IDs
+- IDs came from Andrii's original pipeline imports
 
 ## Notes
 

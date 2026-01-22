@@ -155,6 +155,211 @@ Complete site scaffolding overhaul - fixed all 9 broken routes, redesigned homep
 
 ---
 
+## Session 3 - 2026-01-22
+
+### Summary
+Delivered a blunt design/UX and frontend code quality review of the live site and Next.js codebase.
+
+### Accomplishments
+- Reviewed live site fundamentals for luxury alignment and conversion risks
+- Audited App Router structure, Tailwind/CSS architecture, and core components
+- Flagged accessibility/performance risks and missing luxury-grade elements
+
+### Technical Discoveries
+- None (review-only session)
+
+### Files Modified
+- `PROGRESS.md`
+- `SESSIONS.md`
+
+### Next Session Priorities
+- Apply review fixes in UI/UX and component architecture
+
+---
+
+## Session 4 - 2026-01-22
+
+### Summary
+Validated the review for accuracy and reissued the final review.
+
+### Accomplishments
+- Re-checked live HTML and code references for review claims
+- Confirmed issues and clarified animation rule conflict
+- Stored review in REVIEW.md
+
+### Technical Discoveries
+- None (review-only session)
+
+### Files Modified
+- `PROGRESS.md`
+- `SESSIONS.md`
+
+### Next Session Priorities
+- Apply review fixes in UI/UX and component architecture
+
+---
+
+## Session 5 - 2026-01-22
+
+### Summary
+Implemented critical fixes for currency context, cache freshness, PDP rendering, accessibility, and mobile hero imagery.
+
+### Accomplishments
+- Added Shopify country context variables across product and cart queries to enforce USD
+- Added revalidation to reduce stale product and collection data
+- Rendered PDP HTML safely for description content
+- Implemented focus-visible styles and accessible dialog behavior
+- Added mobile hero image block for visual first impression
+
+### Technical Discoveries
+- None
+
+### Files Modified
+- `lib/shopify/client.ts`
+- `lib/shopify/queries.ts`
+- `lib/store/cart.ts`
+- `app/page.tsx`
+- `app/products/[handle]/page.tsx`
+- `app/collections/[handle]/page.tsx`
+- `app/search/page.tsx`
+- `components/product/ProductTabs.tsx`
+- `components/layout/CartDrawer.tsx`
+- `components/product/SizeChart.tsx`
+- `components/ui/Button.tsx`
+- `components/ui/Input.tsx`
+- `styles/globals.css`
+- `PROGRESS.md`
+- `SESSIONS.md`
+
+### Next Session Priorities
+- Verify Shopify market settings for USD on live site
+- Add route-level `loading.tsx`/`error.tsx` and tighten PDP trust content
+
+---
+
+## Session 6 - 2026-01-22
+
+### Summary
+Batch imported 14 Y OFFICIAL products, set up brand context system, and fixed Storefront API visibility issue.
+
+### Accomplishments
+
+**Product Import**
+- Discovered Products.xlsx with 4,763 Taobao Item IDs (from Axent Shopify)
+- Created batch-import.ts script for importing products by brand
+- Imported 14 Y OFFICIAL products (sequential + parallel testing)
+- Tested parallel imports: 3-5 concurrent is optimal, 10+ causes rate limiting
+
+**Pipeline Fixes**
+- Fixed protocol-relative URLs in taobao.ts (description images starting with `//`)
+- Created publish-products.js to publish products to Headless channel via GraphQL
+
+**Brand Context System**
+- Created pipeline/brands/ folder
+- Added y-official.md brand context file
+- Copied flowery-bubble.md from axent project
+
+**Cleanup**
+- Deleted duplicate "Deconstructed Cotton Bomber Jacket" product
+
+### Technical Discoveries
+
+1. **Storefront API Visibility**: Products created via Admin API are NOT automatically visible via Storefront API. Must publish to Headless publication using GraphQL `publishablePublish` mutation.
+
+2. **Rate Limits**: Running 10+ parallel imports causes ~40% failure rate. 3-5 concurrent is optimal.
+
+3. **Products.xlsx Source**: Contains all Taobao Item IDs from Axent's existing catalog, mapped by brand/shop name.
+
+### Files Modified
+- `pipeline/batch-import.ts` - NEW
+- `pipeline/publish-products.js` - NEW
+- `pipeline/src/services/taobao.ts` - Fixed protocol-relative URLs
+- `pipeline/brands/y-official.md` - NEW
+- `pipeline/brands/flowery-bubble.md` - Copied from axent
+- `PROGRESS.md`
+- `SESSIONS.md`
+
+### Next Session Priorities
+1. Import more brands
+2. Create brand context files before each import
+3. Set up Shopify collections for brands
+
+---
+
+## Session 7 - 2026-01-22
+
+### Summary
+Improved performance and resiliency with next/font and app-level loading/error boundaries.
+
+### Accomplishments
+- Removed render-blocking font import and added Inter via next/font
+- Added app-level `loading.tsx` and `error.tsx`
+
+### Technical Discoveries
+- None
+
+### Files Modified
+- `styles/globals.css`
+- `app/layout.tsx`
+- `app/loading.tsx`
+- `app/error.tsx`
+- `PROGRESS.md`
+- `SESSIONS.md`
+
+### Next Session Priorities
+- Verify Shopify market settings for USD on live site
+- Add PDP trust modules (shipping/returns/duties) near ATC
+
+---
+
+## Session 8 - 2026-01-22
+
+### Summary
+Added PDP trust module content aligned to axent.store policy messaging.
+
+### Accomplishments
+- Added shipping/returns/duties trust block near ATC on PDP
+
+### Technical Discoveries
+- Pulled shipping policy messaging from axent.store og:description
+
+### Files Modified
+- `components/product/ProductInfo.tsx`
+- `PROGRESS.md`
+- `SESSIONS.md`
+
+### Next Session Priorities
+- Verify Shopify market settings for USD on live site
+- Tighten PDP hierarchy and typography rhythm
+
+---
+
+## Session 9 - 2026-01-22
+
+### Summary
+Refined PDP hierarchy and typography rhythm with richer content styling.
+
+### Accomplishments
+- Reworked PDP vendor/title/price hierarchy for stronger visual rhythm
+- Added rich text styling for product description HTML
+- Strengthened PDP trust module hierarchy
+
+### Technical Discoveries
+- None
+
+### Files Modified
+- `components/product/ProductInfo.tsx`
+- `components/product/ProductTabs.tsx`
+- `styles/globals.css`
+- `PROGRESS.md`
+- `SESSIONS.md`
+
+### Next Session Priorities
+- Verify Shopify market settings for USD on live site
+- Tune PDP spacing/CTA alignment after design pass
+
+---
+
 *Template for future sessions:*
 
 ## Session N - YYYY-MM-DD
