@@ -169,6 +169,10 @@
 - [x] Set Shopify fetch default to no-store for fresher pricing and availability
 - [x] Updated login/register microcopy and collection intro text
 
+### SEO Enhancements (Session 21 - 2026-01-22)
+- [x] Added robots.txt and sitemap.xml routes
+- [x] Added product JSON-LD structured data on PDP
+
 ### Batch Product Import (Session 5 - 2026-01-22)
 - [x] Found Products.xlsx with 4,763 Taobao Item IDs mapped to Shopify products
 - [x] Created batch-import.ts script for importing by brand

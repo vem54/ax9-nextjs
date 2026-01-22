@@ -685,6 +685,7 @@ Added SEO essentials (robots and sitemap) and improved collections fallback cont
 - Extended collections page with curated category fallbacks when no Shopify collections exist
 - Marked robots/sitemap items as complete in PROGRESS
 - Fixed sitemap typing issue that blocked Vercel build
+- Added product JSON-LD structured data for PDP SEO
 
 ### Technical Discoveries
 - None
@@ -693,6 +694,7 @@ Added SEO essentials (robots and sitemap) and improved collections fallback cont
 - `app/robots.ts`
 - `app/sitemap.ts`
 - `app/collections/page.tsx`
+- `app/products/[handle]/page.tsx`
 - `PROGRESS.md`
 - `SESSIONS.md`
 

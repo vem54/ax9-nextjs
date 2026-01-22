@@ -9,6 +9,8 @@ import ProductGrid from '@/components/product/ProductGrid';
 import Link from 'next/link';
 
 const STORE_COUNTRY = 'US';
+const THB_TO_USD_RATE = Number(process.env.NEXT_PUBLIC_THB_TO_USD_RATE ?? '0.032126');
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://ax9-nextjs.vercel.app';
 
 interface Props {
   params: Promise<{ handle: string }>;
@@ -77,9 +79,41 @@ export default async function ProductPage({ params }: Props) {
 
   const relatedProducts = await getRelatedProducts(product.id);
   const images = product.images.edges.map((edge) => edge.node);
+  const price = product.priceRange.minVariantPrice;
+  const normalizedPrice =
+    price.currencyCode === 'THB'
+      ? (parseFloat(price.amount) * THB_TO_USD_RATE).toFixed(2)
+      : price.amount;
+  const normalizedCurrency = price.currencyCode === 'THB' ? 'USD' : price.currencyCode;
+
+  const productJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.title,
+    image: images.map((image) => image.url),
+    description: product.description,
+    brand: {
+      '@type': 'Brand',
+      name: product.vendor || 'Axent',
+    },
+    offers: {
+      '@type': 'Offer',
+      availability: product.availableForSale
+        ? 'https://schema.org/InStock'
+        : 'https://schema.org/OutOfStock',
+      price: normalizedPrice,
+      priceCurrency: normalizedCurrency,
+      itemCondition: 'https://schema.org/NewCondition',
+      url: `${SITE_URL}/products/${product.handle}`,
+    },
+  };
 
   return (
     <div className="container py-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
       <nav className="text-xs text-gray-500 mb-4 flex flex-wrap items-center gap-2">
         <Link href="/" className="hover:text-black">Home</Link>
         <span>/</span>
