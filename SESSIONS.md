@@ -452,6 +452,28 @@ Pushed latest changes and attempted live verification of PDP updates and USD pri
 
 ---
 
+## Session 14 - 2026-01-22
+
+### Summary
+Completed Vercel deploy and verified live PDP updates; USD pricing still unresolved.
+
+### Accomplishments
+- Installed Vercel CLI and linked project
+- Deployed latest build to production
+- Verified PDP trust module renders on live site
+
+### Technical Discoveries
+- Shopify prices still render in THB despite country context; likely store currency/market setting
+
+### Files Modified
+- `PROGRESS.md`
+- `SESSIONS.md`
+
+### Next Session Priorities
+- Fix Shopify Markets/currency to return USD in Storefront API
+
+---
+
 *Template for future sessions:*
 
 ## Session N - YYYY-MM-DD

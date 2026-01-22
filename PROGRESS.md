@@ -121,6 +121,10 @@
 ### Verification (Session 11 - 2026-01-22)
 - [ ] Deployed updates; live site still not showing PDP trust blocks or USD (likely Vercel cache/build pending)
 
+### Verification (Session 12 - 2026-01-22)
+- [x] Vercel deploy completed; PDP trust module now visible on live site
+- [ ] Live site prices still render in THB; Shopify currency/market fix required for USD
+
 ### Editorial Visuals (Session 11 - 2026-01-22)
 - [x] Added homepage editorial modules with stock imagery (atelier, fabric, city, lookbook)
 
