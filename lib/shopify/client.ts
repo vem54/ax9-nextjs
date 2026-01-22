@@ -8,13 +8,11 @@ const endpoint = `https://${domain}/api/2024-01/graphql.json`;
 export async function shopifyFetch<T>({
   query,
   variables,
-  cache = 'force-cache',
   tags,
   revalidate,
 }: {
   query: string;
   variables?: Record<string, unknown>;
-  cache?: RequestCache;
   tags?: string[];
   revalidate?: number;
 }): Promise<ShopifyResponse<T>> {
@@ -28,10 +26,7 @@ export async function shopifyFetch<T>({
       query,
       variables,
     }),
-    cache,
-    next: tags || typeof revalidate === 'number'
-      ? { tags, revalidate }
-      : undefined,
+    cache: 'no-store',
   });
 
   if (!response.ok) {
