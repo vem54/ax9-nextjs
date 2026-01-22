@@ -77,6 +77,9 @@ export default function RegisterPage() {
     <div className="container py-10">
       <div className="max-w-md mx-auto">
         <h1 className="text-2xl font-medium mb-6 text-center">Create Account</h1>
+        <p className="text-sm text-gray-500 text-center mb-6">
+          Join Axent for early access and curated releases.
+        </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">

@@ -57,6 +57,9 @@ export default function LoginPage() {
     <div className="container py-10">
       <div className="max-w-md mx-auto">
         <h1 className="text-2xl font-medium mb-6 text-center">Login</h1>
+        <p className="text-sm text-gray-500 text-center mb-6">
+          Sign in to track orders, returns, and new drops.
+        </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input

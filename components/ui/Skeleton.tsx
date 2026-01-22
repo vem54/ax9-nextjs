@@ -5,7 +5,7 @@ interface SkeletonProps {
 export function Skeleton({ className = '' }: SkeletonProps) {
   return (
     <div
-      className={`animate-pulse bg-gray-100 ${className}`}
+      className={`bg-gray-100 ${className}`}
       aria-hidden="true"
     />
   );

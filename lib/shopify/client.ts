@@ -9,7 +9,7 @@ const endpoint = `https://${domain}/api/2024-01/graphql.json`;
 export async function shopifyFetch<T>({
   query,
   variables,
-  cache = 'force-cache',
+  cache = 'no-store',
   tags,
   revalidate,
 }: {

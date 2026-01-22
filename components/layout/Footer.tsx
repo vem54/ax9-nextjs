@@ -20,27 +20,27 @@ export default function Footer() {
             <h4 className="text-sm font-medium mb-3">Shop</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/collections/all" className="text-sm text-gray-500 hover:text-white transition-colors">
+                <Link href="/collections/all" className="text-sm text-gray-500 hover:text-white">
                   All Products
                 </Link>
               </li>
               <li>
-                <Link href="/collections/new-arrivals" className="text-sm text-gray-500 hover:text-white transition-colors">
+                <Link href="/collections/new-arrivals" className="text-sm text-gray-500 hover:text-white">
                   New Arrivals
                 </Link>
               </li>
               <li>
-                <Link href="/collections/outerwear" className="text-sm text-gray-500 hover:text-white transition-colors">
+                <Link href="/collections/outerwear" className="text-sm text-gray-500 hover:text-white">
                   Outerwear
                 </Link>
               </li>
               <li>
-                <Link href="/collections/tops" className="text-sm text-gray-500 hover:text-white transition-colors">
+                <Link href="/collections/tops" className="text-sm text-gray-500 hover:text-white">
                   Tops
                 </Link>
               </li>
               <li>
-                <Link href="/collections/bottoms" className="text-sm text-gray-500 hover:text-white transition-colors">
+                <Link href="/collections/bottoms" className="text-sm text-gray-500 hover:text-white">
                   Bottoms
                 </Link>
               </li>
@@ -52,22 +52,22 @@ export default function Footer() {
             <h4 className="text-sm font-medium mb-3">Help</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/pages/shipping" className="text-sm text-gray-500 hover:text-white transition-colors">
+                <Link href="/shipping" className="text-sm text-gray-500 hover:text-white">
                   Shipping
                 </Link>
               </li>
               <li>
-                <Link href="/pages/returns" className="text-sm text-gray-500 hover:text-white transition-colors">
+                <Link href="/returns" className="text-sm text-gray-500 hover:text-white">
                   Returns
                 </Link>
               </li>
               <li>
-                <Link href="/pages/sizing" className="text-sm text-gray-500 hover:text-white transition-colors">
+                <Link href="/size-guide" className="text-sm text-gray-500 hover:text-white">
                   Size Guide
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-sm text-gray-500 hover:text-white transition-colors">
+                <Link href="/contact" className="text-sm text-gray-500 hover:text-white">
                   Contact
                 </Link>
               </li>
@@ -79,17 +79,17 @@ export default function Footer() {
             <h4 className="text-sm font-medium mb-3">Company</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/about" className="text-sm text-gray-500 hover:text-white transition-colors">
+                <Link href="/about" className="text-sm text-gray-500 hover:text-white">
                   About
                 </Link>
               </li>
               <li>
-                <Link href="/pages/privacy" className="text-sm text-gray-500 hover:text-white transition-colors">
+                <Link href="/privacy" className="text-sm text-gray-500 hover:text-white">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/pages/terms" className="text-sm text-gray-500 hover:text-white transition-colors">
+                <Link href="/terms" className="text-sm text-gray-500 hover:text-white">
                   Terms of Service
                 </Link>
               </li>

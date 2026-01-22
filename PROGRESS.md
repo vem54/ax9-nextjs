@@ -160,6 +160,15 @@
 - [x] Updated homepage and collection copy to match streetwear curation voice
 - [x] Deployed to Vercel and verified static page metadata
 
+### Review Completion Pass (Session 20 - 2026-01-22)
+- [x] Switched PDP hero image to object-contain for proper scaling
+- [x] Added size guide link near variant selection and standardized size guide routes
+- [x] Flattened policy routes (/shipping, /returns, /size-guide, /privacy, /terms) with redirects from /pages
+- [x] Replaced homepage editorial imagery with live product-based editorials
+- [x] Removed animations/transitions to match design system
+- [x] Set Shopify fetch default to no-store for fresher pricing and availability
+- [x] Updated login/register microcopy and collection intro text
+
 ### Batch Product Import (Session 5 - 2026-01-22)
 - [x] Found Products.xlsx with 4,763 Taobao Item IDs mapped to Shopify products
 - [x] Created batch-import.ts script for importing by brand

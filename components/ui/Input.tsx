@@ -34,7 +34,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             'w-full px-3 py-3 text-sm',
             'bg-white border',
             'placeholder:text-gray-500',
-            'transition-colors duration-200',
             'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black',
             error
               ? 'border-black bg-red-50'
@@ -79,7 +78,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             'w-full px-3 py-3 text-sm',
             'bg-white border',
             'placeholder:text-gray-500',
-            'transition-colors duration-200',
             'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black',
             'resize-none',
             error

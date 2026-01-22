@@ -10,6 +10,8 @@ export const metadata: Metadata = {
   description: 'Browse our curated collections of Chinese fashion.',
 };
 
+export const dynamic = 'force-dynamic';
+
 async function getCollections(): Promise<Collection[]> {
   try {
     const response = await shopifyFetch<{
@@ -18,6 +20,7 @@ async function getCollections(): Promise<Collection[]> {
       query: GET_COLLECTIONS,
       variables: { first: 20 },
       tags: ['collections'],
+      revalidate: 300,
     });
     return response.data.collections.edges.map((edge) => edge.node);
   } catch (error) {
@@ -38,6 +41,9 @@ export default async function CollectionsPage() {
     <div className="container py-6">
       <div className="mb-6">
         <h1 className="text-2xl font-medium">Collections</h1>
+        <p className="text-sm text-gray-500 mt-2 max-w-2xl">
+          Focused edits across outerwear, knits, and structured staples from independent Chinese studios.
+        </p>
       </div>
 
       {displayCollections.length > 0 ? (
@@ -54,7 +60,7 @@ export default async function CollectionsPage() {
                     src={collection.image.url}
                     alt={collection.image.altText || collection.title}
                     fill
-                    className="object-cover group-hover:opacity-90 transition-opacity duration-200"
+                    className="object-cover group-hover:opacity-90"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
@@ -64,7 +70,7 @@ export default async function CollectionsPage() {
                   </div>
                 )}
               </div>
-              <h2 className="text-lg font-medium group-hover:text-gray-500 transition-colors duration-200">
+              <h2 className="text-lg font-medium group-hover:text-gray-500">
                 {collection.title}
               </h2>
               {collection.description && (
@@ -88,7 +94,7 @@ export default async function CollectionsPage() {
       <div className="mt-8 pt-6 border-t border-gray-100">
         <Link
           href="/collections/all"
-          className="inline-flex items-center text-sm font-medium hover:text-gray-500 transition-colors duration-200"
+          className="inline-flex items-center text-sm font-medium hover:text-gray-500"
         >
           View All Products
           <svg

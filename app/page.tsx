@@ -4,7 +4,6 @@ import { shopifyFetch } from '@/lib/shopify/client';
 import { GET_PRODUCTS, GET_COLLECTIONS } from '@/lib/shopify/queries';
 import { Product, Collection } from '@/lib/shopify/types';
 import ProductGrid from '@/components/product/ProductGrid';
-import { ProductGridSkeleton } from '@/components/ui/Skeleton';
 
 const STORE_COUNTRY = 'US';
 
@@ -58,6 +57,7 @@ export default async function HomePage() {
     getCollections(),
   ]);
   const heroVideoSrc = '/videos/axent_hero.mp4';
+  const lookbookProduct = products[3] || products[1] || products[0];
 
   return (
     <div>
@@ -79,7 +79,7 @@ export default async function HomePage() {
               </h1>
               <p className="text-gray-500 mb-6 max-w-md">
                 We source exceptional pieces from Shanghai, Beijing, and beyond.
-                Original design. Premium quality. No markup games.
+                Original design. Disciplined construction. Limited runs.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link href="/collections/all" className="btn-primary">
@@ -152,31 +152,31 @@ export default async function HomePage() {
           <nav className="flex items-center gap-6 py-4 overflow-x-auto scrollbar-hide">
             <Link
               href="/collections/all"
-              className="text-sm whitespace-nowrap hover:text-gray-500 transition-colors"
+              className="text-sm whitespace-nowrap hover:text-gray-500"
             >
               All Products
             </Link>
             <Link
               href="/collections/new-arrivals"
-              className="text-sm whitespace-nowrap hover:text-gray-500 transition-colors"
+              className="text-sm whitespace-nowrap hover:text-gray-500"
             >
               New Arrivals
             </Link>
             <Link
               href="/collections/outerwear"
-              className="text-sm whitespace-nowrap hover:text-gray-500 transition-colors"
+              className="text-sm whitespace-nowrap hover:text-gray-500"
             >
               Outerwear
             </Link>
             <Link
               href="/collections/tops"
-              className="text-sm whitespace-nowrap hover:text-gray-500 transition-colors"
+              className="text-sm whitespace-nowrap hover:text-gray-500"
             >
               Tops
             </Link>
             <Link
               href="/collections/bottoms"
-              className="text-sm whitespace-nowrap hover:text-gray-500 transition-colors"
+              className="text-sm whitespace-nowrap hover:text-gray-500"
             >
               Bottoms
             </Link>
@@ -198,38 +198,41 @@ export default async function HomePage() {
           </Link>
         </div>
         <div className="grid gap-4 md:grid-cols-3">
-          {[
-            {
-              title: 'Studio',
-              copy: 'Quiet construction. Precise lines.',
-              image: '/images/editorial/atelier.jpg',
-            },
-            {
-              title: 'Material',
-              copy: 'Weight, drape, and finish.',
-              image: '/images/editorial/fabric.jpg',
-            },
-            {
-              title: 'Street',
-              copy: 'Designed for long days.',
-              image: '/images/editorial/urban.jpg',
-            },
-          ].map((item) => (
-            <div key={item.title} className="group">
+          {products.slice(0, 3).map((product) => (
+            <Link
+              key={product.id}
+              href={`/products/${product.handle}`}
+              className="group block"
+            >
               <div className="relative aspect-[3/4] bg-gray-100">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  className="object-cover"
-                />
+                {product.featuredImage ? (
+                  <Image
+                    src={product.featuredImage.url}
+                    alt={product.featuredImage.altText || product.title}
+                    fill
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-xs text-gray-500">Editorial</span>
+                  </div>
+                )}
               </div>
               <div className="mt-3">
-                <h3 className="text-sm font-medium">{item.title}</h3>
-                <p className="text-xs text-gray-500 mt-1">{item.copy}</p>
+                <h3 className="text-sm font-medium">{product.vendor || 'Axent'}</h3>
+                <p className="text-xs text-gray-500 mt-1">{product.title}</p>
               </div>
-            </div>
+            </Link>
           ))}
+          {products.length === 0 && (
+            <>
+              {['Studio', 'Material', 'Street'].map((label) => (
+                <div key={label} className="bg-gray-100 aspect-[3/4] flex items-center justify-center">
+                  <span className="text-xs text-gray-500">{label}</span>
+                </div>
+              ))}
+            </>
+          )}
         </div>
       </section>
 
@@ -248,14 +251,33 @@ export default async function HomePage() {
                 A curated edit of Chinese streetwear with a luxury frame.
                 Clean silhouettes, deliberate proportions, and material depth.
               </p>
+              {lookbookProduct && (
+                <Link
+                  href={`/products/${lookbookProduct.handle}`}
+                  className="text-xs text-gray-500 mt-4 inline-block underline hover:no-underline"
+                >
+                  Featured: {lookbookProduct.vendor} - {lookbookProduct.title}
+                </Link>
+              )}
             </div>
             <div className="relative aspect-[3/4] bg-gray-100">
-              <Image
-                src="/images/editorial/silhouette.jpg"
-                alt="Lookbook silhouette"
-                fill
-                className="object-cover"
-              />
+              {lookbookProduct?.featuredImage ? (
+                <Link href={`/products/${lookbookProduct.handle}`} className="block h-full">
+                  <Image
+                    src={lookbookProduct.featuredImage.url}
+                    alt={lookbookProduct.featuredImage.altText || lookbookProduct.title}
+                    fill
+                    className="object-cover"
+                  />
+                </Link>
+              ) : (
+                <Image
+                  src="/images/editorial/silhouette.jpg"
+                  alt="Lookbook silhouette"
+                  fill
+                  className="object-cover"
+                />
+              )}
             </div>
           </div>
         </div>
@@ -270,7 +292,7 @@ export default async function HomePage() {
           </div>
           <Link
             href="/collections/new-arrivals"
-            className="text-sm hover:text-gray-500 transition-colors hidden sm:block"
+            className="text-sm hover:text-gray-500 hidden sm:block"
           >
             View All
           </Link>
@@ -302,12 +324,12 @@ export default async function HomePage() {
               The Axent Difference
             </p>
             <h2 className="text-2xl md:text-3xl font-medium mb-4">
-              Chinese designers have mastered quality and originality.
+              Chinese designers set the tone for modern streetwear.
               We bring their work to you.
             </h2>
             <p className="text-gray-500 mb-6">
-              Every piece is hand-selected from independent designers and emerging brands.
-              No knockoffs. No fast fashion. Just exceptional design at honest prices.
+              Every piece is hand-selected from independent studios and emerging labels.
+              Limited production. Verified originality. Construction that holds its shape.
             </p>
             <Link href="/about" className="inline-block text-sm underline hover:no-underline">
               Learn about our curation process
@@ -323,7 +345,7 @@ export default async function HomePage() {
             <h2 className="text-2xl font-medium">Shop by Category</h2>
             <Link
               href="/collections"
-              className="text-sm hover:text-gray-500 transition-colors"
+              className="text-sm hover:text-gray-500"
             >
               View All
             </Link>
@@ -341,17 +363,17 @@ export default async function HomePage() {
                       src={collection.image.url}
                       alt={collection.image.altText || collection.title}
                       fill
-                      className="object-cover group-hover:opacity-90 transition-opacity duration-200"
+                      className="object-cover group-hover:opacity-90"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-2xl font-medium text-gray-500 group-hover:text-gray-500 transition-colors">
+                      <span className="text-2xl font-medium text-gray-500 group-hover:text-gray-500">
                         {collection.title}
                       </span>
                     </div>
                   )}
                 </div>
-                <h3 className="text-lg font-medium group-hover:text-gray-500 transition-colors">
+                <h3 className="text-lg font-medium group-hover:text-gray-500">
                   {collection.title}
                 </h3>
               </Link>
@@ -376,12 +398,12 @@ export default async function HomePage() {
                 href={`/collections/${cat.handle}`}
                 className="group block"
               >
-                <div className="aspect-[4/3] bg-gray-100 flex items-center justify-center mb-3 group-hover:bg-black transition-colors duration-200">
-                  <span className="text-xl font-medium text-gray-500 group-hover:text-white transition-colors duration-200">
+                <div className="aspect-[4/3] bg-gray-100 flex items-center justify-center mb-3 group-hover:bg-black">
+                  <span className="text-xl font-medium text-gray-500 group-hover:text-white">
                     {cat.title}
                   </span>
                 </div>
-                <h3 className="text-sm font-medium group-hover:text-gray-500 transition-colors">
+                <h3 className="text-sm font-medium group-hover:text-gray-500">
                   {cat.title}
                 </h3>
               </Link>
@@ -412,7 +434,7 @@ export default async function HomePage() {
             </form>
             <p className="text-xs text-gray-500 mt-4">
               By subscribing, you agree to our{' '}
-              <Link href="/pages/privacy" className="underline hover:no-underline">
+              <Link href="/privacy" className="underline hover:no-underline">
                 Privacy Policy
               </Link>
             </p>

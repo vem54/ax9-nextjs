@@ -61,7 +61,7 @@ export default async function SearchPage({ searchParams }: Props) {
             {products.length > 0 && (
               <Link
                 href="/collections/all"
-                className="text-sm hover:text-gray-500 transition-colors"
+                className="text-sm hover:text-gray-500"
               >
                 Browse all
               </Link>
@@ -110,11 +110,11 @@ export default async function SearchPage({ searchParams }: Props) {
           <div className="space-y-4">
             <p className="text-xs text-gray-500 uppercase tracking-wide">Popular searches</p>
             <div className="flex flex-wrap justify-center gap-2">
-              {['Cardigan', 'Jacket', 'Wool', 'Oversized'].map((term) => (
+              {['Techwear', 'Workwear', 'Oversized', 'Tailored'].map((term) => (
                 <Link
                   key={term}
                   href={`/search?q=${encodeURIComponent(term)}`}
-                  className="px-3 py-2 text-sm border border-gray-100 hover:border-black transition-colors"
+                  className="px-3 py-2 text-sm border border-gray-100 hover:border-black"
                 >
                   {term}
                 </Link>

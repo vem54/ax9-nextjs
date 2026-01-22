@@ -95,7 +95,7 @@ export default function CartPage() {
                       <div className="min-w-0">
                         <Link
                           href={`/products/${line.merchandise.product.handle}`}
-                          className="font-medium hover:text-gray-500 transition-colors block"
+                          className="font-medium hover:text-gray-500 block"
                         >
                           {line.merchandise.product.title}
                         </Link>
@@ -117,7 +117,7 @@ export default function CartPage() {
                         <button
                           onClick={() => removeLineItem(line.id)}
                           disabled={isLoading}
-                          className="text-xs text-gray-500 hover:text-black mt-2 md:hidden disabled:opacity-50 transition-colors"
+                          className="text-xs text-gray-500 hover:text-black mt-2 md:hidden disabled:opacity-50"
                         >
                           Remove
                         </button>
@@ -136,7 +136,7 @@ export default function CartPage() {
                             }
                           }}
                           disabled={isLoading}
-                          className="w-8 h-8 text-sm hover:bg-gray-100 disabled:opacity-50 transition-colors"
+                          className="w-8 h-8 text-sm hover:bg-gray-100 disabled:opacity-50"
                         >
                           -
                         </button>
@@ -144,7 +144,7 @@ export default function CartPage() {
                         <button
                           onClick={() => updateLineItem(line.id, line.quantity + 1)}
                           disabled={isLoading}
-                          className="w-8 h-8 text-sm hover:bg-gray-100 disabled:opacity-50 transition-colors"
+                          className="w-8 h-8 text-sm hover:bg-gray-100 disabled:opacity-50"
                         >
                           +
                         </button>
@@ -170,7 +170,7 @@ export default function CartPage() {
                       <button
                         onClick={() => removeLineItem(line.id)}
                         disabled={isLoading}
-                        className="text-xs text-gray-500 hover:text-black mt-1 disabled:opacity-50 transition-colors"
+                        className="text-xs text-gray-500 hover:text-black mt-1 disabled:opacity-50"
                       >
                         Remove
                       </button>
@@ -221,7 +221,7 @@ export default function CartPage() {
 
                 <Link
                   href="/collections/all"
-                  className="block text-center text-sm mt-4 text-gray-500 hover:text-black transition-colors"
+                  className="block text-center text-sm mt-4 text-gray-500 hover:text-black"
                 >
                   Continue Shopping
                 </Link>

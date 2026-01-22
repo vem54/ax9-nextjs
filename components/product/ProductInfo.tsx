@@ -25,6 +25,9 @@ interface SizeChartData {
 
 export default function ProductInfo({ product }: ProductInfoProps) {
   const variants = product.variants.edges.map((edge) => edge.node);
+  const hasSizeOption = product.options.some((option) =>
+    option.name.toLowerCase().includes('size')
+  );
 
   // Initialize selected options with first available variant
   const firstAvailableVariant = variants.find((v) => v.availableForSale) || variants[0];
@@ -98,6 +101,16 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
       {/* Variant selector */}
       <div className="border-b border-gray-100 py-6">
+        <div className="flex items-center justify-between mb-4">
+          <p className="text-xs uppercase tracking-widest text-gray-500">
+            Select Options
+          </p>
+          {hasSizeOption && (
+            <a href="/size-guide" className="text-xs underline hover:no-underline">
+              Size guide
+            </a>
+          )}
+        </div>
         <VariantSelector
           options={product.options}
           variants={variants}
@@ -147,7 +160,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           {hasSizeChart && product.sizeChart?.value ? (
             <SizeChart data={product.sizeChart.value} />
           ) : (
-            <a href="/pages/sizing" className="text-sm underline hover:no-underline">
+            <a href="/size-guide" className="text-sm underline hover:no-underline">
               Size Guide
             </a>
           )}
@@ -205,10 +218,10 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           <li>100% original, curated Chinese designers.</li>
         </ul>
         <div className="flex gap-4 mt-3">
-          <a href="/pages/shipping" className="text-xs underline hover:no-underline">
+          <a href="/shipping" className="text-xs underline hover:no-underline">
             Shipping
           </a>
-          <a href="/pages/returns" className="text-xs underline hover:no-underline">
+          <a href="/returns" className="text-xs underline hover:no-underline">
             Returns
           </a>
         </div>

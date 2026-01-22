@@ -623,6 +623,58 @@ Refined all static page copy and collection messaging to better fit the Chinese 
 
 ---
 
+## Session 20 - 2026-01-22
+
+### Summary
+Closed remaining review gaps: refreshed editorial visuals, fixed PDP scaling and size guide access, flattened policy routes, removed animations, and tightened caching.
+
+### Accomplishments
+- Replaced homepage editorial imagery with live product-based editorials and added a lookbook product link
+- Fixed PDP main image scaling and added a size guide link above variant selection
+- Flattened policy routes (/shipping, /returns, /size-guide, /privacy, /terms) and redirected legacy /pages routes
+- Removed all animations/transitions to align with the no-animation design system
+- Set Shopify fetch default to no-store for fresher pricing/availability
+- Refined login/register copy and collections intro text
+- Lint passes
+
+### Technical Discoveries
+- None
+
+### Files Modified
+- `app/page.tsx`
+- `components/product/ProductGallery.tsx`
+- `components/product/ProductInfo.tsx`
+- `lib/shopify/client.ts`
+- `styles/globals.css`
+- `components/ui/Button.tsx`
+- `components/ui/Input.tsx`
+- `components/ui/Skeleton.tsx`
+- `components/layout/Header.tsx`
+- `components/layout/Footer.tsx`
+- `app/collections/page.tsx`
+- `app/search/page.tsx`
+- `app/cart/page.tsx`
+- `app/account/login/page.tsx`
+- `app/account/register/page.tsx`
+- `app/shipping/page.tsx`
+- `app/returns/page.tsx`
+- `app/size-guide/page.tsx`
+- `app/privacy/page.tsx`
+- `app/terms/page.tsx`
+- `app/pages/shipping/page.tsx`
+- `app/pages/returns/page.tsx`
+- `app/pages/sizing/page.tsx`
+- `app/pages/privacy/page.tsx`
+- `app/pages/terms/page.tsx`
+- `PROGRESS.md`
+- `SESSIONS.md`
+
+### Next Session Priorities
+- Verify USD presentment currency via Shopify Markets and remove conversion fallback
+- Run a full live QA pass post-deploy and address any layout regressions
+
+---
+
 *Template for future sessions:*
 
 ## Session N - YYYY-MM-DD

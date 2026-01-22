@@ -56,7 +56,7 @@ export default function ProductGallery({ images, productTitle }: ProductGalleryP
           alt={selectedImage.altText || productTitle}
           fill
           sizes="(min-width: 1024px) 55vw, (min-width: 768px) 50vw, 100vw"
-          className="object-cover"
+          className="object-contain"
           priority
         />
       </div>

@@ -15,7 +15,7 @@ export default function Header() {
           <div className="flex items-center gap-4">
             {/* Mobile menu button */}
             <button
-              className="md:hidden p-2 -ml-2 hover:text-gray-500 transition-colors"
+              className="md:hidden p-2 -ml-2 hover:text-gray-500"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -32,13 +32,13 @@ export default function Header() {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-6">
-              <Link href="/collections/all" className="text-sm hover:text-gray-500 transition-colors">
+              <Link href="/collections/all" className="text-sm hover:text-gray-500">
                 Shop
               </Link>
-              <Link href="/collections/new-arrivals" className="text-sm hover:text-gray-500 transition-colors">
+              <Link href="/collections/new-arrivals" className="text-sm hover:text-gray-500">
                 New Arrivals
               </Link>
-              <Link href="/about" className="text-sm hover:text-gray-500 transition-colors">
+              <Link href="/about" className="text-sm hover:text-gray-500">
                 About
               </Link>
             </nav>
@@ -53,19 +53,19 @@ export default function Header() {
 
           {/* Right side */}
           <div className="flex items-center gap-4 justify-end">
-            <Link href="/search" className="p-2 hover:text-gray-500 transition-colors" aria-label="Search">
+            <Link href="/search" className="p-2 hover:text-gray-500" aria-label="Search">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </Link>
-            <Link href="/account" className="hidden sm:block p-2 hover:text-gray-500 transition-colors" aria-label="Account">
+            <Link href="/account" className="hidden sm:block p-2 hover:text-gray-500" aria-label="Account">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
             </Link>
             <button
               onClick={openCart}
-              className="p-2 hover:text-gray-500 transition-colors flex items-center gap-1"
+              className="p-2 hover:text-gray-500 flex items-center gap-1"
               aria-label="Cart"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -89,7 +89,7 @@ export default function Header() {
               <li>
                 <Link
                   href="/collections/all"
-                  className="block text-lg font-medium hover:text-gray-500 transition-colors"
+                  className="block text-lg font-medium hover:text-gray-500"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Shop All
@@ -98,7 +98,7 @@ export default function Header() {
               <li>
                 <Link
                   href="/collections/new-arrivals"
-                  className="block text-lg font-medium hover:text-gray-500 transition-colors"
+                  className="block text-lg font-medium hover:text-gray-500"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   New Arrivals
@@ -107,7 +107,7 @@ export default function Header() {
               <li className="pt-2 border-t border-gray-100">
                 <Link
                   href="/collections/outerwear"
-                  className="block text-sm hover:text-gray-500 transition-colors py-2"
+                  className="block text-sm hover:text-gray-500 py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Outerwear
@@ -116,7 +116,7 @@ export default function Header() {
               <li>
                 <Link
                   href="/collections/tops"
-                  className="block text-sm hover:text-gray-500 transition-colors py-2"
+                  className="block text-sm hover:text-gray-500 py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Tops
@@ -125,7 +125,7 @@ export default function Header() {
               <li>
                 <Link
                   href="/collections/bottoms"
-                  className="block text-sm hover:text-gray-500 transition-colors py-2"
+                  className="block text-sm hover:text-gray-500 py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Bottoms
@@ -134,7 +134,7 @@ export default function Header() {
               <li className="pt-4 border-t border-gray-100">
                 <Link
                   href="/about"
-                  className="block text-sm hover:text-gray-500 transition-colors py-2"
+                  className="block text-sm hover:text-gray-500 py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   About
@@ -143,7 +143,7 @@ export default function Header() {
               <li>
                 <Link
                   href="/contact"
-                  className="block text-sm hover:text-gray-500 transition-colors py-2"
+                  className="block text-sm hover:text-gray-500 py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Contact
@@ -152,7 +152,7 @@ export default function Header() {
               <li>
                 <Link
                   href="/account"
-                  className="block text-sm hover:text-gray-500 transition-colors py-2"
+                  className="block text-sm hover:text-gray-500 py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Account
