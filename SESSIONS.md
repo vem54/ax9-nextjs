@@ -600,6 +600,7 @@ Refined all static page copy and collection messaging to better fit the Chinese 
 - Updated About page narrative and positioning
 - Tightened Contact, Shipping, Returns, Sizing, Privacy, and Terms copy
 - Refined homepage and collection descriptions for curation tone
+- Deployed to Vercel and verified sizing page title metadata
 
 ### Technical Discoveries
 - None
@@ -618,7 +619,7 @@ Refined all static page copy and collection messaging to better fit the Chinese 
 - `SESSIONS.md`
 
 ### Next Session Priorities
-- Deploy content pass and verify live copy on key pages
+- Continue content QA across remaining pages
 
 ---
 

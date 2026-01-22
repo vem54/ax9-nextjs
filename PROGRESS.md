@@ -158,6 +158,7 @@
 ### Content Pass (Session 19 - 2026-01-22)
 - [x] Refined About, Contact, Shipping, Returns, Sizing, Privacy, and Terms tone
 - [x] Updated homepage and collection copy to match streetwear curation voice
+- [x] Deployed to Vercel and verified static page metadata
 
 ### Batch Product Import (Session 5 - 2026-01-22)
 - [x] Found Products.xlsx with 4,763 Taobao Item IDs mapped to Shopify products
