@@ -684,6 +684,7 @@ Added SEO essentials (robots and sitemap) and improved collections fallback cont
 - Added `app/robots.ts` and `app/sitemap.ts` with dynamic Shopify routes
 - Extended collections page with curated category fallbacks when no Shopify collections exist
 - Marked robots/sitemap items as complete in PROGRESS
+- Fixed sitemap typing issue that blocked Vercel build
 
 ### Technical Discoveries
 - None
