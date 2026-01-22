@@ -2,6 +2,7 @@ import { ShopifyResponse } from './types';
 
 const domain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN!;
 const storefrontAccessToken = process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN!;
+const THB_TO_USD_RATE = Number(process.env.NEXT_PUBLIC_THB_TO_USD_RATE ?? '0.032126');
 
 const endpoint = `https://${domain}/api/2024-01/graphql.json`;
 
@@ -49,10 +50,18 @@ export async function shopifyFetch<T>({
 }
 
 export function formatPrice(amount: string, currencyCode: string): string {
+  let normalizedAmount = parseFloat(amount);
+  let normalizedCurrency = currencyCode;
+
+  if (currencyCode === 'THB') {
+    normalizedAmount = normalizedAmount * THB_TO_USD_RATE;
+    normalizedCurrency = 'USD';
+  }
+
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: currencyCode,
-  }).format(parseFloat(amount));
+    currency: normalizedCurrency,
+  }).format(normalizedAmount);
 }
 
 export function getIdFromGid(gid: string): string {

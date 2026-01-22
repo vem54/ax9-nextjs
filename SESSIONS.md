@@ -472,6 +472,39 @@ Completed Vercel deploy and verified live PDP updates; USD pricing still unresol
 ### Next Session Priorities
 - Fix Shopify Markets/currency to return USD in Storefront API
 
+## Session 15 - 2026-01-22
+
+### Summary
+Polished editorial visuals, fixed PDP image scaling, added size guide fallback, and introduced THB-to-USD display conversion while noting Shopify market limits.
+
+### Accomplishments
+- Replaced homepage editorial imagery and refined editorial copy
+- Switched PDP main image to object-contain for correct scaling
+- Added size guide fallback link when size charts are missing
+- Added THB->USD price conversion fallback in formatting
+- Verified Storefront API still returns THB due to market settings
+
+### Technical Discoveries
+- Storefront API ignores `@inContext(country: US)` because shop only has THB presentment currency enabled
+- Admin API token lacks `read_markets` scope, so Markets currency must be updated in Shopify admin
+
+### Files Modified
+- `app/page.tsx`
+- `components/product/ProductGallery.tsx`
+- `components/product/ProductInfo.tsx`
+- `lib/shopify/client.ts`
+- `public/images/editorial/atelier.jpg`
+- `public/images/editorial/fabric.jpg`
+- `public/images/editorial/urban.jpg`
+- `public/images/editorial/silhouette.jpg`
+- `PROGRESS.md`
+- `SESSIONS.md`
+
+### Next Session Priorities
+- Enable USD presentment currency in Shopify Markets
+- QA PDP image scaling and sizing guidance on live site
+- Continue editorial refinement with licensed imagery
+
 ---
 
 *Template for future sessions:*

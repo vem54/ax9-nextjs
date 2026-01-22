@@ -128,6 +128,13 @@
 ### Editorial Visuals (Session 11 - 2026-01-22)
 - [x] Added homepage editorial modules with stock imagery (atelier, fabric, city, lookbook)
 
+### Editorial + PDP Polish (Session 15 - 2026-01-22)
+- [x] Replaced homepage editorial imagery with refined editorial set
+- [x] Updated editorial copy and lookbook headline for tighter tone
+- [x] Switched PDP main image to object-contain for correct scaling
+- [x] Added PDP size guide fallback when no size chart exists
+- [x] Added THB->USD price conversion fallback (Shopify market still THB)
+
 ### Batch Product Import (Session 5 - 2026-01-22)
 - [x] Found Products.xlsx with 4,763 Taobao Item IDs mapped to Shopify products
 - [x] Created batch-import.ts script for importing by brand
@@ -168,6 +175,7 @@
 ### Products
 - [ ] Import more products from Taobao (10-15 for real catalog)
 - [ ] Set up proper collections in Shopify
+- [ ] Enable USD presentment currency in Shopify Markets (Storefront API still returns THB)
 
 ### Future
 - [ ] Custom domain setup

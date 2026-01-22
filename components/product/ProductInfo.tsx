@@ -61,6 +61,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       return null;
     }
   }, [product.sizeChart?.value]);
+  const hasSizeChart = Boolean(sizeChartData);
 
   const detailItems = [
     { label: 'Materials', value: product.materials?.value },
@@ -109,22 +110,31 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       </div>
 
       {/* Fit and sizing */}
-      {product.sizeChart?.value && (
-        <div className="border-t border-gray-100 pt-4 mb-6">
-          <p className="text-xs uppercase tracking-widest text-gray-500 mb-3">
-            Fit and Sizing
-          </p>
-          <div className="flex items-center justify-between">
-            <span className="text-xs text-gray-500">Size guide</span>
+      <div className="border-t border-gray-100 pt-4 mb-6">
+        <p className="text-xs uppercase tracking-widest text-gray-500 mb-3">
+          Fit and Sizing
+        </p>
+        <div className="flex items-center justify-between">
+          <span className="text-xs text-gray-500">Size guide</span>
+          {hasSizeChart && product.sizeChart?.value ? (
             <SizeChart data={product.sizeChart.value} />
-          </div>
-          {sizeChartData?.modelInfo && (
-            <p className="text-xs text-gray-500 mt-3">
-              Model is {sizeChartData.modelInfo.height} and wears size {sizeChartData.modelInfo.wears}
-            </p>
+          ) : (
+            <a href="/pages/sizing" className="text-sm underline hover:no-underline">
+              Size Guide
+            </a>
           )}
         </div>
-      )}
+        {sizeChartData?.modelInfo && (
+          <p className="text-xs text-gray-500 mt-3">
+            Model is {sizeChartData.modelInfo.height} and wears size {sizeChartData.modelInfo.wears}
+          </p>
+        )}
+        {!hasSizeChart && (
+          <p className="text-xs text-gray-500 mt-3">
+            Use our general size guide and consider sizing up for a relaxed fit.
+          </p>
+        )}
+      </div>
 
       {/* Composition and care */}
       {detailItems.length > 0 && (

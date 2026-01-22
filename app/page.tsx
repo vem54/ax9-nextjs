@@ -186,7 +186,7 @@ export default async function HomePage() {
             <p className="text-xs uppercase tracking-widest text-gray-500 mb-2">
               Editorial
             </p>
-            <h2 className="text-2xl font-medium">The new city uniform</h2>
+            <h2 className="text-2xl font-medium">City studies</h2>
           </div>
           <Link href="/about" className="text-sm hover:text-gray-500">
             Our curation
@@ -195,18 +195,18 @@ export default async function HomePage() {
         <div className="grid gap-4 md:grid-cols-3">
           {[
             {
-              title: 'Atelier',
-              copy: 'Quiet process, sharp results.',
+              title: 'Studio',
+              copy: 'Quiet construction. Precise lines.',
               image: '/images/editorial/atelier.jpg',
             },
             {
-              title: 'Fabric',
-              copy: 'Texture first. Finish matters.',
+              title: 'Material',
+              copy: 'Weight, drape, and finish.',
               image: '/images/editorial/fabric.jpg',
             },
             {
-              title: 'City',
-              copy: 'Built for movement and restraint.',
+              title: 'Street',
+              copy: 'Designed for long days.',
               image: '/images/editorial/urban.jpg',
             },
           ].map((item) => (
@@ -237,7 +237,7 @@ export default async function HomePage() {
                 Lookbook
               </p>
               <h2 className="text-2xl md:text-3xl font-medium mb-4">
-                Modern East, western streets.
+                Modern East, clear lines.
               </h2>
               <p className="text-sm text-gray-500 max-w-md">
                 A curated edit of Chinese streetwear with a luxury frame.
