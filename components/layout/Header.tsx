@@ -11,44 +11,48 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-black">
       <div className="container">
-        <div className="flex items-center justify-between h-14">
-          {/* Mobile menu button */}
-          <button
-            className="md:hidden p-2 -ml-2 hover:text-gray-500 transition-colors"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? (
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            )}
-          </button>
+        <div className="grid grid-cols-[auto,1fr,auto] items-center h-14">
+          <div className="flex items-center gap-4">
+            {/* Mobile menu button */}
+            <button
+              className="md:hidden p-2 -ml-2 hover:text-gray-500 transition-colors"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
+            </button>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center gap-6">
+              <Link href="/collections/all" className="text-sm hover:text-gray-500 transition-colors">
+                Shop
+              </Link>
+              <Link href="/collections/new-arrivals" className="text-sm hover:text-gray-500 transition-colors">
+                New Arrivals
+              </Link>
+              <Link href="/about" className="text-sm hover:text-gray-500 transition-colors">
+                About
+              </Link>
+            </nav>
+          </div>
 
           {/* Logo */}
-          <Link href="/" className="text-xl font-medium tracking-tight">
-            AXENT
-          </Link>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="/collections/all" className="text-sm hover:text-gray-500 transition-colors">
-              Shop
+          <div className="flex justify-center">
+            <Link href="/" className="text-xl font-medium tracking-tight">
+              AXENT
             </Link>
-            <Link href="/collections/new-arrivals" className="text-sm hover:text-gray-500 transition-colors">
-              New Arrivals
-            </Link>
-            <Link href="/about" className="text-sm hover:text-gray-500 transition-colors">
-              About
-            </Link>
-          </nav>
+          </div>
 
           {/* Right side */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 justify-end">
             <Link href="/search" className="p-2 hover:text-gray-500 transition-colors" aria-label="Search">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />

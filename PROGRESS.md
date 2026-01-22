@@ -135,6 +135,10 @@
 - [x] Added PDP size guide fallback when no size chart exists
 - [x] Added THB->USD price conversion fallback (Shopify market still THB)
 
+### Header + Hero Video (Session 16 - 2026-01-22)
+- [x] Centered AXENT logo in header on desktop
+- [x] Added desktop hero video slot for axent_hero.mp4 (asset pending)
+
 ### Batch Product Import (Session 5 - 2026-01-22)
 - [x] Found Products.xlsx with 4,763 Taobao Item IDs mapped to Shopify products
 - [x] Created batch-import.ts script for importing by brand
@@ -159,6 +163,7 @@
 - [ ] Collection filtering by vendor/price
 - [ ] Wishlist functionality
 - [ ] Recently viewed products
+- [ ] Add `public/videos/axent_hero.mp4` asset for desktop hero
 
 ### SEO & Performance
 - [ ] robots.txt

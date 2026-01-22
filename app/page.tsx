@@ -57,6 +57,7 @@ export default async function HomePage() {
     getProducts(),
     getCollections(),
   ]);
+  const heroVideoSrc = '/videos/axent_hero.mp4';
 
   return (
     <div>
@@ -115,17 +116,20 @@ export default async function HomePage() {
               </div>
             </div>
 
-            {/* Right - Featured Image */}
+            {/* Right - Featured Media */}
             <div className="relative hidden lg:block">
               {products[0]?.featuredImage ? (
                 <Link href={`/products/${products[0].handle}`} className="block h-full">
-                  <Image
-                    src={products[0].featuredImage.url}
-                    alt={products[0].featuredImage.altText || products[0].title}
-                    fill
-                    className="object-cover"
-                    priority
-                  />
+                  <video
+                    className="absolute inset-0 w-full h-full object-cover"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    poster={products[0].featuredImage.url}
+                  >
+                    <source src={heroVideoSrc} type="video/mp4" />
+                  </video>
                   <div className="absolute bottom-6 left-6 bg-white px-4 py-3">
                     <p className="text-xs text-gray-500 mb-1">{products[0].vendor}</p>
                     <p className="text-sm font-medium">{products[0].title}</p>
