@@ -568,6 +568,7 @@ Polished PDP, collections, and search with breadcrumbs, quantity controls, and c
 - Displayed price ranges on product cards
 - Restyled collection filters to match system select styles
 - Added thumbnail accessibility labels and video preload optimization
+- Deployed to Vercel and verified live PDP updates
 
 ### Technical Discoveries
 - None

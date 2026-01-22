@@ -153,6 +153,7 @@
 - [x] Refined collection filters styling for consistency
 - [x] Added accessibility labels to PDP thumbnails
 - [x] Added hero video preload optimization
+- [x] Deployed to Vercel and verified live PDP updates
 
 ### Batch Product Import (Session 5 - 2026-01-22)
 - [x] Found Products.xlsx with 4,763 Taobao Item IDs mapped to Shopify products
