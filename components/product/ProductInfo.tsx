@@ -6,6 +6,7 @@ import { formatPrice } from '@/lib/shopify/client';
 import VariantSelector from './VariantSelector';
 import AddToCart from './AddToCart';
 import SizeChart from './SizeChart';
+import WishlistButton from './WishlistButton';
 
 interface ProductInfoProps {
   product: Product;
@@ -74,25 +75,25 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
   return (
     <div className="flex flex-col">
-      <div className="border-b border-gray-100 pb-6">
+      <div className="border-b border-gray-200 pb-6">
         {/* Vendor */}
-        <p className="text-xs uppercase tracking-widest text-gray-500 mb-2">
+        <p className="overline mb-3">
           {product.vendor}
         </p>
 
         {/* Title */}
-        <h1 className="text-3xl md:text-4xl font-medium leading-tight mb-4">
+        <h1 className="display-md mb-5">
           {product.title}
         </h1>
 
         {/* Price */}
         <div className="flex items-baseline gap-3">
-          <p className="text-xl md:text-2xl">
+          <p className="price-lg">
             {formatPrice(price.amount, price.currencyCode)}
           </p>
-          <span className="text-xs text-gray-500">{displayCurrency}</span>
+          <span className="caption">{displayCurrency}</span>
           {hasDiscount && (
-            <p className="text-sm text-gray-500 line-through">
+            <p className="price-strike">
               {formatPrice(compareAtPrice.amount, compareAtPrice.currencyCode)}
             </p>
           )}
@@ -100,13 +101,13 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       </div>
 
       {/* Variant selector */}
-      <div className="border-b border-gray-100 py-6">
+      <div className="border-b border-gray-200 py-6">
         <div className="flex items-center justify-between mb-4">
-          <p className="text-xs uppercase tracking-widest text-gray-500">
+          <p className="label">
             Select Options
           </p>
           {hasSizeOption && (
-            <a href="/size-guide" className="text-xs underline hover:no-underline">
+            <a href="/size-guide" className="link-underline text-xs">
               Size guide
             </a>
           )}
@@ -120,23 +121,23 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       </div>
 
       {/* Quantity + Add to cart */}
-      <div className="border-b border-gray-100 py-6 space-y-4">
+      <div className="border-b border-gray-200 py-6 space-y-4">
         <div className="flex items-center justify-between">
-          <span className="text-xs uppercase tracking-widest text-gray-500">Quantity</span>
+          <span className="label">Quantity</span>
           <div className="flex items-center border border-black">
             <button
               type="button"
               onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
-              className="w-10 h-10 flex items-center justify-center text-sm hover:bg-gray-100"
+              className="w-10 h-10 flex items-center justify-center font-mono text-sm hover:bg-gray-100 transition-colors"
               aria-label="Decrease quantity"
             >
-              -
+              −
             </button>
-            <span className="w-10 text-center text-sm">{quantity}</span>
+            <span className="w-10 text-center font-mono text-sm tabular-nums">{quantity}</span>
             <button
               type="button"
               onClick={() => setQuantity((prev) => Math.min(10, prev + 1))}
-              className="w-10 h-10 flex items-center justify-center text-sm hover:bg-gray-100"
+              className="w-10 h-10 flex items-center justify-center font-mono text-sm hover:bg-gray-100 transition-colors"
               aria-label="Increase quantity"
             >
               +
@@ -148,30 +149,31 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           availableForSale={selectedVariant?.availableForSale || false}
           quantity={quantity}
         />
+        <WishlistButton product={product} variant="full" />
       </div>
 
       {/* Fit and sizing */}
-      <div className="border-b border-gray-100 py-6">
-        <p className="text-xs uppercase tracking-widest text-gray-500 mb-3">
+      <div className="border-b border-gray-200 py-6">
+        <p className="label mb-4">
           Size and Fit
         </p>
         <div className="flex items-center justify-between">
-          <span className="text-xs text-gray-500">Size guide</span>
+          <span className="caption">Size guide</span>
           {hasSizeChart && product.sizeChart?.value ? (
             <SizeChart data={product.sizeChart.value} />
           ) : (
-            <a href="/size-guide" className="text-sm underline hover:no-underline">
-              Size Guide
+            <a href="/size-guide" className="link-underline text-sm">
+              View Size Guide
             </a>
           )}
         </div>
         {sizeChartData?.modelInfo && (
-          <p className="text-xs text-gray-500 mt-3">
+          <p className="caption mt-3">
             Model is {sizeChartData.modelInfo.height} and wears size {sizeChartData.modelInfo.wears}
           </p>
         )}
         {!hasSizeChart && (
-          <p className="text-xs text-gray-500 mt-3">
+          <p className="caption mt-3">
             Use our general size guide and consider sizing up for a relaxed fit.
           </p>
         )}
@@ -179,15 +181,15 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
       {/* Composition and care */}
       {detailItems.length > 0 && (
-        <div className="border-b border-gray-100 py-6">
-          <p className="text-xs uppercase tracking-widest text-gray-500 mb-3">
+        <div className="border-b border-gray-200 py-6">
+          <p className="label mb-4">
             Composition and Care
           </p>
-          <dl className="space-y-2 text-sm">
+          <dl className="space-y-3 text-sm">
             {detailItems.map((item) => (
               <div key={item.label} className="flex justify-between gap-6">
                 <dt className="text-gray-500">{item.label}</dt>
-                <dd className="text-black text-right">{item.value}</dd>
+                <dd className="text-black text-right font-medium">{item.value}</dd>
               </div>
             ))}
           </dl>
@@ -196,12 +198,12 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
       {/* Details */}
       {product.descriptionHtml && (
-        <div className="border-b border-gray-100 py-6">
-          <p className="text-xs uppercase tracking-widest text-gray-500 mb-3">
+        <div className="border-b border-gray-200 py-6">
+          <p className="label mb-4">
             Product Details
           </p>
           <div
-            className="product-richtext text-sm text-gray-500 leading-relaxed"
+            className="product-richtext text-sm text-gray-600"
             dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
           />
         </div>
@@ -209,19 +211,19 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
       {/* Trust module */}
       <div className="pt-6">
-        <p className="text-xs uppercase tracking-widest text-gray-500 mb-3">
+        <p className="label mb-4">
           Shipping and Returns
         </p>
-        <ul className="text-xs text-gray-500 space-y-2">
+        <ul className="caption space-y-2">
           <li>Fast, free shipping. All customs and taxes prepaid.</li>
           <li>14-day refunds on eligible items.</li>
           <li>100% original, curated Chinese designers.</li>
         </ul>
-        <div className="flex gap-4 mt-3">
-          <a href="/shipping" className="text-xs underline hover:no-underline">
+        <div className="flex gap-4 mt-4">
+          <a href="/shipping" className="link-underline text-xs">
             Shipping
           </a>
-          <a href="/returns" className="text-xs underline hover:no-underline">
+          <a href="/returns" className="link-underline text-xs">
             Returns
           </a>
         </div>

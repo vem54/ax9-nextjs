@@ -26,13 +26,14 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       'font-medium uppercase tracking-wide',
       'disabled:opacity-50 disabled:cursor-not-allowed',
       'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black',
+      'transition-all duration-250 ease-out-expo',
       fullWidth ? 'w-full' : '',
     ].join(' ');
 
     const variants = {
-      primary: 'bg-black text-white hover:bg-gray-500 active:bg-gray-500',
+      primary: 'bg-black text-white hover:bg-gray-800 active:scale-[0.98]',
       secondary:
-        'bg-white text-black border border-black hover:bg-black hover:text-white active:bg-black active:text-white',
+        'bg-white text-black border border-black hover:bg-black hover:text-white active:scale-[0.98]',
       ghost: 'bg-transparent text-black hover:text-gray-500 active:text-gray-500',
     };
 

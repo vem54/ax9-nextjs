@@ -45,17 +45,17 @@ export default function ProductTabs({
   const activeIsHtml = tabs.find((tab) => tab.id === activeTab)?.isHtml;
 
   return (
-    <div className="border-t border-black mt-6 pt-6">
+    <div className="border-t border-black mt-8 pt-8">
       {/* Tab headers */}
-      <div className="flex flex-wrap gap-6 border-b border-gray-100 mb-4">
+      <div className="flex flex-wrap gap-8 border-b border-gray-200 mb-6">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`pb-2 text-xs uppercase tracking-widest ${
+            className={`pb-3 font-sans text-xs font-medium uppercase tracking-wider transition-colors ${
               activeTab === tab.id
-                ? 'border-b-2 border-black font-medium'
-                : 'text-gray-500 hover:text-black'
+                ? 'border-b-2 border-black text-black'
+                : 'text-gray-400 hover:text-black'
             }`}
           >
             {tab.label}
@@ -64,7 +64,7 @@ export default function ProductTabs({
       </div>
 
       {/* Tab content */}
-      <div className="product-richtext text-sm text-gray-500 leading-relaxed">
+      <div className="product-richtext text-sm text-gray-600 leading-relaxed">
         {activeIsHtml ? (
           <div dangerouslySetInnerHTML={{ __html: activeContent || '' }} />
         ) : (

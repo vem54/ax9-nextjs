@@ -95,14 +95,14 @@ export default function SizeChart({ data }: SizeChartProps) {
         <>
           {/* Backdrop */}
           <div
-            className="fixed inset-0 bg-black/50 z-50"
+            className="fixed inset-0 bg-black/50 z-50 animate-fade-in"
             onClick={() => setIsOpen(false)}
           />
 
           {/* Modal */}
           <div
             ref={modalRef}
-            className="fixed inset-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-2xl md:w-full bg-white z-50 overflow-auto max-h-[90vh]"
+            className="fixed inset-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-2xl md:w-full bg-white z-50 overflow-auto max-h-[90vh] animate-scale-in"
             role="dialog"
             aria-modal="true"
             aria-labelledby="size-chart-title"

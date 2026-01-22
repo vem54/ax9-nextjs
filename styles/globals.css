@@ -10,14 +10,45 @@
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   body {
-    @apply bg-white text-black text-base;
+    @apply bg-white text-black text-base font-sans;
   }
 
+  /* Typography Hierarchy */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-medium tracking-tight;
+    @apply font-serif font-normal;
+    text-wrap: balance;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl tracking-tighter;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl tracking-tighter;
+  }
+
+  h3 {
+    @apply text-2xl tracking-tight;
+  }
+
+  h4 {
+    @apply text-xl tracking-tight;
+  }
+
+  h5 {
+    @apply text-lg;
+  }
+
+  h6 {
+    @apply text-base font-medium font-sans uppercase tracking-wider;
+  }
+
+  p {
+    @apply text-base leading-relaxed;
   }
 
   a {
@@ -29,12 +60,21 @@
   }
 
   input, textarea, select {
-    @apply border border-black focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black;
+    @apply font-sans border border-black focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black;
+  }
+
+  img {
+    /* No transitions per design system */
   }
 
   /* Selection styling */
   ::selection {
     @apply bg-black text-white;
+  }
+
+  /* Focus visible for accessibility */
+  :focus-visible {
+    @apply outline-none ring-1 ring-black ring-offset-2;
   }
 }
 
@@ -43,27 +83,83 @@
     @apply max-w-[1440px] mx-auto px-4;
   }
 
-  /* Buttons - used as class fallbacks */
+  /* Display Headings - Serif */
+  .display-xl {
+    @apply font-serif text-5xl md:text-6xl font-light tracking-tightest leading-none;
+  }
+
+  .display-lg {
+    @apply font-serif text-4xl md:text-5xl font-light tracking-tighter leading-tight;
+  }
+
+  .display-md {
+    @apply font-serif text-3xl md:text-4xl font-normal tracking-tighter leading-tight;
+  }
+
+  .display-sm {
+    @apply font-serif text-2xl md:text-3xl font-normal tracking-tight leading-snug;
+  }
+
+  /* Body Headings - Sans */
+  .heading-lg {
+    @apply font-sans text-xl font-semibold tracking-tight;
+  }
+
+  .heading-md {
+    @apply font-sans text-lg font-semibold tracking-tight;
+  }
+
+  .heading-sm {
+    @apply font-sans text-base font-semibold tracking-normal;
+  }
+
+  /* Labels and Overlines */
+  .label {
+    @apply font-sans text-micro font-medium uppercase tracking-ultra text-gray-500;
+  }
+
+  .overline {
+    @apply font-sans text-xs font-medium uppercase tracking-widest text-gray-500;
+  }
+
+  .caption {
+    @apply font-sans text-xs text-gray-500;
+  }
+
+  /* Price styling - Mono */
+  .price {
+    @apply font-mono text-sm font-medium tracking-tight tabular-nums;
+  }
+
+  .price-lg {
+    @apply font-mono text-lg font-medium tracking-tight tabular-nums;
+  }
+
+  .price-strike {
+    @apply font-mono text-sm text-gray-400 line-through tabular-nums;
+  }
+
+  /* Buttons */
   .btn {
-    @apply inline-flex items-center justify-center px-4 py-3 text-sm font-medium uppercase tracking-wide focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black;
+    @apply inline-flex items-center justify-center px-5 py-3 text-sm font-sans font-semibold uppercase tracking-wider focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black focus-visible:ring-offset-2;
   }
 
   .btn-primary {
-    @apply btn bg-black text-white hover:bg-gray-500;
+    @apply btn bg-black text-white hover:bg-gray-800;
   }
 
   .btn-secondary {
     @apply btn bg-white text-black border border-black hover:bg-black hover:text-white;
   }
 
-  /* Input - used as class fallback */
+  /* Input */
   .input {
-    @apply w-full px-3 py-3 text-sm border border-black bg-white placeholder:text-gray-500 focus:border-gray-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black;
+    @apply w-full px-4 py-3 text-sm font-sans border border-black bg-white placeholder:text-gray-400 focus:border-gray-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black focus-visible:ring-offset-2;
   }
 
   /* Select styling */
   .select {
-    @apply w-full px-3 py-3 text-sm border border-black bg-white appearance-none cursor-pointer;
+    @apply w-full px-4 py-3 text-sm font-sans border border-black bg-white appearance-none cursor-pointer;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
     background-position: right 12px center;
     background-repeat: no-repeat;
@@ -87,7 +183,32 @@
 
   /* Underline link */
   .link-underline {
-    @apply underline hover:no-underline;
+    @apply underline underline-offset-4 decoration-gray-300 hover:decoration-black;
+  }
+
+  /* Nav Link */
+  .nav-link {
+    @apply font-sans text-sm font-medium tracking-wide hover:text-gray-500;
+  }
+
+  /* Logo */
+  .logo {
+    @apply font-serif text-2xl font-normal tracking-tight;
+  }
+
+  /* Editorial serif italic accent */
+  .editorial-accent {
+    @apply font-serif italic;
+  }
+
+  /* Quote styling */
+  .quote {
+    @apply font-serif text-2xl md:text-3xl font-light italic leading-relaxed tracking-tight;
+  }
+
+  /* Subtle divider */
+  .divider {
+    @apply w-12 h-px bg-gray-300;
   }
 }
 
@@ -97,17 +218,15 @@
   }
 
   .product-richtext p {
-    margin-bottom: 0.75rem;
+    @apply mb-4 text-base leading-relaxed;
   }
 
   .product-richtext ul {
-    margin: 0.75rem 0;
-    padding-left: 1.25rem;
-    list-style: disc;
+    @apply my-4 pl-5 list-disc;
   }
 
   .product-richtext li {
-    margin-bottom: 0.5rem;
+    @apply mb-2 text-base;
   }
 
   /* Hide scrollbar but keep functionality */
@@ -140,5 +259,10 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  /* Tabular numbers for alignment */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
   }
 }

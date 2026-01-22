@@ -44,6 +44,13 @@ const FRAGMENTS = `
     featuredImage {
       ...ImageFields
     }
+    images(first: 2) {
+      edges {
+        node {
+          ...ImageFields
+        }
+      }
+    }
     priceRange {
       minVariantPrice {
         ...MoneyFields

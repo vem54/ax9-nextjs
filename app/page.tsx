@@ -62,22 +62,22 @@ export default async function HomePage() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative bg-gray-100">
+      <section className="relative bg-gray-50">
         <div className="container">
           <div className="grid lg:grid-cols-2 min-h-[70vh]">
             {/* Left - Content */}
-            <div className="flex flex-col justify-center py-10 lg:py-7 lg:pr-8">
-              <p className="text-xs uppercase tracking-widest text-gray-500 mb-4">
+            <div className="flex flex-col justify-center py-10 lg:py-7 lg:pr-10">
+              <p className="label mb-4">
                 Curated Fashion from China
               </p>
-              <h1 className="text-3xl md:text-4xl lg:text-[48px] font-medium leading-tight mb-4">
+              <h1 className="display-lg mb-5">
                 Discover designers
                 <br />
-                the world hasn&apos;t
+                <span className="editorial-accent">the world hasn&apos;t</span>
                 <br />
                 seen yet.
               </h1>
-              <p className="text-gray-500 mb-6 max-w-md">
+              <p className="text-base text-gray-600 mb-8 max-w-md leading-relaxed">
                 We source exceptional pieces from Shanghai, Beijing, and beyond.
                 Original design. Disciplined construction. Limited runs.
               </p>
@@ -91,7 +91,7 @@ export default async function HomePage() {
               </div>
 
               {/* Mobile featured image */}
-              <div className="relative mt-6 lg:hidden">
+              <div className="relative mt-8 lg:hidden">
                 {products[0]?.featuredImage ? (
                   <Link href={`/products/${products[0].handle}`} className="block">
                     <div className="relative aspect-product bg-gray-100">
@@ -103,14 +103,14 @@ export default async function HomePage() {
                         priority
                       />
                     </div>
-                    <div className="mt-3">
-                      <p className="text-xs text-gray-500 mb-1">{products[0].vendor}</p>
-                      <p className="text-sm font-medium">{products[0].title}</p>
+                    <div className="mt-4">
+                      <p className="overline mb-1">{products[0].vendor}</p>
+                      <p className="font-serif text-lg">{products[0].title}</p>
                     </div>
                   </Link>
                 ) : (
                   <div className="aspect-product bg-gray-100 flex items-center justify-center">
-                    <span className="text-gray-500">Featured Product</span>
+                    <span className="caption">Featured Product</span>
                   </div>
                 )}
               </div>
@@ -131,14 +131,14 @@ export default async function HomePage() {
                   >
                     <source src={heroVideoSrc} type="video/mp4" />
                   </video>
-                  <div className="absolute bottom-6 left-6 bg-white px-4 py-3">
-                    <p className="text-xs text-gray-500 mb-1">{products[0].vendor}</p>
-                    <p className="text-sm font-medium">{products[0].title}</p>
+                  <div className="absolute bottom-6 left-6 bg-white px-5 py-4">
+                    <p className="overline mb-1">{products[0].vendor}</p>
+                    <p className="font-serif text-lg">{products[0].title}</p>
                   </div>
                 </Link>
               ) : (
                 <div className="h-full bg-gray-100 flex items-center justify-center">
-                  <span className="text-gray-500">Featured Product</span>
+                  <span className="caption">Featured Product</span>
                 </div>
               )}
             </div>
@@ -147,37 +147,22 @@ export default async function HomePage() {
       </section>
 
       {/* Category Navigation */}
-      <section className="border-b border-gray-100">
+      <section className="border-b border-gray-200">
         <div className="container">
-          <nav className="flex items-center gap-6 py-4 overflow-x-auto scrollbar-hide">
-            <Link
-              href="/collections/all"
-              className="text-sm whitespace-nowrap hover:text-gray-500"
-            >
+          <nav className="flex items-center gap-8 py-4 overflow-x-auto scrollbar-hide">
+            <Link href="/collections/all" className="nav-link whitespace-nowrap">
               All Products
             </Link>
-            <Link
-              href="/collections/new-arrivals"
-              className="text-sm whitespace-nowrap hover:text-gray-500"
-            >
+            <Link href="/collections/new-arrivals" className="nav-link whitespace-nowrap">
               New Arrivals
             </Link>
-            <Link
-              href="/collections/outerwear"
-              className="text-sm whitespace-nowrap hover:text-gray-500"
-            >
+            <Link href="/collections/outerwear" className="nav-link whitespace-nowrap">
               Outerwear
             </Link>
-            <Link
-              href="/collections/tops"
-              className="text-sm whitespace-nowrap hover:text-gray-500"
-            >
+            <Link href="/collections/tops" className="nav-link whitespace-nowrap">
               Tops
             </Link>
-            <Link
-              href="/collections/bottoms"
-              className="text-sm whitespace-nowrap hover:text-gray-500"
-            >
+            <Link href="/collections/bottoms" className="nav-link whitespace-nowrap">
               Bottoms
             </Link>
           </nav>
@@ -186,15 +171,13 @@ export default async function HomePage() {
 
       {/* Editorial Modules */}
       <section className="container py-10">
-        <div className="flex items-baseline justify-between mb-6">
+        <div className="flex items-end justify-between mb-8">
           <div>
-            <p className="text-xs uppercase tracking-widest text-gray-500 mb-2">
-              Editorial
-            </p>
-            <h2 className="text-2xl font-medium">City studies</h2>
+            <p className="label mb-3">Editorial</p>
+            <h2 className="display-sm">City studies</h2>
           </div>
-          <Link href="/about" className="text-sm hover:text-gray-500">
-            Our curation
+          <Link href="/about" className="nav-link">
+            Our curation →
           </Link>
         </div>
         <div className="grid gap-4 md:grid-cols-3">
@@ -214,13 +197,13 @@ export default async function HomePage() {
                   />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-xs text-gray-500">Editorial</span>
+                    <span className="caption">Editorial</span>
                   </div>
                 )}
               </div>
-              <div className="mt-3">
-                <h3 className="text-sm font-medium">{product.vendor || 'Axent'}</h3>
-                <p className="text-xs text-gray-500 mt-1">{product.title}</p>
+              <div className="mt-4">
+                <h3 className="font-serif text-lg group-hover:text-gray-600 transition-colors">{product.vendor || 'Axent'}</h3>
+                <p className="caption mt-1">{product.title}</p>
               </div>
             </Link>
           ))}
@@ -228,7 +211,7 @@ export default async function HomePage() {
             <>
               {['Studio', 'Material', 'Street'].map((label) => (
                 <div key={label} className="bg-gray-100 aspect-[3/4] flex items-center justify-center">
-                  <span className="text-xs text-gray-500">{label}</span>
+                  <span className="caption">{label}</span>
                 </div>
               ))}
             </>
@@ -237,26 +220,26 @@ export default async function HomePage() {
       </section>
 
       {/* Lookbook Feature */}
-      <section className="bg-gray-100">
+      <section className="bg-gray-50">
         <div className="container py-10">
-          <div className="grid gap-6 lg:grid-cols-2 items-center">
-            <div>
-              <p className="text-xs uppercase tracking-widest text-gray-500 mb-3">
-                Lookbook
-              </p>
-              <h2 className="text-2xl md:text-3xl font-medium mb-4">
-                Modern East, clear lines.
+          <div className="grid gap-8 lg:grid-cols-2 items-center">
+            <div className="lg:pr-8">
+              <p className="label mb-4">Lookbook</p>
+              <h2 className="display-md mb-5">
+                Modern East,<br />
+                <span className="editorial-accent">clear lines.</span>
               </h2>
-              <p className="text-sm text-gray-500 max-w-md">
+              <p className="text-base text-gray-600 max-w-md leading-relaxed mb-6">
                 A curated edit of Chinese streetwear with a luxury frame.
                 Clean silhouettes, deliberate proportions, and material depth.
               </p>
+              <div className="divider mb-6"></div>
               {lookbookProduct && (
                 <Link
                   href={`/products/${lookbookProduct.handle}`}
-                  className="text-xs text-gray-500 mt-4 inline-block underline hover:no-underline"
+                  className="link-underline text-sm text-gray-500"
                 >
-                  Featured: {lookbookProduct.vendor} - {lookbookProduct.title}
+                  Featured: {lookbookProduct.vendor} — {lookbookProduct.title}
                 </Link>
               )}
             </div>
@@ -284,32 +267,32 @@ export default async function HomePage() {
       </section>
 
       {/* New Arrivals */}
-      <section className="container py-8">
-        <div className="flex justify-between items-baseline mb-6">
+      <section className="container py-10">
+        <div className="flex justify-between items-end mb-8">
           <div>
-            <h2 className="text-2xl font-medium">New Arrivals</h2>
-            <p className="text-sm text-gray-500 mt-1">The latest from our curated selection</p>
+            <h2 className="display-sm">New Arrivals</h2>
+            <p className="caption mt-2">The latest from our curated selection</p>
           </div>
           <Link
             href="/collections/new-arrivals"
-            className="text-sm hover:text-gray-500 hidden sm:block"
+            className="nav-link hidden sm:block"
           >
-            View All
+            View All →
           </Link>
         </div>
 
-          {products.length > 0 ? (
-            <ProductGrid products={products.slice(0, 4)} columns={4} />
-          ) : (
-            <div className="text-center py-10 bg-gray-100">
-              <p className="text-gray-500 mb-4">New drops land weekly.</p>
-              <p className="text-sm text-gray-500">
-                Follow the edit for the next release.
-              </p>
-            </div>
-          )}
+        {products.length > 0 ? (
+          <ProductGrid products={products.slice(0, 4)} columns={4} />
+        ) : (
+          <div className="text-center py-10 bg-gray-50">
+            <p className="font-serif text-xl text-gray-600 mb-2">New drops land weekly.</p>
+            <p className="caption">
+              Follow the edit for the next release.
+            </p>
+          </div>
+        )}
 
-        <div className="mt-6 text-center sm:hidden">
+        <div className="mt-8 text-center sm:hidden">
           <Link href="/collections/new-arrivals" className="btn-secondary">
             View All New Arrivals
           </Link>
@@ -318,20 +301,20 @@ export default async function HomePage() {
 
       {/* Editorial Banner */}
       <section className="bg-black text-white">
-        <div className="container py-10">
+        <div className="container py-12">
           <div className="max-w-3xl mx-auto text-center">
-            <p className="text-xs uppercase tracking-widest text-gray-500 mb-4">
+            <p className="label text-gray-500 mb-5">
               The Axent Difference
             </p>
-            <h2 className="text-2xl md:text-3xl font-medium mb-4">
-              Chinese designers set the tone for modern streetwear.
-              We bring their work to you.
+            <h2 className="display-md text-white mb-6">
+              Chinese designers set the tone for <span className="editorial-accent">modern streetwear.</span>
+              <br />We bring their work to you.
             </h2>
-            <p className="text-gray-500 mb-6">
+            <p className="text-base text-gray-400 mb-8 max-w-xl mx-auto leading-relaxed">
               Every piece is hand-selected from independent studios and emerging labels.
               Limited production. Verified originality. Construction that holds its shape.
             </p>
-            <Link href="/about" className="inline-block text-sm underline hover:no-underline">
+            <Link href="/about" className="link-underline text-sm text-gray-300">
               Learn about our curation process
             </Link>
           </div>
@@ -340,14 +323,11 @@ export default async function HomePage() {
 
       {/* Collections Grid */}
       {collections.length > 0 && (
-        <section className="container py-8">
-          <div className="flex justify-between items-baseline mb-6">
-            <h2 className="text-2xl font-medium">Shop by Category</h2>
-            <Link
-              href="/collections"
-              className="text-sm hover:text-gray-500"
-            >
-              View All
+        <section className="container py-10">
+          <div className="flex justify-between items-end mb-8">
+            <h2 className="display-sm">Shop by Category</h2>
+            <Link href="/collections" className="nav-link">
+              View All →
             </Link>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
@@ -357,23 +337,23 @@ export default async function HomePage() {
                 href={`/collections/${collection.handle}`}
                 className="group block"
               >
-                <div className="aspect-[4/3] bg-gray-100 relative overflow-hidden mb-3">
+                <div className="aspect-[4/3] bg-gray-100 relative overflow-hidden mb-4">
                   {collection.image ? (
                     <Image
                       src={collection.image.url}
                       alt={collection.image.altText || collection.title}
                       fill
-                      className="object-cover group-hover:opacity-90"
+                      className="object-cover group-hover:opacity-90 transition-opacity"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-2xl font-medium text-gray-500 group-hover:text-gray-500">
+                      <span className="font-serif text-2xl text-gray-400">
                         {collection.title}
                       </span>
                     </div>
                   )}
                 </div>
-                <h3 className="text-lg font-medium group-hover:text-gray-500">
+                <h3 className="font-serif text-xl group-hover:text-gray-600 transition-colors">
                   {collection.title}
                 </h3>
               </Link>
@@ -384,8 +364,8 @@ export default async function HomePage() {
 
       {/* If no real collections, show virtual category links */}
       {collections.length === 0 && (
-        <section className="container py-8">
-          <h2 className="text-2xl font-medium mb-6">Shop by Category</h2>
+        <section className="container py-10">
+          <h2 className="display-sm mb-8">Shop by Category</h2>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               { title: 'All Products', handle: 'all' },
@@ -398,12 +378,12 @@ export default async function HomePage() {
                 href={`/collections/${cat.handle}`}
                 className="group block"
               >
-                <div className="aspect-[4/3] bg-gray-100 flex items-center justify-center mb-3 group-hover:bg-black">
-                  <span className="text-xl font-medium text-gray-500 group-hover:text-white">
+                <div className="aspect-[4/3] bg-gray-100 flex items-center justify-center mb-4 group-hover:bg-black transition-colors">
+                  <span className="font-serif text-xl text-gray-500 group-hover:text-white transition-colors">
                     {cat.title}
                   </span>
                 </div>
-                <h3 className="text-sm font-medium group-hover:text-gray-500">
+                <h3 className="font-sans text-sm font-medium group-hover:text-gray-600 transition-colors">
                   {cat.title}
                 </h3>
               </Link>
@@ -413,11 +393,11 @@ export default async function HomePage() {
       )}
 
       {/* Newsletter */}
-      <section className="bg-gray-100">
-        <div className="container py-10">
+      <section className="bg-gray-50">
+        <div className="container py-12">
           <div className="max-w-lg mx-auto text-center">
-            <h2 className="text-2xl font-medium mb-2">Join the List</h2>
-            <p className="text-sm text-gray-500 mb-6">
+            <h2 className="display-sm mb-3">Join the List</h2>
+            <p className="caption mb-8">
               Be the first to know about new arrivals and exclusive offers.
               No spam, ever.
             </p>
@@ -432,9 +412,9 @@ export default async function HomePage() {
                 Subscribe
               </button>
             </form>
-            <p className="text-xs text-gray-500 mt-4">
+            <p className="caption mt-5">
               By subscribing, you agree to our{' '}
-              <Link href="/privacy" className="underline hover:no-underline">
+              <Link href="/privacy" className="link-underline">
                 Privacy Policy
               </Link>
             </p>

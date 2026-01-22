@@ -1,13 +1,33 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Newsreader, Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
 import '@/styles/globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import CartDrawer from '@/components/layout/CartDrawer';
 
-const inter = Inter({
+// Display serif for headlines - editorial elegance
+const newsreader = Newsreader({
   subsets: ['latin'],
   display: 'swap',
+  variable: '--font-serif',
+  weight: ['300', '400', '500', '600'],
+  style: ['normal', 'italic'],
+});
+
+// Body sans for UI and body text - modern geometric
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-sans',
+  weight: ['300', '400', '500', '600', '700'],
+});
+
+// Mono for prices and technical details - refined precision
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-mono',
+  weight: ['400', '500'],
 });
 
 export const metadata: Metadata = {
@@ -25,8 +45,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} min-h-screen flex flex-col`}>
+    <html lang="en" className={`${newsreader.variable} ${plusJakarta.variable} ${jetbrainsMono.variable}`}>
+      <body className="font-sans min-h-screen flex flex-col antialiased">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

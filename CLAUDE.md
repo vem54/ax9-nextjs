@@ -165,3 +165,14 @@ git add .
 git commit -m "description"
 git push origin main
 ```
+
+## Deploy/Push Process (Vercel + GitHub)
+
+1) Stage and commit all changes (`git add .`, `git commit -m "..."`).
+2) Push to GitHub (`git push origin main`).
+3) Deploy to Vercel with CLI:
+   - Install once: `npm install -g vercel`
+   - From repo root: `vercel --prod --yes`
+   - If prompted, ensure project is linked; `.vercel` is created and `.env.local` may be updated.
+4) If the build fails, fix the error, re-commit, re-push, and re-run `vercel --prod --yes`.
+5) Verify deploy: check live URLs and confirm expected UI changes or data.

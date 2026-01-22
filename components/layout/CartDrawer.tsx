@@ -78,47 +78,47 @@ export default function CartDrawer() {
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/50 z-50"
+        className="fixed inset-0 bg-black/50 z-50 animate-fade-in"
         onClick={closeCart}
       />
 
       {/* Drawer */}
       <div
         ref={drawerRef}
-        className="fixed right-0 top-0 h-full w-full max-w-md bg-white z-50 flex flex-col"
+        className="fixed right-0 top-0 h-full w-full max-w-md bg-white z-50 flex flex-col animate-slide-in-right"
         role="dialog"
         aria-modal="true"
         aria-labelledby="cart-drawer-title"
         tabIndex={-1}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-4 border-b border-black">
-          <h2 id="cart-drawer-title" className="text-lg font-medium">
-            Cart ({cart?.totalQuantity || 0})
+        <div className="flex items-center justify-between px-5 py-5 border-b border-black">
+          <h2 id="cart-drawer-title" className="font-serif text-xl">
+            Cart <span className="font-mono text-sm text-gray-500">({cart?.totalQuantity || 0})</span>
           </h2>
           <button
             onClick={closeCart}
-            className="text-sm hover:text-gray-500"
+            className="nav-link"
           >
             Close
           </button>
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto px-4 py-4">
+        <div className="flex-1 overflow-y-auto px-5 py-6">
           {lines.length === 0 ? (
-            <div className="text-center py-10">
-              <p className="text-gray-500 mb-4">Your cart is empty</p>
+            <div className="text-center py-12">
+              <p className="font-serif text-xl text-gray-600 mb-4">Your cart is empty</p>
               <Link
                 href="/collections/all"
                 onClick={closeCart}
-                className="text-sm underline"
+                className="link-underline text-sm"
               >
                 Continue shopping
               </Link>
             </div>
           ) : (
-            <ul className="space-y-4">
+            <ul className="space-y-6">
               {lines.map((line) => (
                 <li key={line.id} className="flex gap-4">
                   {/* Image */}
@@ -145,18 +145,18 @@ export default function CartDrawer() {
                     <Link
                       href={`/products/${line.merchandise.product.handle}`}
                       onClick={closeCart}
-                      className="text-sm font-medium hover:text-gray-500 block truncate"
+                      className="font-serif text-base hover:text-gray-600 transition-colors block truncate"
                     >
                       {line.merchandise.product.title}
                     </Link>
                     {line.merchandise.title !== 'Default Title' && (
-                      <p className="text-xs text-gray-500 mt-1">
+                      <p className="caption mt-1">
                         {line.merchandise.selectedOptions
                           .map((opt) => opt.value)
                           .join(' / ')}
                       </p>
                     )}
-                    <p className="text-sm mt-1">
+                    <p className="price mt-2">
                       {formatPrice(
                         line.merchandise.price.amount,
                         line.merchandise.price.currencyCode
@@ -164,7 +164,7 @@ export default function CartDrawer() {
                     </p>
 
                     {/* Quantity */}
-                    <div className="flex items-center gap-2 mt-2">
+                    <div className="flex items-center gap-2 mt-3">
                       <button
                         onClick={() => {
                           if (line.quantity === 1) {
@@ -174,22 +174,22 @@ export default function CartDrawer() {
                           }
                         }}
                         disabled={isLoading}
-                        className="w-6 h-6 border border-black text-xs hover:bg-gray-100 disabled:opacity-50"
+                        className="w-7 h-7 border border-black font-mono text-xs hover:bg-gray-100 disabled:opacity-50 transition-colors duration-200"
                       >
-                        -
+                        −
                       </button>
-                      <span className="text-sm w-6 text-center">{line.quantity}</span>
+                      <span className="font-mono text-sm w-6 text-center tabular-nums">{line.quantity}</span>
                       <button
                         onClick={() => updateLineItem(line.id, line.quantity + 1)}
                         disabled={isLoading}
-                        className="w-6 h-6 border border-black text-xs hover:bg-gray-100 disabled:opacity-50"
+                        className="w-7 h-7 border border-black font-mono text-xs hover:bg-gray-100 disabled:opacity-50 transition-colors duration-200"
                       >
                         +
                       </button>
                       <button
                         onClick={() => removeLineItem(line.id)}
                         disabled={isLoading}
-                        className="text-xs text-gray-500 hover:text-black ml-auto disabled:opacity-50"
+                        className="text-xs text-gray-400 hover:text-black ml-auto disabled:opacity-50 transition-colors duration-200"
                       >
                         Remove
                       </button>
@@ -203,17 +203,17 @@ export default function CartDrawer() {
 
         {/* Footer */}
         {lines.length > 0 && cart && (
-          <div className="border-t border-black px-4 py-4">
-            <div className="flex justify-between mb-2">
+          <div className="border-t border-black px-5 py-5">
+            <div className="flex justify-between mb-3">
               <span className="text-sm">Subtotal</span>
-              <span className="text-sm font-medium">
+              <span className="price-lg">
                 {formatPrice(
                   cart.cost.subtotalAmount.amount,
                   cart.cost.subtotalAmount.currencyCode
                 )}
               </span>
             </div>
-            <p className="text-xs text-gray-500 mb-4">
+            <p className="caption mb-5">
               Shipping and taxes calculated at checkout.
             </p>
             <a
