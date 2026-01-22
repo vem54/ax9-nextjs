@@ -153,7 +153,7 @@ export default function SearchDropdown() {
       </label>
       <input
         id="header-search"
-        type="text"
+        type="search"
         value={query}
         onChange={(event) => {
           setQuery(event.target.value);
@@ -168,6 +168,7 @@ export default function SearchDropdown() {
         aria-controls={dropdownId}
         aria-activedescendant={activeId}
         aria-autocomplete="list"
+        autoComplete="off"
       />
 
       {isOpen && (
@@ -176,7 +177,7 @@ export default function SearchDropdown() {
           className="absolute right-0 mt-2 w-72 sm:w-80 border border-gray-200 bg-white z-50"
           role="listbox"
         >
-          <div className="px-4 py-3 border-b border-gray-100">
+          <div className="px-4 py-3 border-b border-gray-100" role="status" aria-live="polite">
             <p className="caption text-gray-500">
               {isLoading
                 ? 'Searching...'
@@ -204,6 +205,8 @@ export default function SearchDropdown() {
                     <button
                       type="button"
                       id={`predictive-search-item-${index}`}
+                      role="option"
+                      aria-selected={isActive}
                       className={`w-full text-left px-4 py-3 border-b border-gray-100 ${
                         isActive ? 'bg-gray-100 text-black' : 'text-gray-700'
                       }`}
@@ -251,6 +254,8 @@ export default function SearchDropdown() {
               <button
                 type="button"
                 id={`predictive-search-item-${results.length}`}
+                role="option"
+                aria-selected={activeIndex === results.length}
                 className={`w-full text-left px-4 py-3 text-sm ${
                   activeIndex === results.length
                     ? 'bg-gray-100 text-black'

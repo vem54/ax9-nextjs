@@ -29,6 +29,7 @@
 
 ### Product Components
 - [x] ProductCard with image, vendor, title, price
+- [x] QuickAdd size selector on product cards
 - [x] ProductGrid (2/3/4 column layouts)
 - [x] ProductGallery with thumbnails
 - [x] VariantSelector for size/color selection

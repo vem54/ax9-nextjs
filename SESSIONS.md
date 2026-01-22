@@ -750,6 +750,30 @@ Added predictive search dropdown with debounced Shopify results in the header.
 
 ---
 
+## Session 24 - 2026-01-22
+
+### Summary
+Added QuickAdd size selector overlays on product cards for direct cart adds.
+
+### Accomplishments
+- Built `QuickAdd` component with size buttons, loading, and success feedback
+- Integrated QuickAdd overlay into product cards with hover/tap behavior
+
+### Technical Discoveries
+- `pipeline/.env` remains filtered by ignore rules, token status not verified
+
+### Files Modified
+- `components/product/QuickAdd.tsx`
+- `components/product/ProductCard.tsx`
+- `PROGRESS.md`
+- `SESSIONS.md`
+
+### Next Session Priorities
+- Verify USD presentment currency via Shopify Markets and remove conversion fallback
+- QA quick-add interaction across desktop hover and mobile tap
+
+---
+
 *Template for future sessions:*
 
 ## Session N - YYYY-MM-DD
