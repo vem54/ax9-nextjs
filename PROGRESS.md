@@ -173,6 +173,9 @@
 - [x] Added robots.txt and sitemap.xml routes
 - [x] Added product JSON-LD structured data on PDP
 
+### UI Polish (Session 22 - 2026-01-22)
+- [x] Added product card hover swap with secondary/variant image fallback
+
 ### Batch Product Import (Session 5 - 2026-01-22)
 - [x] Found Products.xlsx with 4,763 Taobao Item IDs mapped to Shopify products
 - [x] Created batch-import.ts script for importing by brand

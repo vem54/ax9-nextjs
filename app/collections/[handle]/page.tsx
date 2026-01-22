@@ -191,19 +191,22 @@ export default async function CollectionPage({ params, searchParams }: Props) {
   }
 
   return (
-    <div className="container py-6">
-      <nav className="text-xs text-gray-500 mb-4 flex flex-wrap items-center gap-2">
-        <Link href="/" className="hover:text-black">Home</Link>
-        <span>/</span>
-        <Link href="/collections" className="hover:text-black">Collections</Link>
-        <span>/</span>
+    <div className="container py-12 lg:py-16">
+      {/* Breadcrumb */}
+      <nav className="caption mb-8 flex flex-wrap items-center gap-2">
+        <Link href="/" className="hover:text-black transition-colors duration-200">Home</Link>
+        <span className="text-gray-300">/</span>
+        <Link href="/collections" className="hover:text-black transition-colors duration-200">Collections</Link>
+        <span className="text-gray-300">/</span>
         <span className="text-black">{title}</span>
       </nav>
+
       {/* Header */}
-      <div className="mb-6">
-        <h1 className="text-2xl font-medium mb-2">{title}</h1>
+      <div className="mb-12">
+        <p className="eyebrow mb-4">Collection</p>
+        <h1 className="display-lg mb-4">{title}</h1>
         {description && (
-          <p className="text-sm text-gray-500 max-w-2xl">{description}</p>
+          <p className="text-lg text-gray-500 max-w-2xl">{description}</p>
         )}
       </div>
 
@@ -218,9 +221,9 @@ export default async function CollectionPage({ params, searchParams }: Props) {
       {products.length > 0 ? (
         <ProductGrid products={products} />
       ) : (
-        <div className="text-center py-10">
-          <p className="text-gray-500 mb-4">No products found in this collection.</p>
-          <a href="/collections/all" className="text-sm underline hover:no-underline">
+        <div className="text-center py-20 bg-cream">
+          <p className="display-sm text-gray-600 mb-5">No products found in this collection.</p>
+          <a href="/collections/all" className="link-underline text-sm">
             Browse all products
           </a>
         </div>

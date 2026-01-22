@@ -1,41 +1,41 @@
 import type { Metadata } from 'next';
-import { Newsreader, Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
+import { Cormorant_Garamond, Manrope, Space_Mono } from 'next/font/google';
 import '@/styles/globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import CartDrawer from '@/components/layout/CartDrawer';
 
-// Display serif for headlines - editorial elegance
-const newsreader = Newsreader({
+// Display serif - Cormorant Garamond: elegant, high-contrast, editorial luxury
+const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-serif',
-  weight: ['300', '400', '500', '600'],
+  weight: ['300', '400', '500', '600', '700'],
   style: ['normal', 'italic'],
 });
 
-// Body sans for UI and body text - modern geometric
-const plusJakarta = Plus_Jakarta_Sans({
+// Body sans - Manrope: geometric, modern, distinctive but readable
+const manrope = Manrope({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-sans',
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['300', '400', '500', '600', '700', '800'],
 });
 
-// Mono for prices and technical details - refined precision
-const jetbrainsMono = JetBrains_Mono({
+// Mono - Space Mono: distinctive character for prices and technical details
+const spaceMono = Space_Mono({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-mono',
-  weight: ['400', '500'],
+  weight: ['400', '700'],
 });
 
 export const metadata: Metadata = {
   title: {
-    default: 'Axent - Curated Chinese Fashion',
-    template: '%s | Axent',
+    default: 'AXENT — Curated Chinese Fashion',
+    template: '%s | AXENT',
   },
-  description: 'Curated Chinese fashion brands for the global market. Quality streetwear and contemporary designs.',
+  description: 'Curated Chinese fashion brands for the global market. Quality streetwear and contemporary designs from Shanghai, Beijing, and beyond.',
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
 };
 
@@ -45,8 +45,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${newsreader.variable} ${plusJakarta.variable} ${jetbrainsMono.variable}`}>
-      <body className="font-sans min-h-screen flex flex-col antialiased">
+    <html lang="en" className={`${cormorant.variable} ${manrope.variable} ${spaceMono.variable}`}>
+      <body className="font-sans min-h-screen flex flex-col antialiased bg-white text-black">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

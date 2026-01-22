@@ -44,13 +44,6 @@ const FRAGMENTS = `
     featuredImage {
       ...ImageFields
     }
-    images(first: 2) {
-      edges {
-        node {
-          ...ImageFields
-        }
-      }
-    }
     priceRange {
       minVariantPrice {
         ...MoneyFields
@@ -74,6 +67,13 @@ export const GET_PRODUCTS = `
       edges {
         node {
           ...ProductFields
+          images(first: 2) {
+            edges {
+              node {
+                ...ImageFields
+              }
+            }
+          }
           variants(first: 1) {
             edges {
               node {
@@ -163,6 +163,13 @@ export const GET_COLLECTION_BY_HANDLE = `
         edges {
           node {
             ...ProductFields
+            images(first: 2) {
+              edges {
+                node {
+                  ...ImageFields
+                }
+              }
+            }
             variants(first: 1) {
               edges {
                 node {
@@ -298,6 +305,13 @@ export const SEARCH_PRODUCTS = `
       edges {
         node {
           ...ProductFields
+          images(first: 2) {
+            edges {
+              node {
+                ...ImageFields
+              }
+            }
+          }
           variants(first: 1) {
             edges {
               node {

@@ -75,25 +75,25 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
   return (
     <div className="flex flex-col">
-      <div className="border-b border-gray-200 pb-6">
+      <div className="border-b border-gray-200 pb-8">
         {/* Vendor */}
-        <p className="overline mb-3">
+        <p className="product-vendor mb-4">
           {product.vendor}
         </p>
 
         {/* Title */}
-        <h1 className="display-md mb-5">
+        <h1 className="display-md mb-6">
           {product.title}
         </h1>
 
         {/* Price */}
-        <div className="flex items-baseline gap-3">
-          <p className="price-lg">
+        <div className="flex items-baseline gap-4">
+          <p className="price-xl">
             {formatPrice(price.amount, price.currencyCode)}
           </p>
           <span className="caption">{displayCurrency}</span>
           {hasDiscount && (
-            <p className="price-strike">
+            <p className="price-strike text-base">
               {formatPrice(compareAtPrice.amount, compareAtPrice.currencyCode)}
             </p>
           )}
@@ -101,9 +101,9 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       </div>
 
       {/* Variant selector */}
-      <div className="border-b border-gray-200 py-6">
-        <div className="flex items-center justify-between mb-4">
-          <p className="label">
+      <div className="border-b border-gray-200 py-8">
+        <div className="flex items-center justify-between mb-5">
+          <p className="label-lg">
             Select Options
           </p>
           {hasSizeOption && (
@@ -121,23 +121,23 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       </div>
 
       {/* Quantity + Add to cart */}
-      <div className="border-b border-gray-200 py-6 space-y-4">
+      <div className="border-b border-gray-200 py-8 space-y-5">
         <div className="flex items-center justify-between">
-          <span className="label">Quantity</span>
+          <span className="label-lg">Quantity</span>
           <div className="flex items-center border border-black">
             <button
               type="button"
               onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
-              className="w-10 h-10 flex items-center justify-center font-mono text-sm hover:bg-gray-100 transition-colors"
+              className="w-11 h-11 flex items-center justify-center font-mono text-sm hover:bg-gray-100 transition-colors duration-200"
               aria-label="Decrease quantity"
             >
               −
             </button>
-            <span className="w-10 text-center font-mono text-sm tabular-nums">{quantity}</span>
+            <span className="w-12 text-center font-mono text-sm font-bold tabular-nums">{quantity}</span>
             <button
               type="button"
               onClick={() => setQuantity((prev) => Math.min(10, prev + 1))}
-              className="w-10 h-10 flex items-center justify-center font-mono text-sm hover:bg-gray-100 transition-colors"
+              className="w-11 h-11 flex items-center justify-center font-mono text-sm hover:bg-gray-100 transition-colors duration-200"
               aria-label="Increase quantity"
             >
               +
@@ -153,12 +153,12 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       </div>
 
       {/* Fit and sizing */}
-      <div className="border-b border-gray-200 py-6">
-        <p className="label mb-4">
+      <div className="border-b border-gray-200 py-8">
+        <p className="label-lg mb-5">
           Size and Fit
         </p>
         <div className="flex items-center justify-between">
-          <span className="caption">Size guide</span>
+          <span className="text-sm text-gray-500">Size guide</span>
           {hasSizeChart && product.sizeChart?.value ? (
             <SizeChart data={product.sizeChart.value} />
           ) : (
@@ -168,12 +168,12 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           )}
         </div>
         {sizeChartData?.modelInfo && (
-          <p className="caption mt-3">
+          <p className="caption mt-4">
             Model is {sizeChartData.modelInfo.height} and wears size {sizeChartData.modelInfo.wears}
           </p>
         )}
         {!hasSizeChart && (
-          <p className="caption mt-3">
+          <p className="caption mt-4">
             Use our general size guide and consider sizing up for a relaxed fit.
           </p>
         )}
@@ -181,13 +181,13 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
       {/* Composition and care */}
       {detailItems.length > 0 && (
-        <div className="border-b border-gray-200 py-6">
-          <p className="label mb-4">
+        <div className="border-b border-gray-200 py-8">
+          <p className="label-lg mb-5">
             Composition and Care
           </p>
-          <dl className="space-y-3 text-sm">
+          <dl className="space-y-4 text-sm">
             {detailItems.map((item) => (
-              <div key={item.label} className="flex justify-between gap-6">
+              <div key={item.label} className="flex justify-between gap-8">
                 <dt className="text-gray-500">{item.label}</dt>
                 <dd className="text-black text-right font-medium">{item.value}</dd>
               </div>
@@ -198,8 +198,8 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
       {/* Details */}
       {product.descriptionHtml && (
-        <div className="border-b border-gray-200 py-6">
-          <p className="label mb-4">
+        <div className="border-b border-gray-200 py-8">
+          <p className="label-lg mb-5">
             Product Details
           </p>
           <div
@@ -210,20 +210,29 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       )}
 
       {/* Trust module */}
-      <div className="pt-6">
-        <p className="label mb-4">
+      <div className="pt-8">
+        <p className="label-lg mb-5">
           Shipping and Returns
         </p>
-        <ul className="caption space-y-2">
-          <li>Fast, free shipping. All customs and taxes prepaid.</li>
-          <li>14-day refunds on eligible items.</li>
-          <li>100% original, curated Chinese designers.</li>
+        <ul className="text-sm text-gray-500 space-y-3">
+          <li className="flex items-start gap-3">
+            <span className="text-black">→</span>
+            Fast, free shipping. All customs and taxes prepaid.
+          </li>
+          <li className="flex items-start gap-3">
+            <span className="text-black">→</span>
+            14-day refunds on eligible items.
+          </li>
+          <li className="flex items-start gap-3">
+            <span className="text-black">→</span>
+            100% original, curated Chinese designers.
+          </li>
         </ul>
-        <div className="flex gap-4 mt-4">
-          <a href="/shipping" className="link-underline text-xs">
+        <div className="flex gap-5 mt-6">
+          <a href="/shipping" className="link-underline text-sm">
             Shipping
           </a>
-          <a href="/returns" className="link-underline text-xs">
+          <a href="/returns" className="link-underline text-sm">
             Returns
           </a>
         </div>

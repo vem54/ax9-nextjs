@@ -109,22 +109,25 @@ export default async function ProductPage({ params }: Props) {
   };
 
   return (
-    <div className="container py-6">
+    <div className="container py-10 lg:py-14">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
       />
-      <nav className="text-xs text-gray-500 mb-4 flex flex-wrap items-center gap-2">
-        <Link href="/" className="hover:text-black">Home</Link>
-        <span>/</span>
-        <Link href="/collections/all" className="hover:text-black">Shop</Link>
-        <span>/</span>
-        <span className="text-black">{product.title}</span>
+
+      {/* Breadcrumb */}
+      <nav className="caption mb-8 flex flex-wrap items-center gap-2">
+        <Link href="/" className="hover:text-black transition-colors duration-200">Home</Link>
+        <span className="text-gray-300">/</span>
+        <Link href="/collections/all" className="hover:text-black transition-colors duration-200">Shop</Link>
+        <span className="text-gray-300">/</span>
+        <span className="text-black line-clamp-1">{product.title}</span>
       </nav>
+
       {/* Main product section */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] gap-6 lg:gap-12 items-start">
+      <div className="grid md:grid-cols-2 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] gap-10 lg:gap-16 items-start">
         {/* Gallery */}
-        <div className="md:sticky md:top-20 self-start">
+        <div className="md:sticky md:top-28 self-start">
           <ProductGallery images={images} productTitle={product.title} />
         </div>
 
@@ -134,8 +137,11 @@ export default async function ProductPage({ params }: Props) {
 
       {/* Related products */}
       {relatedProducts.length > 0 && (
-        <section className="mt-10 pt-10 border-t border-gray-100">
-          <h2 className="text-xl font-medium mb-6">You May Also Like</h2>
+        <section className="mt-20 lg:mt-28 pt-16 border-t border-gray-200">
+          <div className="mb-12">
+            <p className="eyebrow mb-4">More to Explore</p>
+            <h2 className="display-md">You May Also Like</h2>
+          </div>
           <ProductGrid products={relatedProducts.slice(0, 4)} />
         </section>
       )}

@@ -703,6 +703,29 @@ Added SEO essentials (robots and sitemap) and improved collections fallback cont
 
 ---
 
+## Session 22 - 2026-01-22
+
+### Summary
+Implemented product card hover swap with secondary/variant image fallback and keyboard focus support.
+
+### Accomplishments
+- Added robust image selection to ensure a secondary image is available when possible
+- Enabled hover/focus-visible swap behavior for product cards
+- Updated progress tracking
+
+### Technical Discoveries
+- `pipeline/.env` is filtered by ignore rules in this workspace, so token status could not be verified
+
+### Files Modified
+- `components/product/ProductCard.tsx`
+- `PROGRESS.md`
+- `SESSIONS.md`
+
+### Next Session Priorities
+- Verify USD presentment currency via Shopify Markets and remove conversion fallback
+
+---
+
 *Template for future sessions:*
 
 ## Session N - YYYY-MM-DD

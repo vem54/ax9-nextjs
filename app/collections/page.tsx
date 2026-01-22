@@ -38,43 +38,43 @@ export default async function CollectionsPage() {
   );
 
   return (
-    <div className="container py-6">
-      <div className="mb-6">
-        <h1 className="text-2xl font-medium">Collections</h1>
-        <p className="text-sm text-gray-500 mt-2 max-w-2xl">
+    <div className="container py-8">
+      <div className="mb-10">
+        <h1 className="display-sm mb-3">Collections</h1>
+        <p className="text-base text-gray-500 max-w-2xl">
           Focused edits across outerwear, knits, and structured staples from independent Chinese studios.
         </p>
       </div>
 
       {displayCollections.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayCollections.map((collection) => (
             <Link
               key={collection.id}
               href={`/collections/${collection.handle}`}
               className="group block"
             >
-              <div className="aspect-[4/3] bg-gray-100 relative overflow-hidden mb-3">
+              <div className="aspect-[4/3] bg-gray-100 relative overflow-hidden mb-4">
                 {collection.image ? (
                   <Image
                     src={collection.image.url}
                     alt={collection.image.altText || collection.title}
                     fill
-                    className="object-cover group-hover:opacity-90"
+                    className="object-cover group-hover:opacity-90 transition-opacity"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
-                    <span className="text-2xl font-medium text-gray-500">
+                    <span className="font-serif text-2xl text-gray-400">
                       {collection.title}
                     </span>
                   </div>
                 )}
               </div>
-              <h2 className="text-lg font-medium group-hover:text-gray-500">
+              <h2 className="font-serif text-xl group-hover:text-gray-600 transition-colors">
                 {collection.title}
               </h2>
               {collection.description && (
-                <p className="text-sm text-gray-500 mt-1 line-clamp-2">
+                <p className="caption mt-2 line-clamp-2">
                   {collection.description}
                 </p>
               )}
@@ -83,7 +83,7 @@ export default async function CollectionsPage() {
         </div>
       ) : (
         <div>
-          <p className="text-sm text-gray-500 mb-6">
+          <p className="caption mb-8">
             Explore our core edits while curated collections go live.
           </p>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -99,12 +99,12 @@ export default async function CollectionsPage() {
                 href={`/collections/${cat.handle}`}
                 className="group block"
               >
-                <div className="aspect-[4/3] bg-gray-100 flex items-center justify-center mb-3 group-hover:bg-black">
-                  <span className="text-xl font-medium text-gray-500 group-hover:text-white">
+                <div className="aspect-[4/3] bg-gray-100 flex items-center justify-center mb-4 group-hover:bg-black transition-colors">
+                  <span className="font-serif text-xl text-gray-500 group-hover:text-white transition-colors">
                     {cat.title}
                   </span>
                 </div>
-                <h3 className="text-sm font-medium group-hover:text-gray-500">
+                <h3 className="font-sans text-sm font-medium group-hover:text-gray-600 transition-colors">
                   {cat.title}
                 </h3>
               </Link>
@@ -114,10 +114,10 @@ export default async function CollectionsPage() {
       )}
 
       {/* Always show All Products link */}
-      <div className="mt-8 pt-6 border-t border-gray-100">
+      <div className="mt-10 pt-8 border-t border-gray-200">
         <Link
           href="/collections/all"
-          className="inline-flex items-center text-sm font-medium hover:text-gray-500"
+          className="inline-flex items-center nav-link"
         >
           View All Products
           <svg

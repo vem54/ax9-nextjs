@@ -11,40 +11,46 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    font-feature-settings: "kern" 1, "liga" 1;
   }
 
   body {
     @apply bg-white text-black text-base font-sans;
   }
 
-  /* Typography Hierarchy */
+  /* ═══════════════════════════════════════════════════════════════════════════
+     TYPOGRAPHY SYSTEM — AXENT
+     A dramatic, editorial hierarchy built for luxury fashion
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  /* Headings - Cormorant Garamond Serif */
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif font-normal;
     text-wrap: balance;
   }
 
   h1 {
-    @apply text-4xl md:text-5xl tracking-tighter;
+    @apply text-4xl md:text-5xl lg:text-6xl font-light tracking-tighter leading-none;
   }
 
   h2 {
-    @apply text-3xl md:text-4xl tracking-tighter;
+    @apply text-3xl md:text-4xl font-light tracking-tight leading-tight;
   }
 
   h3 {
-    @apply text-2xl tracking-tight;
+    @apply text-2xl md:text-3xl tracking-tight leading-snug;
   }
 
   h4 {
-    @apply text-xl tracking-tight;
+    @apply text-xl md:text-2xl tracking-tight;
   }
 
   h5 {
-    @apply text-lg;
+    @apply text-lg md:text-xl;
   }
 
   h6 {
-    @apply text-base font-medium font-sans uppercase tracking-wider;
+    @apply text-base font-sans font-semibold uppercase tracking-wider;
   }
 
   p {
@@ -63,10 +69,6 @@
     @apply font-sans border border-black focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black;
   }
 
-  img {
-    /* No transitions per design system */
-  }
-
   /* Selection styling */
   ::selection {
     @apply bg-black text-white;
@@ -76,31 +78,54 @@
   :focus-visible {
     @apply outline-none ring-1 ring-black ring-offset-2;
   }
+
+  /* Smooth scrolling */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
 }
 
 @layer components {
   .container {
-    @apply max-w-[1440px] mx-auto px-4;
+    @apply max-w-[1440px] mx-auto px-4 md:px-6 lg:px-8;
   }
 
-  /* Display Headings - Serif */
+  /* ═══════════════════════════════════════════════════════════════════════════
+     DISPLAY TYPOGRAPHY — Cormorant Garamond
+     For hero headlines, section titles, editorial statements
+     ═══════════════════════════════════════════════════════════════════════════ */
+  
+  .display-hero {
+    @apply font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light tracking-tightest leading-none;
+  }
+
   .display-xl {
-    @apply font-serif text-5xl md:text-6xl font-light tracking-tightest leading-none;
+    @apply font-serif text-4xl sm:text-5xl md:text-6xl font-light tracking-tighter leading-none;
   }
 
   .display-lg {
-    @apply font-serif text-4xl md:text-5xl font-light tracking-tighter leading-tight;
+    @apply font-serif text-3xl sm:text-4xl md:text-5xl font-light tracking-tighter leading-tight;
   }
 
   .display-md {
-    @apply font-serif text-3xl md:text-4xl font-normal tracking-tighter leading-tight;
+    @apply font-serif text-2xl sm:text-3xl md:text-4xl font-normal tracking-tight leading-tight;
   }
 
   .display-sm {
-    @apply font-serif text-2xl md:text-3xl font-normal tracking-tight leading-snug;
+    @apply font-serif text-xl sm:text-2xl md:text-3xl font-normal tracking-tight leading-snug;
   }
 
-  /* Body Headings - Sans */
+  /* ═══════════════════════════════════════════════════════════════════════════
+     BODY HEADINGS — Manrope Sans
+     For UI headings, card titles, navigation
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  .heading-xl {
+    @apply font-sans text-2xl font-semibold tracking-tight;
+  }
+
   .heading-lg {
     @apply font-sans text-xl font-semibold tracking-tight;
   }
@@ -113,9 +138,21 @@
     @apply font-sans text-base font-semibold tracking-normal;
   }
 
-  /* Labels and Overlines */
+  .heading-xs {
+    @apply font-sans text-sm font-semibold tracking-normal;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     LABELS & OVERLINES — Manrope Sans Uppercase
+     For categories, metadata, navigation hints
+     ═══════════════════════════════════════════════════════════════════════════ */
+
   .label {
-    @apply font-sans text-micro font-medium uppercase tracking-ultra text-gray-500;
+    @apply font-sans text-micro font-semibold uppercase tracking-ultra text-gray-500;
+  }
+
+  .label-lg {
+    @apply font-sans text-xs font-semibold uppercase tracking-widest text-gray-500;
   }
 
   .overline {
@@ -123,25 +160,61 @@
   }
 
   .caption {
-    @apply font-sans text-xs text-gray-500;
+    @apply font-sans text-xs text-gray-500 tracking-wide;
   }
 
-  /* Price styling - Mono */
+  .eyebrow {
+    @apply font-sans text-micro font-bold uppercase tracking-mega text-gray-400;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     PRICE TYPOGRAPHY — Space Mono
+     For prices, quantities, technical details
+     ═══════════════════════════════════════════════════════════════════════════ */
+
   .price {
-    @apply font-mono text-sm font-medium tracking-tight tabular-nums;
+    @apply font-mono text-sm font-normal tracking-tight tabular-nums;
   }
 
   .price-lg {
-    @apply font-mono text-lg font-medium tracking-tight tabular-nums;
+    @apply font-mono text-lg font-normal tracking-tight tabular-nums;
+  }
+
+  .price-xl {
+    @apply font-mono text-xl font-bold tracking-tight tabular-nums;
   }
 
   .price-strike {
     @apply font-mono text-sm text-gray-400 line-through tabular-nums;
   }
 
-  /* Buttons */
+  /* ═══════════════════════════════════════════════════════════════════════════
+     EDITORIAL ACCENTS — Cormorant Garamond Italic
+     For emphasis, quotes, artistic flourishes
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  .editorial-accent {
+    @apply font-serif italic;
+  }
+
+  .editorial-light {
+    @apply font-serif font-light;
+  }
+
+  .quote {
+    @apply font-serif text-2xl md:text-3xl lg:text-4xl font-light italic leading-relaxed tracking-tight;
+  }
+
+  .quote-sm {
+    @apply font-serif text-xl md:text-2xl font-light italic leading-relaxed tracking-tight;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     BUTTONS
+     ═══════════════════════════════════════════════════════════════════════════ */
+
   .btn {
-    @apply inline-flex items-center justify-center px-5 py-3 text-sm font-sans font-semibold uppercase tracking-wider focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black focus-visible:ring-offset-2;
+    @apply inline-flex items-center justify-center px-6 py-3.5 text-sm font-sans font-semibold uppercase tracking-wider focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black focus-visible:ring-offset-2 transition-colors duration-200;
   }
 
   .btn-primary {
@@ -152,63 +225,129 @@
     @apply btn bg-white text-black border border-black hover:bg-black hover:text-white;
   }
 
-  /* Input */
-  .input {
-    @apply w-full px-4 py-3 text-sm font-sans border border-black bg-white placeholder:text-gray-400 focus:border-gray-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black focus-visible:ring-offset-2;
+  .btn-ghost {
+    @apply btn bg-transparent text-black hover:bg-gray-100;
   }
 
-  /* Select styling */
+  .btn-sm {
+    @apply px-4 py-2.5 text-xs;
+  }
+
+  .btn-lg {
+    @apply px-8 py-4 text-base;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     INPUTS
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  .input {
+    @apply w-full px-4 py-3.5 text-sm font-sans border border-black bg-white placeholder:text-gray-400 focus:border-gray-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black focus-visible:ring-offset-2 transition-colors duration-200;
+  }
+
+  .input-lg {
+    @apply px-5 py-4 text-base;
+  }
+
   .select {
-    @apply w-full px-4 py-3 text-sm font-sans border border-black bg-white appearance-none cursor-pointer;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-    background-position: right 12px center;
+    @apply w-full px-4 py-3.5 text-sm font-sans border border-black bg-white appearance-none cursor-pointer transition-colors duration-200;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%230A0A0A' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 14px center;
     background-repeat: no-repeat;
     background-size: 16px;
-    padding-right: 40px;
+    padding-right: 44px;
   }
 
   .select:focus {
-    @apply border-gray-500;
+    @apply border-gray-600;
   }
 
-  /* Product image aspect ratio */
+  /* ═══════════════════════════════════════════════════════════════════════════
+     PRODUCT ELEMENTS
+     ═══════════════════════════════════════════════════════════════════════════ */
+
   .product-image {
     @apply aspect-product object-cover;
   }
 
-  /* Link hover effect */
+  .product-title {
+    @apply font-serif text-lg md:text-xl font-normal tracking-tight leading-snug;
+  }
+
+  .product-vendor {
+    @apply font-sans text-xs font-semibold uppercase tracking-widest text-gray-500;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     LINKS
+     ═══════════════════════════════════════════════════════════════════════════ */
+
   .link-hover {
-    @apply hover:text-gray-500;
+    @apply hover:text-gray-500 transition-colors duration-200;
   }
 
-  /* Underline link */
   .link-underline {
-    @apply underline underline-offset-4 decoration-gray-300 hover:decoration-black;
+    @apply underline underline-offset-4 decoration-gray-300 hover:decoration-black transition-colors duration-200;
   }
 
-  /* Nav Link */
+  .link-editorial {
+    @apply font-serif italic hover:text-gray-600 transition-colors duration-200;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     NAVIGATION
+     ═══════════════════════════════════════════════════════════════════════════ */
+
   .nav-link {
-    @apply font-sans text-sm font-medium tracking-wide hover:text-gray-500;
+    @apply font-sans text-sm font-medium tracking-wide hover:text-gray-500 transition-colors duration-200;
   }
 
-  /* Logo */
+  .nav-link-lg {
+    @apply font-serif text-xl md:text-2xl font-normal hover:text-gray-500 transition-colors duration-200;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     LOGO
+     ═══════════════════════════════════════════════════════════════════════════ */
+
   .logo {
-    @apply font-serif text-2xl font-normal tracking-tight;
+    @apply font-serif text-2xl md:text-3xl font-normal tracking-tight;
   }
 
-  /* Editorial serif italic accent */
-  .editorial-accent {
-    @apply font-serif italic;
+  .logo-sm {
+    @apply font-serif text-xl font-normal tracking-tight;
   }
 
-  /* Quote styling */
-  .quote {
-    @apply font-serif text-2xl md:text-3xl font-light italic leading-relaxed tracking-tight;
-  }
+  /* ═══════════════════════════════════════════════════════════════════════════
+     DECORATIVE ELEMENTS
+     ═══════════════════════════════════════════════════════════════════════════ */
 
-  /* Subtle divider */
   .divider {
-    @apply w-12 h-px bg-gray-300;
+    @apply w-16 h-px bg-gray-300;
+  }
+
+  .divider-vertical {
+    @apply w-px h-8 bg-gray-300;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-3 py-1.5 text-micro font-sans font-semibold uppercase tracking-wider bg-black text-white;
+  }
+
+  .badge-outline {
+    @apply badge bg-transparent text-black border border-black;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     SECTION BACKGROUNDS
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  .bg-cream {
+    background-color: #F5F3EF;
+  }
+
+  .bg-stone {
+    background-color: #E8E4DE;
   }
 }
 
@@ -217,6 +356,11 @@
     text-wrap: balance;
   }
 
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Rich text content styling */
   .product-richtext p {
     @apply mb-4 text-base leading-relaxed;
   }
@@ -227,6 +371,10 @@
 
   .product-richtext li {
     @apply mb-2 text-base;
+  }
+
+  .product-richtext strong {
+    @apply font-semibold;
   }
 
   /* Hide scrollbar but keep functionality */
@@ -264,5 +412,37 @@
   /* Tabular numbers for alignment */
   .tabular-nums {
     font-variant-numeric: tabular-nums;
+  }
+
+  /* Stagger animation delays */
+  .stagger-1 { animation-delay: 50ms; }
+  .stagger-2 { animation-delay: 100ms; }
+  .stagger-3 { animation-delay: 150ms; }
+  .stagger-4 { animation-delay: 200ms; }
+  .stagger-5 { animation-delay: 250ms; }
+  .stagger-6 { animation-delay: 300ms; }
+  .stagger-7 { animation-delay: 350ms; }
+  .stagger-8 { animation-delay: 400ms; }
+
+  /* Gradient overlays */
+  .gradient-fade-b {
+    background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.6) 100%);
+  }
+
+  .gradient-fade-t {
+    background: linear-gradient(to top, transparent 0%, rgba(0,0,0,0.4) 100%);
+  }
+
+  /* Aspect ratios */
+  .aspect-product {
+    aspect-ratio: 3 / 4;
+  }
+
+  .aspect-hero {
+    aspect-ratio: 16 / 9;
+  }
+
+  .aspect-portrait {
+    aspect-ratio: 2 / 3;
   }
 }
