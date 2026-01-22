@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from '@/lib/shopify/types';
 import { formatPrice } from '@/lib/shopify/client';
+import QuickAdd from '@/components/product/QuickAdd';
 
 interface ProductCardProps {
   product: Product;
@@ -18,7 +19,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     product.images.edges.find((image) => image.node.url !== primaryImage?.url)?.node || null;
 
   return (
-    <Link href={`/products/${product.handle}`} className="group block">
+    <div className="group block">
       {/* Image */}
       <div className="relative aspect-product bg-gray-100 overflow-hidden mb-5">
         {primaryImage ? (
@@ -49,17 +50,27 @@ export default function ProductCard({ product }: ProductCardProps) {
             Sold out
           </div>
         )}
+        <Link
+          href={`/products/${product.handle}`}
+          className="absolute inset-0 z-10"
+          aria-label={product.title}
+        >
+          <span className="sr-only">{product.title}</span>
+        </Link>
+        <QuickAdd variants={product.variants.edges.map((edge) => edge.node)} />
       </div>
 
       {/* Info */}
-      <div>
+      <Link href={`/products/${product.handle}`} className="block">
         <p className="product-vendor mb-2">{product.vendor}</p>
         <h3 className="product-title group-hover:text-gray-500 transition-colors duration-300 mb-3 line-clamp-2">
           {product.title}
         </h3>
         <div className="flex items-center gap-3">
           <p className="price">
-            {hasRange ? `From ${formatPrice(price.amount, price.currencyCode)}` : formatPrice(price.amount, price.currencyCode)}
+            {hasRange
+              ? `From ${formatPrice(price.amount, price.currencyCode)}`
+              : formatPrice(price.amount, price.currencyCode)}
           </p>
           {hasDiscount && (
             <p className="price-strike">
@@ -67,7 +78,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             </p>
           )}
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }

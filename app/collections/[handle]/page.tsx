@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import Image from 'next/image';
 import { shopifyFetch } from '@/lib/shopify/client';
 import { GET_COLLECTION_BY_HANDLE, GET_PRODUCTS } from '@/lib/shopify/queries';
 import { Collection, Product } from '@/lib/shopify/types';
@@ -17,27 +18,50 @@ interface Props {
   searchParams: Promise<{ sort?: string; availability?: string }>;
 }
 
-// Special virtual collections that don't exist in Shopify
-const VIRTUAL_COLLECTIONS: Record<string, { title: string; description: string }> = {
+// Editorial content for virtual collections
+interface CollectionEditorial {
+  title: string;
+  displayTitle: string;
+  subtitle: string;
+  description: string;
+  theme: 'light' | 'dark';
+}
+
+const VIRTUAL_COLLECTIONS: Record<string, CollectionEditorial> = {
   all: {
     title: 'All Products',
-    description: 'A curated edit of Chinese streetwear and contemporary design.',
+    displayTitle: 'The Full Edit',
+    subtitle: 'Every piece we\'ve curated, in one place.',
+    description: 'A comprehensive collection of Chinese streetwear and contemporary design, selected for distinction and lasting style.',
+    theme: 'light',
   },
   'new-arrivals': {
     title: 'New Arrivals',
-    description: 'Fresh arrivals from emerging labels and studio favorites.',
+    displayTitle: 'Just Landed',
+    subtitle: 'The latest from our network of designers.',
+    description: 'Fresh perspectives from emerging labels and established ateliers. Updated weekly with pieces that define the season.',
+    theme: 'dark',
   },
   outerwear: {
     title: 'Outerwear',
-    description: 'Coats and jackets built for structure, volume, and contrast.',
+    displayTitle: 'Outerwear',
+    subtitle: 'Structured silhouettes for every season.',
+    description: 'Coats, jackets, and layering pieces engineered for form and function. Built to last, designed to impress.',
+    theme: 'light',
   },
   tops: {
     title: 'Tops',
-    description: 'Shirts, knits, and long sleeves with sharp proportion.',
+    displayTitle: 'Tops',
+    subtitle: 'From knits to shirts, the foundations.',
+    description: 'Essential pieces and statement makers. Precision cuts and considered details for everyday wear.',
+    theme: 'light',
   },
   bottoms: {
     title: 'Bottoms',
-    description: 'Trousers and denim with clean lines and modern shape.',
+    displayTitle: 'Bottoms',
+    subtitle: 'Trousers, shorts, and everything below.',
+    description: 'Clean lines and modern proportions. From tailored trousers to relaxed fits, each piece crafted with intention.',
+    theme: 'light',
   },
 };
 
@@ -155,12 +179,19 @@ export default async function CollectionPage({ params, searchParams }: Props) {
   const virtual = VIRTUAL_COLLECTIONS[handle];
 
   let title: string;
+  let displayTitle: string;
+  let subtitle: string | undefined;
   let description: string | undefined;
   let products: Product[];
+  let collectionImage: { url: string; altText?: string | null } | null = null;
+  let theme: 'light' | 'dark' = 'light';
 
   if (virtual) {
     title = virtual.title;
+    displayTitle = virtual.displayTitle;
+    subtitle = virtual.subtitle;
     description = virtual.description;
+    theme = virtual.theme;
 
     if (handle === 'all' || handle === 'new-arrivals') {
       products = await getAllProducts(sortKey, reverse);
@@ -181,7 +212,10 @@ export default async function CollectionPage({ params, searchParams }: Props) {
     }
 
     title = collection.title;
+    displayTitle = collection.title;
+    subtitle = undefined;
     description = collection.description;
+    collectionImage = collection.image || null;
     products = collection.products.edges.map((edge) => edge.node);
   }
 
@@ -190,44 +224,95 @@ export default async function CollectionPage({ params, searchParams }: Props) {
     products = products.filter((p) => p.availableForSale);
   }
 
-  return (
-    <div className="container py-12 lg:py-16">
-      {/* Breadcrumb */}
-      <nav className="caption mb-8 flex flex-wrap items-center gap-2">
-        <Link href="/" className="hover:text-black transition-colors duration-200">Home</Link>
-        <span className="text-gray-300">/</span>
-        <Link href="/collections" className="hover:text-black transition-colors duration-200">Collections</Link>
-        <span className="text-gray-300">/</span>
-        <span className="text-black">{title}</span>
-      </nav>
+  // Determine hero styling based on theme and image
+  const isDark = theme === 'dark' || collectionImage;
+  const heroTextColor = isDark ? 'text-white' : 'text-black';
+  const heroBgColor = collectionImage ? '' : (theme === 'dark' ? 'bg-black' : 'bg-gray-100');
 
-      {/* Header */}
-      <div className="mb-12">
-        <p className="eyebrow mb-4">Collection</p>
-        <h1 className="display-lg mb-4">{title}</h1>
-        {description && (
-          <p className="text-lg text-gray-500 max-w-2xl">{description}</p>
+  return (
+    <>
+      {/* Editorial Hero Section */}
+      <section className={`relative w-full ${heroBgColor}`}>
+        {/* Background Image */}
+        {collectionImage && (
+          <div className="absolute inset-0">
+            <Image
+              src={collectionImage.url}
+              alt={collectionImage.altText || displayTitle}
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-black/50" />
+          </div>
+        )}
+
+        {/* Hero Content */}
+        <div className="container relative">
+          <div className="py-20 md:py-28 lg:py-36">
+            {/* Breadcrumb */}
+            <nav className={`caption mb-8 flex flex-wrap items-center gap-2 ${isDark ? 'text-white/60' : 'text-gray-500'}`}>
+              <Link 
+                href="/" 
+                className={`${isDark ? 'hover:text-white' : 'hover:text-black'} transition-colors duration-200`}
+              >
+                Home
+              </Link>
+              <span className={isDark ? 'text-white/30' : 'text-gray-300'}>/</span>
+              <Link 
+                href="/collections" 
+                className={`${isDark ? 'hover:text-white' : 'hover:text-black'} transition-colors duration-200`}
+              >
+                Collections
+              </Link>
+              <span className={isDark ? 'text-white/30' : 'text-gray-300'}>/</span>
+              <span className={heroTextColor}>{title}</span>
+            </nav>
+
+            {/* Editorial Header */}
+            <div className="max-w-3xl">
+              <p className={`eyebrow mb-6 ${isDark ? 'text-white/50' : 'text-gray-400'}`}>
+                Collection
+              </p>
+              <h1 className={`display-hero mb-6 ${heroTextColor}`}>
+                {displayTitle}
+              </h1>
+              {subtitle && (
+                <p className={`text-xl md:text-2xl font-serif italic mb-6 ${isDark ? 'text-white/80' : 'text-gray-600'}`}>
+                  {subtitle}
+                </p>
+              )}
+              {description && (
+                <p className={`text-base md:text-lg max-w-xl ${isDark ? 'text-white/70' : 'text-gray-500'}`}>
+                  {description}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Products Section */}
+      <div className="container py-12 lg:py-16">
+        {/* Filters and Sort */}
+        <CollectionFilters
+          productCount={products.length}
+          currentSort={sort}
+          currentAvailability={availability}
+        />
+
+        {/* Products */}
+        {products.length > 0 ? (
+          <ProductGrid products={products} />
+        ) : (
+          <div className="text-center py-20 bg-cream">
+            <p className="display-sm text-gray-600 mb-5">No products found in this collection.</p>
+            <a href="/collections/all" className="link-underline text-sm">
+              Browse all products
+            </a>
+          </div>
         )}
       </div>
-
-      {/* Filters and Sort */}
-      <CollectionFilters
-        productCount={products.length}
-        currentSort={sort}
-        currentAvailability={availability}
-      />
-
-      {/* Products */}
-      {products.length > 0 ? (
-        <ProductGrid products={products} />
-      ) : (
-        <div className="text-center py-20 bg-cream">
-          <p className="display-sm text-gray-600 mb-5">No products found in this collection.</p>
-          <a href="/collections/all" className="link-underline text-sm">
-            Browse all products
-          </a>
-        </div>
-      )}
-    </div>
+    </>
   );
 }
