@@ -196,7 +196,7 @@
 
 ### Frontend Enhancements
 - [ ] Error boundaries
-- [ ] Predictive search (as-you-type)
+- [x] Predictive search (as-you-type)
 - [ ] Collection filtering by vendor/price
 - [ ] Wishlist functionality
 - [ ] Recently viewed products

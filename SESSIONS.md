@@ -726,6 +726,30 @@ Implemented product card hover swap with secondary/variant image fallback and ke
 
 ---
 
+## Session 23 - 2026-01-22
+
+### Summary
+Added predictive search dropdown with debounced Shopify results in the header.
+
+### Accomplishments
+- Built `SearchDropdown` with 300ms debounce, top 5 product results, and keyboard navigation
+- Replaced header search icon with input + instant dropdown results
+- Marked predictive search as complete in progress tracker
+
+### Technical Discoveries
+- `pipeline/.env` remains filtered by ignore rules, so token status could not be verified
+
+### Files Modified
+- `components/search/SearchDropdown.tsx`
+- `components/layout/Header.tsx`
+- `PROGRESS.md`
+- `SESSIONS.md`
+
+### Next Session Priorities
+- Verify USD presentment currency via Shopify Markets and remove conversion fallback
+
+---
+
 *Template for future sessions:*
 
 ## Session N - YYYY-MM-DD
