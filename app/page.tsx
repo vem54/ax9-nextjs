@@ -8,6 +8,9 @@ import { ProductGridSkeleton } from '@/components/ui/Skeleton';
 
 const STORE_COUNTRY = 'US';
 
+// Force dynamic rendering to always fetch fresh data from Shopify
+export const dynamic = 'force-dynamic';
+
 async function getProducts(): Promise<Product[]> {
   try {
     const response = await shopifyFetch<{

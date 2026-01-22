@@ -8,6 +8,9 @@ import CollectionFilters from '@/components/collection/CollectionFilters';
 
 const STORE_COUNTRY = 'US';
 
+// Force dynamic rendering to always fetch fresh data from Shopify
+export const dynamic = 'force-dynamic';
+
 interface Props {
   params: Promise<{ handle: string }>;
   searchParams: Promise<{ sort?: string; availability?: string }>;
