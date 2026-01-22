@@ -276,16 +276,16 @@ export default async function HomePage() {
           </Link>
         </div>
 
-        {products.length > 0 ? (
-          <ProductGrid products={products.slice(0, 4)} columns={4} />
-        ) : (
-          <div className="text-center py-10 bg-gray-100">
-            <p className="text-gray-500 mb-4">New arrivals coming soon.</p>
-            <p className="text-sm text-gray-500">
-              We&apos;re curating exceptional pieces for you.
-            </p>
-          </div>
-        )}
+          {products.length > 0 ? (
+            <ProductGrid products={products.slice(0, 4)} columns={4} />
+          ) : (
+            <div className="text-center py-10 bg-gray-100">
+              <p className="text-gray-500 mb-4">New drops land weekly.</p>
+              <p className="text-sm text-gray-500">
+                Follow the edit for the next release.
+              </p>
+            </div>
+          )}
 
         <div className="mt-6 text-center sm:hidden">
           <Link href="/collections/new-arrivals" className="btn-secondary">

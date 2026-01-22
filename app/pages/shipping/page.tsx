@@ -16,7 +16,7 @@ export default function ShippingPage() {
           <section>
             <h2 className="text-lg font-medium mb-3">Delivery Times</h2>
             <p className="text-sm text-gray-500 mb-4">
-              All orders are processed within 1-2 business days. Orders placed on weekends or holidays will be processed the next business day.
+              Orders are processed within 1-2 business days. Weekend and holiday orders ship the next business day.
             </p>
             <div className="border border-gray-100">
               <div className="grid grid-cols-2 border-b border-gray-100">
@@ -45,26 +45,26 @@ export default function ShippingPage() {
           <section>
             <h2 className="text-lg font-medium mb-3">Shipping Rates</h2>
             <p className="text-sm text-gray-500 mb-4">
-              Shipping costs are calculated at checkout based on your location and the weight of your order.
+              Shipping costs are calculated at checkout based on destination and weight.
             </p>
             <ul className="text-sm text-gray-500 space-y-2">
               <li>Free shipping on orders over $200 USD</li>
               <li>Express shipping available at checkout</li>
-              <li>All duties and taxes included for EU orders</li>
+              <li>Duties and taxes shown at checkout when applicable</li>
             </ul>
           </section>
 
           <section>
             <h2 className="text-lg font-medium mb-3">Tracking Your Order</h2>
             <p className="text-sm text-gray-500">
-              Once your order ships, you will receive an email with tracking information. You can also track your order through your account dashboard.
+              You will receive a tracking email once your order ships. You can also track from your account dashboard.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-medium mb-3">International Orders</h2>
             <p className="text-sm text-gray-500">
-              We ship to most countries worldwide. Import duties and taxes may apply depending on your country&apos;s regulations. These charges are the responsibility of the recipient.
+              We ship worldwide. Import duties and taxes may apply depending on your country&apos;s regulations.
             </p>
           </section>
 

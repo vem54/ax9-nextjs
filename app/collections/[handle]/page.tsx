@@ -21,23 +21,23 @@ interface Props {
 const VIRTUAL_COLLECTIONS: Record<string, { title: string; description: string }> = {
   all: {
     title: 'All Products',
-    description: 'Browse our complete collection of curated Chinese fashion.',
+    description: 'A curated edit of Chinese streetwear and contemporary design.',
   },
   'new-arrivals': {
     title: 'New Arrivals',
-    description: 'The latest additions to our collection.',
+    description: 'Fresh arrivals from emerging labels and studio favorites.',
   },
   outerwear: {
     title: 'Outerwear',
-    description: 'Jackets, coats, and layers for every season.',
+    description: 'Coats and jackets built for structure, volume, and contrast.',
   },
   tops: {
     title: 'Tops',
-    description: 'Shirts, sweaters, and essentials.',
+    description: 'Shirts, knits, and long sleeves with sharp proportion.',
   },
   bottoms: {
     title: 'Bottoms',
-    description: 'Trousers, pants, and more.',
+    description: 'Trousers and denim with clean lines and modern shape.',
   },
 };
 

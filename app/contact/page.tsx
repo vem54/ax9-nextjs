@@ -43,9 +43,9 @@ export default function ContactPage() {
   return (
     <div className="container py-10">
       <div className="max-w-md mx-auto">
-        <h1 className="text-2xl font-medium mb-2 text-center">Contact Us</h1>
+        <h1 className="text-2xl font-medium mb-2 text-center">Contact</h1>
         <p className="text-sm text-gray-500 text-center mb-8">
-          Questions about an order or product? We&apos;re here to help.
+          Ask about sizing, materials, or shipping. We reply within 24-48 hours.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -67,14 +67,15 @@ export default function ContactPage() {
             <select
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
-              className="w-full px-3 py-3 text-sm border border-black bg-white"
+              className="select text-sm"
               required
             >
               <option value="">Select a subject</option>
-              <option value="order">Order Inquiry</option>
-              <option value="shipping">Shipping Question</option>
-              <option value="returns">Returns & Exchanges</option>
-              <option value="product">Product Question</option>
+              <option value="order">Order</option>
+              <option value="sizing">Sizing</option>
+              <option value="shipping">Shipping</option>
+              <option value="returns">Returns</option>
+              <option value="product">Product details</option>
               <option value="other">Other</option>
             </select>
           </div>
@@ -86,6 +87,7 @@ export default function ContactPage() {
               rows={5}
               className="w-full px-3 py-3 text-sm border border-black bg-white resize-none"
               required
+              placeholder="Tell us the product name, size, and what you need."
             />
           </div>
 
@@ -96,7 +98,7 @@ export default function ContactPage() {
 
         <div className="mt-8 pt-8 border-t border-gray-100 text-center">
           <p className="text-sm text-gray-500 mb-2">
-            Need immediate help?
+            Need help now?
           </p>
           <a
             href="mailto:support@axent.com"

@@ -36,7 +36,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-lg font-medium mb-3">Products and Pricing</h2>
             <p className="text-gray-500 mb-3">
-              We strive to display accurate product information and pricing. However, errors may occur. We reserve the right to:
+              We strive to display accurate product information and pricing. If errors occur, we reserve the right to:
             </p>
             <ul className="text-gray-500 space-y-2">
               <li>Correct any errors in pricing or product descriptions</li>
@@ -49,21 +49,21 @@ export default function TermsPage() {
           <section>
             <h2 className="text-lg font-medium mb-3">Orders and Payment</h2>
             <p className="text-gray-500">
-              All orders are subject to acceptance. We may refuse or cancel any order for any reason. Payment must be received in full before orders are shipped. We accept major credit cards and other payment methods as displayed at checkout.
+              All orders are subject to acceptance. We may refuse or cancel any order for any reason. Payment must be received in full before orders ship. We accept major credit cards and other payment methods as displayed at checkout.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-medium mb-3">Intellectual Property</h2>
             <p className="text-gray-500">
-              All content on this website, including text, graphics, logos, images, and software, is the property of Axent or its content suppliers and is protected by intellectual property laws. You may not use, reproduce, or distribute any content without our written permission.
+              All content on this website, including text, graphics, logos, images, and software, is the property of Axent or its content suppliers and is protected by intellectual property laws. You may not use, reproduce, or distribute any content without written permission.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-medium mb-3">Limitation of Liability</h2>
             <p className="text-gray-500">
-              To the fullest extent permitted by law, Axent shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the website or products purchased.
+              To the fullest extent permitted by law, Axent is not liable for indirect, incidental, special, consequential, or punitive damages arising from use of the website or products purchased.
             </p>
           </section>
 

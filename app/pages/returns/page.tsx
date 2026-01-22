@@ -16,7 +16,7 @@ export default function ReturnsPage() {
           <section>
             <h2 className="text-lg font-medium mb-3">Return Policy</h2>
             <p className="text-sm text-gray-500">
-              We accept returns within 14 days of delivery. Items must be unworn, unwashed, and in their original condition with all tags attached.
+              Returns are accepted within 14 days of delivery. Items must be unworn, unwashed, and returned with all tags.
             </p>
           </section>
 
@@ -25,11 +25,11 @@ export default function ReturnsPage() {
             <ol className="text-sm text-gray-500 space-y-3">
               <li className="flex gap-3">
                 <span className="font-medium text-black">1.</span>
-                <span>Contact us at support@axent.com with your order number and reason for return.</span>
+                <span>Contact us at support@axent.com with your order number and reason.</span>
               </li>
               <li className="flex gap-3">
                 <span className="font-medium text-black">2.</span>
-                <span>We will send you a prepaid return label within 24 hours.</span>
+                <span>We will send a return label within 24 hours.</span>
               </li>
               <li className="flex gap-3">
                 <span className="font-medium text-black">3.</span>
@@ -45,7 +45,7 @@ export default function ReturnsPage() {
           <section>
             <h2 className="text-lg font-medium mb-3">Refunds</h2>
             <p className="text-sm text-gray-500 mb-4">
-              Once we receive and inspect your return, we will process your refund within 5-7 business days. Refunds will be credited to your original payment method.
+              Once your return is inspected, we process refunds within 5-7 business days to the original payment method.
             </p>
             <ul className="text-sm text-gray-500 space-y-2">
               <li>Original shipping costs are non-refundable</li>

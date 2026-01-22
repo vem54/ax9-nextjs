@@ -16,10 +16,10 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-lg font-medium mb-3">Information We Collect</h2>
             <p className="text-gray-500 mb-3">
-              When you visit our site, we automatically collect certain information about your device, including information about your web browser, IP address, time zone, and some of the cookies that are installed on your device.
+              When you visit our site, we collect basic device data such as browser type, IP address, time zone, and cookies used to run the storefront.
             </p>
             <p className="text-gray-500">
-              When you make a purchase, we collect your name, billing address, shipping address, payment information, email address, and phone number.
+              When you place an order, we collect your name, billing and shipping address, payment information, email address, and phone number.
             </p>
           </section>
 
@@ -37,21 +37,21 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-lg font-medium mb-3">Information Sharing</h2>
             <p className="text-gray-500">
-              We share your information with third parties only to help us process orders, fulfill shipments, and provide customer service. We do not sell your personal information.
+              We share information only with partners that help us process payments, fulfill orders, and provide support. We do not sell your personal information.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-medium mb-3">Cookies</h2>
             <p className="text-gray-500">
-              We use cookies to remember your preferences, keep items in your shopping cart, and understand how you use our site. You can control cookies through your browser settings.
+              We use cookies to remember preferences, keep items in your cart, and understand site usage. You can control cookies through your browser settings.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-medium mb-3">Data Retention</h2>
             <p className="text-gray-500">
-              We retain your order information for our records unless you ask us to delete it. Account information is retained as long as your account is active.
+              We retain order information for our records unless you ask us to delete it. Account information is retained while your account is active.
             </p>
           </section>
 
@@ -72,7 +72,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-lg font-medium mb-3">Security</h2>
             <p className="text-gray-500">
-              We implement appropriate security measures to protect your personal information. All payment transactions are encrypted using SSL technology.
+              We implement appropriate security measures to protect your personal information. Payment transactions are encrypted using SSL technology.
             </p>
           </section>
 

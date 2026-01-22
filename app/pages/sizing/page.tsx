@@ -16,7 +16,7 @@ export default function SizingPage() {
           <section>
             <h2 className="text-lg font-medium mb-3">How to Measure</h2>
             <p className="text-sm text-gray-500 mb-4">
-              For the most accurate fit, take measurements over light clothing. Use a soft measuring tape and keep it parallel to the floor.
+              For the most accurate fit, measure over light clothing. Use a soft tape and keep it parallel to the floor.
             </p>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="p-4 bg-gray-100">
@@ -34,7 +34,7 @@ export default function SizingPage() {
               <div className="p-4 bg-gray-100">
                 <h3 className="text-sm font-medium mb-2">Hips</h3>
                 <p className="text-sm text-gray-500">
-                  Measure around the fullest part of your hips, approximately 8 inches below your waist.
+                  Measure around the fullest part of your hips, approximately 20 cm below your waist.
                 </p>
               </div>
               <div className="p-4 bg-gray-100">
@@ -133,10 +133,10 @@ export default function SizingPage() {
           <section>
             <h2 className="text-lg font-medium mb-3">Fit Notes</h2>
             <ul className="text-sm text-gray-500 space-y-2">
-              <li>Our pieces tend to run true to Asian sizing, which may be smaller than Western sizing.</li>
-              <li>When in doubt, we recommend sizing up.</li>
-              <li>Individual product pages include specific measurements for that item.</li>
-              <li>Many of our pieces feature an oversized or relaxed fit by design.</li>
+              <li>Our pieces follow Asian sizing and may run smaller than Western sizing.</li>
+              <li>If you are between sizes, size up.</li>
+              <li>Product pages include measurements when provided by the brand.</li>
+              <li>Many pieces are intentionally oversized or relaxed.</li>
             </ul>
           </section>
 

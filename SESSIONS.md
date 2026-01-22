@@ -591,6 +591,37 @@ Polished PDP, collections, and search with breadcrumbs, quantity controls, and c
 
 ---
 
+## Session 19 - 2026-01-22
+
+### Summary
+Refined all static page copy and collection messaging to better fit the Chinese streetwear curation voice.
+
+### Accomplishments
+- Updated About page narrative and positioning
+- Tightened Contact, Shipping, Returns, Sizing, Privacy, and Terms copy
+- Refined homepage and collection descriptions for curation tone
+
+### Technical Discoveries
+- None
+
+### Files Modified
+- `app/about/page.tsx`
+- `app/contact/page.tsx`
+- `app/pages/shipping/page.tsx`
+- `app/pages/returns/page.tsx`
+- `app/pages/sizing/page.tsx`
+- `app/pages/privacy/page.tsx`
+- `app/pages/terms/page.tsx`
+- `app/page.tsx`
+- `app/collections/[handle]/page.tsx`
+- `PROGRESS.md`
+- `SESSIONS.md`
+
+### Next Session Priorities
+- Deploy content pass and verify live copy on key pages
+
+---
+
 *Template for future sessions:*
 
 ## Session N - YYYY-MM-DD
