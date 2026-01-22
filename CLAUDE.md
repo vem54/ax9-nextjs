@@ -1,8 +1,28 @@
 # AX9 Next.js - Axent E-Commerce
 
+## SESSION PROTOCOL (READ THIS FIRST)
+
+### At Session Start
+1. Read this file (`CLAUDE.md`) for project context
+2. Read `PROGRESS.md` for current status and pending tasks
+3. Read `SESSIONS.md` for recent session history
+4. Check `pipeline/.env` for current API token status (tokens expire in 24 hours)
+
+### At Session End
+1. Update `PROGRESS.md` with completed/pending items
+2. Append session summary to `SESSIONS.md` with date and accomplishments
+3. Note any expiring tokens or credentials that need refresh
+4. Commit changes if significant work was done
+
+---
+
 ## What This Is
 
 A headless Shopify storefront for Axent, a curated Chinese fashion e-commerce brand. Built with Next.js 14 (App Router), Tailwind CSS, and Shopify Storefront API.
+
+**Live Site:** https://ax9-nextjs.vercel.app/
+**GitHub:** https://github.com/vem54/ax9-nextjs
+**Shopify Store:** nextjsax9.myshopify.com
 
 ## Quick Start
 
@@ -11,10 +31,24 @@ npm install
 npm run dev
 ```
 
-Update `.env.local` with your Shopify credentials:
+## Credentials & Tokens
+
+### Storefront API (for frontend)
 ```
-NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN=your-store.myshopify.com
-NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN=your_token
+NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN=nextjsax9.myshopify.com
+NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN=450ff915ffc5cc7479ac851c94b96885
+```
+
+### Admin API (for pipeline - tokens expire in 24 hours)
+```
+SHOPIFY_CLIENT_ID=<see pipeline/.env>
+SHOPIFY_CLIENT_SECRET=<see pipeline/.env>
+```
+
+To refresh Admin API token:
+```bash
+curl -X POST "https://nextjsax9.myshopify.com/admin/oauth/access_token" \
+  -d "grant_type=client_credentials&client_id=<CLIENT_ID>&client_secret=<CLIENT_SECRET>"
 ```
 
 ## Project Structure
@@ -43,6 +77,15 @@ lib/
 ├── store/              # Zustand cart store
 └── utils.ts            # Utility functions
 
+pipeline/               # Product import pipeline (Taobao → Shopify)
+├── src/
+│   ├── index.ts        # Main entry point
+│   ├── config.ts       # Environment config
+│   ├── services/       # Taobao, Shopify, Claude, PhotoRoom
+│   ├── prompts/        # Claude AI prompts
+│   └── types/          # TypeScript types
+└── .env                # API keys (Taobao, Claude, PhotoRoom, Shopify)
+
 styles/
 └── globals.css         # Tailwind + custom styles
 ```
@@ -61,6 +104,27 @@ styles/
 - `lib/shopify/queries.ts` - GraphQL queries/mutations
 - `lib/store/cart.ts` - Zustand cart state management
 - `tailwind.config.js` - Design tokens
+- `pipeline/src/index.ts` - Product import pipeline
+
+## Product Pipeline
+
+Import products from Taobao to Shopify:
+```bash
+cd pipeline
+npm install
+npx tsx src/index.ts --item <TAOBAO_ITEM_ID>
+```
+
+Pipeline steps:
+1. Fetch product from Taobao Global API
+2. Convert currency (CNY → USD with 2x markup)
+3. Translate with Claude AI
+4. Extract size chart from images
+5. Remove backgrounds with PhotoRoom
+6. Upload to Shopify with variants and metafields
+7. Publish to Headless sales channel
+
+**Important:** After creating products via Admin API, they must be published to the "Nextjsax9 Headless" publication to be visible on the storefront.
 
 ## Brand Voice
 
@@ -78,8 +142,26 @@ Products use these metafields:
 ## Commands
 
 ```bash
-npm run dev     # Start dev server
+# Next.js app
+npm run dev     # Start dev server (localhost:3000)
 npm run build   # Production build
 npm run start   # Start production server
 npm run lint    # Run ESLint
+
+# Pipeline
+cd pipeline
+npx tsx src/index.ts --item <ID>    # Import single product
+npx tsx src/index.ts --test         # Test API connections
+```
+
+## Deployment
+
+- **Hosting:** Vercel (auto-deploys from GitHub main branch)
+- **Environment Variables:** Set in Vercel dashboard
+- **To deploy:** Push to `main` branch on GitHub
+
+```bash
+git add .
+git commit -m "description"
+git push origin main
 ```

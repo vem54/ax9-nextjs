@@ -2,7 +2,7 @@
 
 ## Completed
 
-### Setup
+### Setup (Session 1 - 2026-01-22)
 - [x] Next.js 14 project with App Router
 - [x] TypeScript configuration
 - [x] Tailwind CSS with Axent design tokens
@@ -13,6 +13,8 @@
 - [x] Storefront API client (`lib/shopify/client.ts`)
 - [x] GraphQL queries for products, collections, cart, customers (`lib/shopify/queries.ts`)
 - [x] TypeScript types for Shopify data (`lib/shopify/types.ts`)
+- [x] Connected to `nextjsax9.myshopify.com` store
+- [x] Headless channel configured with Storefront API token
 
 ### Layout Components
 - [x] Header with navigation and cart button
@@ -50,31 +52,62 @@
 - [x] Zustand cart store with persist middleware
 - [x] Cart operations (add, update, remove)
 
+### Deployment (Session 1 - 2026-01-22)
+- [x] GitHub repository created (vem54/ax9-nextjs)
+- [x] Vercel deployment configured
+- [x] Environment variables set in Vercel
+- [x] Live at https://ax9-nextjs.vercel.app/
+
+### Product Pipeline (Session 1 - 2026-01-22)
+- [x] Copied pipeline from axent project
+- [x] Configured for nextjsax9 store
+- [x] Admin API OAuth client credentials flow working
+- [x] Successfully imported test product (Striped Wool Knit Cardigan)
+- [x] Product published to Headless sales channel
+- [x] Product visible on live site
+
 ## Pending
 
-### Before Launch
-- [ ] Connect to live Shopify storefront
-- [ ] Test all cart operations
-- [ ] Test checkout flow
-- [ ] Add loading states/skeletons
-- [ ] Error boundaries
-- [ ] SEO optimization (robots.txt, sitemap)
+### Pipeline Improvements
+- [ ] Auto-publish to Headless channel after product creation
+- [ ] Auto-refresh Admin API token (expires every 24 hours)
+- [ ] Batch import multiple products
 
-### Nice to Have
+### Frontend Enhancements
+- [ ] Loading states/skeletons
+- [ ] Error boundaries
 - [ ] Predictive search (as-you-type)
 - [ ] Collection filtering by vendor/price
 - [ ] Wishlist functionality
 - [ ] Recently viewed products
-- [ ] Product reviews integration
-- [ ] Email signup integration
 
-### Deployment
-- [ ] Vercel deployment
-- [ ] Environment variables in Vercel
+### SEO & Performance
+- [ ] robots.txt
+- [ ] sitemap.xml
+- [ ] Meta tags optimization
+- [ ] Image optimization audit
+
+### Testing
+- [ ] Test all cart operations end-to-end
+- [ ] Test checkout flow
+- [ ] Test account login/register
+- [ ] Mobile responsiveness audit
+
+### Future
 - [ ] Custom domain setup
+- [ ] Product reviews integration
+- [ ] Email signup integration (Klaviyo/Mailchimp)
+- [ ] Analytics (GA4, Shopify analytics)
+
+## Known Issues
+
+1. **Admin API Token Expiry**: Tokens expire every 24 hours. Must refresh using client credentials grant before running pipeline.
+
+2. **Product Publishing**: Products created via Admin API are not automatically visible on Storefront API. Must publish to "Nextjsax9 Headless" publication.
 
 ## Notes
 
 - Cart uses localStorage for persistence via Zustand persist middleware
 - Customer auth tokens stored in localStorage (should move to httpOnly cookies for production)
 - Images require `cdn.shopify.com` in `next.config.js` remotePatterns
+- Pipeline uses Taobao Global API (distributor.taobao.global), not regular taobao.com
