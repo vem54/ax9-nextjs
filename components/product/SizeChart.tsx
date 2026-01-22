@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 interface SizeChartData {
   sizes: string[];
@@ -23,12 +23,13 @@ export default function SizeChart({ data }: SizeChartProps) {
   const modalRef = useRef<HTMLDivElement | null>(null);
   const lastActiveRef = useRef<HTMLElement | null>(null);
 
-  let chartData: SizeChartData;
-  try {
-    chartData = JSON.parse(data);
-  } catch {
-    return null;
-  }
+  const chartData = useMemo<SizeChartData | null>(() => {
+    try {
+      return JSON.parse(data) as SizeChartData;
+    } catch {
+      return null;
+    }
+  }, [data]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -76,6 +77,10 @@ export default function SizeChart({ data }: SizeChartProps) {
       lastActiveRef.current?.focus();
     };
   }, [isOpen]);
+
+  if (!chartData) {
+    return null;
+  }
 
   return (
     <>

@@ -49,3 +49,6 @@ logs/
 # Pipeline env
 pipeline/.env
 pipeline/node_modules
+
+.vercel
+.env*.local
