@@ -1,12 +1,11 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { Product, ProductVariant } from '@/lib/shopify/types';
+import { Product } from '@/lib/shopify/types';
 import { formatPrice } from '@/lib/shopify/client';
 import VariantSelector from './VariantSelector';
 import AddToCart from './AddToCart';
 import SizeChart from './SizeChart';
-import ProductTabs from './ProductTabs';
 
 interface ProductInfoProps {
   product: Product;
@@ -70,37 +69,42 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
   return (
     <div className="flex flex-col">
-      {/* Vendor */}
-      <p className="text-xs uppercase tracking-widest text-gray-500 mb-2">
-        {product.vendor}
-      </p>
-
-      {/* Title */}
-      <h1 className="text-3xl md:text-4xl font-medium leading-tight mb-4">
-        {product.title}
-      </h1>
-
-      {/* Price */}
-      <div className="flex items-baseline gap-3 mb-6">
-        <p className="text-xl md:text-2xl">
-          {formatPrice(price.amount, price.currencyCode)}
+      <div className="border-b border-gray-100 pb-6">
+        {/* Vendor */}
+        <p className="text-xs uppercase tracking-widest text-gray-500 mb-2">
+          {product.vendor}
         </p>
-        {hasDiscount && (
-          <p className="text-sm text-gray-500 line-through">
-            {formatPrice(compareAtPrice.amount, compareAtPrice.currencyCode)}
+
+        {/* Title */}
+        <h1 className="text-3xl md:text-4xl font-medium leading-tight mb-4">
+          {product.title}
+        </h1>
+
+        {/* Price */}
+        <div className="flex items-baseline gap-3">
+          <p className="text-xl md:text-2xl">
+            {formatPrice(price.amount, price.currencyCode)}
           </p>
-        )}
+          {hasDiscount && (
+            <p className="text-sm text-gray-500 line-through">
+              {formatPrice(compareAtPrice.amount, compareAtPrice.currencyCode)}
+            </p>
+          )}
+        </div>
       </div>
 
       {/* Description */}
-      {product.description && (
-        <p className="text-sm text-gray-500 mb-6 leading-relaxed max-w-xl">
-          {product.description}
-        </p>
+      {product.descriptionHtml && (
+        <div className="border-b border-gray-100 py-6">
+          <div
+            className="product-richtext text-sm text-gray-500 leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+          />
+        </div>
       )}
 
       {/* Variant selector */}
-      <div className="mb-6">
+      <div className="border-b border-gray-100 py-6">
         <VariantSelector
           options={product.options}
           variants={variants}
@@ -109,8 +113,16 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         />
       </div>
 
+      {/* Add to cart */}
+      <div className="border-b border-gray-100 py-6">
+        <AddToCart
+          variantId={selectedVariant?.id || ''}
+          availableForSale={selectedVariant?.availableForSale || false}
+        />
+      </div>
+
       {/* Fit and sizing */}
-      <div className="border-t border-gray-100 pt-4 mb-6">
+      <div className="border-b border-gray-100 py-6">
         <p className="text-xs uppercase tracking-widest text-gray-500 mb-3">
           Fit and Sizing
         </p>
@@ -138,7 +150,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
       {/* Composition and care */}
       {detailItems.length > 0 && (
-        <div className="border-t border-gray-100 pt-4 mb-6">
+        <div className="border-b border-gray-100 py-6">
           <p className="text-xs uppercase tracking-widest text-gray-500 mb-3">
             Composition and Care
           </p>
@@ -153,16 +165,8 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         </div>
       )}
 
-      {/* Add to cart */}
-      <div className="mb-6">
-        <AddToCart
-          variantId={selectedVariant?.id || ''}
-          availableForSale={selectedVariant?.availableForSale || false}
-        />
-      </div>
-
       {/* Trust module */}
-      <div className="border-t border-gray-100 pt-4 mb-6">
+      <div className="pt-6">
         <p className="text-xs uppercase tracking-widest text-gray-500 mb-3">
           Shipping and Returns
         </p>
@@ -180,13 +184,6 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           </a>
         </div>
       </div>
-
-      {/* Product tabs */}
-      <ProductTabs
-        description={product.descriptionHtml}
-        materials={product.materials?.value}
-        careInstructions={product.careInstructions?.value}
-      />
     </div>
   );
 }

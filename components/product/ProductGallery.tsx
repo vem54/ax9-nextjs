@@ -48,13 +48,13 @@ export default function ProductGallery({ images, productTitle }: ProductGalleryP
       )}
 
       {/* Main image */}
-      <div className="flex-1 relative aspect-product bg-white">
+      <div className="flex-1 relative aspect-product bg-gray-100">
         <Image
           src={selectedImage.url}
           alt={selectedImage.altText || productTitle}
           fill
-          sizes="(min-width: 768px) 50vw, 100vw"
-          className="object-contain"
+          sizes="(min-width: 1024px) 55vw, (min-width: 768px) 50vw, 100vw"
+          className="object-cover"
           priority
         />
       </div>

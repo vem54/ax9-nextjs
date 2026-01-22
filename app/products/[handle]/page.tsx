@@ -80,9 +80,11 @@ export default async function ProductPage({ params }: Props) {
   return (
     <div className="container py-6">
       {/* Main product section */}
-      <div className="grid md:grid-cols-2 gap-6 lg:gap-10">
+      <div className="grid md:grid-cols-2 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] gap-6 lg:gap-12 items-start">
         {/* Gallery */}
-        <ProductGallery images={images} productTitle={product.title} />
+        <div className="md:sticky md:top-20 self-start">
+          <ProductGallery images={images} productTitle={product.title} />
+        </div>
 
         {/* Info */}
         <ProductInfo product={product} />

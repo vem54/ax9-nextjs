@@ -531,6 +531,32 @@ Centered the logo in the header and added a desktop hero video slot for axent_he
 
 ---
 
+## Session 17 - 2026-01-22
+
+### Summary
+Refined PDP layout, hierarchy, and content structure to remove clutter and improve balance.
+
+### Accomplishments
+- Added sticky gallery wrapper and rebalanced PDP columns for stronger media emphasis
+- Reworked PDP info stack with clearer borders and HTML description rendering
+- Removed redundant tabs while keeping sizing and composition/care sections
+
+### Technical Discoveries
+- None
+
+### Files Modified
+- `app/products/[handle]/page.tsx`
+- `components/product/ProductGallery.tsx`
+- `components/product/ProductInfo.tsx`
+- `PROGRESS.md`
+- `SESSIONS.md`
+
+### Next Session Priorities
+- Deploy PDP refinements and verify live product page layout
+- Continue PDP polish toward 10/10 bar
+
+---
+
 *Template for future sessions:*
 
 ## Session N - YYYY-MM-DD
