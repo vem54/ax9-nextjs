@@ -540,6 +540,7 @@ Refined PDP layout, hierarchy, and content structure to remove clutter and impro
 - Added sticky gallery wrapper and rebalanced PDP columns for stronger media emphasis
 - Reworked PDP info stack with clearer borders and HTML description rendering
 - Removed redundant tabs while keeping sizing and composition/care sections
+- Deployed to Vercel and verified live PDP markup
 
 ### Technical Discoveries
 - None
@@ -552,7 +553,6 @@ Refined PDP layout, hierarchy, and content structure to remove clutter and impro
 - `SESSIONS.md`
 
 ### Next Session Priorities
-- Deploy PDP refinements and verify live product page layout
 - Continue PDP polish toward 10/10 bar
 
 ---

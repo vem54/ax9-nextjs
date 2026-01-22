@@ -144,6 +144,7 @@
 - [x] Rebalanced PDP layout with sticky gallery and wider media column
 - [x] Cleaned PDP hierarchy with sectional borders and HTML description rendering
 - [x] Simplified PDP to remove redundant tabs while keeping composition/care
+- [x] Deployed to Vercel and verified live PDP markup updates
 
 ### Batch Product Import (Session 5 - 2026-01-22)
 - [x] Found Products.xlsx with 4,763 Taobao Item IDs mapped to Shopify products
