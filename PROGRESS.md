@@ -195,8 +195,8 @@
 - [ ] Recently viewed products
 
 ### SEO & Performance
-- [ ] robots.txt
-- [ ] sitemap.xml
+- [x] robots.txt
+- [x] sitemap.xml
 - [ ] Meta tags optimization
 - [ ] Image optimization audit
 

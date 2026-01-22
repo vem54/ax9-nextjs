@@ -675,6 +675,31 @@ Closed remaining review gaps: refreshed editorial visuals, fixed PDP scaling and
 
 ---
 
+## Session 21 - 2026-01-22
+
+### Summary
+Added SEO essentials (robots and sitemap) and improved collections fallback content.
+
+### Accomplishments
+- Added `app/robots.ts` and `app/sitemap.ts` with dynamic Shopify routes
+- Extended collections page with curated category fallbacks when no Shopify collections exist
+- Marked robots/sitemap items as complete in PROGRESS
+
+### Technical Discoveries
+- None
+
+### Files Modified
+- `app/robots.ts`
+- `app/sitemap.ts`
+- `app/collections/page.tsx`
+- `PROGRESS.md`
+- `SESSIONS.md`
+
+### Next Session Priorities
+- Verify sitemap/robots live output and complete USD presentment currency fix
+
+---
+
 *Template for future sessions:*
 
 ## Session N - YYYY-MM-DD

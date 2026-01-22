@@ -82,11 +82,34 @@ export default async function CollectionsPage() {
           ))}
         </div>
       ) : (
-        <div className="text-center py-10">
-          <p className="text-gray-500 mb-4">No collections available yet.</p>
-          <Link href="/" className="text-sm underline hover:no-underline">
-            Return to homepage
-          </Link>
+        <div>
+          <p className="text-sm text-gray-500 mb-6">
+            Explore our core edits while curated collections go live.
+          </p>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { title: 'All Products', handle: 'all' },
+              { title: 'New Arrivals', handle: 'new-arrivals' },
+              { title: 'Outerwear', handle: 'outerwear' },
+              { title: 'Tops', handle: 'tops' },
+              { title: 'Bottoms', handle: 'bottoms' },
+            ].map((cat) => (
+              <Link
+                key={cat.handle}
+                href={`/collections/${cat.handle}`}
+                className="group block"
+              >
+                <div className="aspect-[4/3] bg-gray-100 flex items-center justify-center mb-3 group-hover:bg-black">
+                  <span className="text-xl font-medium text-gray-500 group-hover:text-white">
+                    {cat.title}
+                  </span>
+                </div>
+                <h3 className="text-sm font-medium group-hover:text-gray-500">
+                  {cat.title}
+                </h3>
+              </Link>
+            ))}
+          </div>
         </div>
       )}
 
