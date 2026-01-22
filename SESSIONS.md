@@ -516,6 +516,7 @@ Centered the logo in the header and added a desktop hero video slot for axent_he
 - Centered AXENT logo in the header to match luxury site conventions
 - Added desktop hero video element for `axent_hero.mp4` with poster fallback
 - Added `axent_hero.mp4` asset to `public/videos`
+- Deployed to Vercel and verified live hero markup
 - Verified lint passes
 
 ### Files Modified
