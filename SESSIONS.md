@@ -360,6 +360,49 @@ Refined PDP hierarchy and typography rhythm with richer content styling.
 
 ---
 
+## Session 10 - 2026-01-22
+
+### Summary
+Added PDP fit/sizing and composition/care blocks to improve purchase confidence.
+
+### Accomplishments
+- Added Fit and Sizing block with size guide and model info
+- Added Composition and Care block using product metafields
+
+### Technical Discoveries
+- None
+
+### Files Modified
+- `components/product/ProductInfo.tsx`
+- `PROGRESS.md`
+- `SESSIONS.md`
+
+### Next Session Priorities
+- Verify Shopify market settings for USD on live site
+- Run a PDP visual QA pass for spacing and CTA alignment
+
+---
+
+## Session 11 - 2026-01-22
+
+### Summary
+Verified live site currency and noted pending USD deployment.
+
+### Accomplishments
+- Checked live homepage and confirmed prices still render in THB
+
+### Technical Discoveries
+- Live site still serving old build; USD verification requires deploy
+
+### Files Modified
+- `PROGRESS.md`
+- `SESSIONS.md`
+
+### Next Session Priorities
+- Deploy changes and re-check USD pricing on live site
+
+---
+
 *Template for future sessions:*
 
 ## Session N - YYYY-MM-DD

@@ -12,6 +12,18 @@ interface ProductInfoProps {
   product: Product;
 }
 
+interface SizeChartData {
+  sizes: string[];
+  measurements: {
+    name: string;
+    values: string[];
+  }[];
+  modelInfo?: {
+    height: string;
+    wears: string;
+  };
+}
+
 export default function ProductInfo({ product }: ProductInfoProps) {
   const variants = product.variants.edges.map((edge) => edge.node);
 
@@ -40,6 +52,20 @@ export default function ProductInfo({ product }: ProductInfoProps) {
   const price = selectedVariant?.price || product.priceRange.minVariantPrice;
   const compareAtPrice = selectedVariant?.compareAtPrice;
   const hasDiscount = compareAtPrice && parseFloat(compareAtPrice.amount) > parseFloat(price.amount);
+
+  const sizeChartData = useMemo<SizeChartData | null>(() => {
+    if (!product.sizeChart?.value) return null;
+    try {
+      return JSON.parse(product.sizeChart.value) as SizeChartData;
+    } catch {
+      return null;
+    }
+  }, [product.sizeChart?.value]);
+
+  const detailItems = [
+    { label: 'Materials', value: product.materials?.value },
+    { label: 'Care', value: product.careInstructions?.value },
+  ].filter((item) => item.value);
 
   return (
     <div className="flex flex-col">
@@ -82,10 +108,38 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         />
       </div>
 
-      {/* Size chart */}
+      {/* Fit and sizing */}
       {product.sizeChart?.value && (
-        <div className="mb-4">
-          <SizeChart data={product.sizeChart.value} />
+        <div className="border-t border-gray-100 pt-4 mb-6">
+          <p className="text-xs uppercase tracking-widest text-gray-500 mb-3">
+            Fit and Sizing
+          </p>
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-gray-500">Size guide</span>
+            <SizeChart data={product.sizeChart.value} />
+          </div>
+          {sizeChartData?.modelInfo && (
+            <p className="text-xs text-gray-500 mt-3">
+              Model is {sizeChartData.modelInfo.height} and wears size {sizeChartData.modelInfo.wears}
+            </p>
+          )}
+        </div>
+      )}
+
+      {/* Composition and care */}
+      {detailItems.length > 0 && (
+        <div className="border-t border-gray-100 pt-4 mb-6">
+          <p className="text-xs uppercase tracking-widest text-gray-500 mb-3">
+            Composition and Care
+          </p>
+          <dl className="space-y-2 text-sm">
+            {detailItems.map((item) => (
+              <div key={item.label} className="flex justify-between gap-6">
+                <dt className="text-gray-500">{item.label}</dt>
+                <dd className="text-black text-right">{item.value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       )}
 

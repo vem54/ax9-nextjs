@@ -112,6 +112,12 @@
 - [x] Tightened PDP hierarchy and typography rhythm
 - [x] Added product rich text styling for descriptions
 
+### Critical Fixes (Session 9 - 2026-01-22)
+- [x] Added PDP fit/sizing and composition/care blocks
+
+### Verification (Session 10 - 2026-01-22)
+- [ ] Live site still shows THB; USD verification pending deploy
+
 ### Batch Product Import (Session 5 - 2026-01-22)
 - [x] Found Products.xlsx with 4,763 Taobao Item IDs mapped to Shopify products
 - [x] Created batch-import.ts script for importing by brand

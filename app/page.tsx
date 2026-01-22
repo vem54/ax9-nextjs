@@ -176,6 +176,83 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Editorial Modules */}
+      <section className="container py-10">
+        <div className="flex items-baseline justify-between mb-6">
+          <div>
+            <p className="text-xs uppercase tracking-widest text-gray-500 mb-2">
+              Editorial
+            </p>
+            <h2 className="text-2xl font-medium">The new city uniform</h2>
+          </div>
+          <Link href="/about" className="text-sm hover:text-gray-500">
+            Our curation
+          </Link>
+        </div>
+        <div className="grid gap-4 md:grid-cols-3">
+          {[
+            {
+              title: 'Atelier',
+              copy: 'Quiet process, sharp results.',
+              image: '/images/editorial/atelier.jpg',
+            },
+            {
+              title: 'Fabric',
+              copy: 'Texture first. Finish matters.',
+              image: '/images/editorial/fabric.jpg',
+            },
+            {
+              title: 'City',
+              copy: 'Built for movement and restraint.',
+              image: '/images/editorial/urban.jpg',
+            },
+          ].map((item) => (
+            <div key={item.title} className="group">
+              <div className="relative aspect-[3/4] bg-gray-100">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="mt-3">
+                <h3 className="text-sm font-medium">{item.title}</h3>
+                <p className="text-xs text-gray-500 mt-1">{item.copy}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Lookbook Feature */}
+      <section className="bg-gray-100">
+        <div className="container py-10">
+          <div className="grid gap-6 lg:grid-cols-2 items-center">
+            <div>
+              <p className="text-xs uppercase tracking-widest text-gray-500 mb-3">
+                Lookbook
+              </p>
+              <h2 className="text-2xl md:text-3xl font-medium mb-4">
+                Modern East, western streets.
+              </h2>
+              <p className="text-sm text-gray-500 max-w-md">
+                A curated edit of Chinese streetwear with a luxury frame.
+                Clean silhouettes, deliberate proportions, and material depth.
+              </p>
+            </div>
+            <div className="relative aspect-[3/4] bg-gray-100">
+              <Image
+                src="/images/editorial/silhouette.jpg"
+                alt="Lookbook silhouette"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* New Arrivals */}
       <section className="container py-8">
         <div className="flex justify-between items-baseline mb-6">
