@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    border-radius: 0 !important;
+  }
+
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-white text-black text-base;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-medium tracking-tight;
+  }
+
+  a {
+    @apply text-black no-underline;
+  }
+
+  button {
+    @apply cursor-pointer;
+  }
+
+  input, textarea, select {
+    @apply outline-none border border-black;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-[1440px] mx-auto px-4;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-3 text-sm font-medium uppercase tracking-wide;
+  }
+
+  .btn-primary {
+    @apply btn bg-black text-white hover:bg-gray-500;
+  }
+
+  .btn-secondary {
+    @apply btn bg-white text-black border border-black hover:bg-gray-100;
+  }
+
+  .input {
+    @apply w-full px-3 py-3 text-sm border border-black bg-white placeholder:text-gray-500 focus:border-gray-500;
+  }
+
+  .product-image {
+    @apply aspect-product object-cover;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
