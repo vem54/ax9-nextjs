@@ -17,13 +17,15 @@
 - [x] Headless channel configured with Storefront API token
 
 ### Layout Components
-- [x] Header with navigation and cart button
+- [x] Header with navigation, mobile menu, and cart button
 - [x] Footer with links and newsletter
 - [x] CartDrawer slide-out
 
 ### UI Components
-- [x] Button (primary/secondary variants)
-- [x] Input with label and error states
+- [x] Button (primary/secondary/ghost variants with loading state)
+- [x] Input with label, error, hint states
+- [x] Textarea component
+- [x] Skeleton components for loading states
 
 ### Product Components
 - [x] ProductCard with image, vendor, title, price
@@ -36,17 +38,26 @@
 - [x] ProductInfo wrapper component
 
 ### Pages
-- [x] Homepage (hero, collections, new arrivals, newsletter)
-- [x] Collection page with filters and sorting
+- [x] Homepage (editorial hero, category nav, new arrivals, collections, newsletter)
+- [x] Collection listing page (`/collections`)
+- [x] Collection page with filters and sorting (`/collections/[handle]`)
+- [x] Virtual collections (all, new-arrivals, outerwear, tops, bottoms)
 - [x] Product page with gallery, info, related products
-- [x] Cart page with quantity controls
-- [x] Search page with results
+- [x] Cart page with quantity controls and improved empty state
+- [x] Search page with popular searches and improved empty state
 - [x] Account login page
 - [x] Account register page
 - [x] Account dashboard with orders
 - [x] About page
 - [x] Contact page with form
 - [x] 404 Not Found page
+
+### Static Pages (Session 2 - 2026-01-22)
+- [x] Shipping information (`/pages/shipping`)
+- [x] Returns & Exchanges (`/pages/returns`)
+- [x] Size Guide (`/pages/sizing`)
+- [x] Privacy Policy (`/pages/privacy`)
+- [x] Terms of Service (`/pages/terms`)
 
 ### State Management
 - [x] Zustand cart store with persist middleware
@@ -66,6 +77,16 @@
 - [x] Product published to Headless sales channel
 - [x] Product visible on live site
 
+### Site Scaffolding Overhaul (Session 2 - 2026-01-22)
+- [x] Fixed all broken routes (was 9 broken links)
+- [x] Editorial homepage redesign with split hero
+- [x] Mobile-first header with hamburger menu
+- [x] Proper category navigation
+- [x] Loading skeleton components
+- [x] Better empty states throughout
+- [x] Refined Button/Input components with transitions
+- [x] Updated globals.css with utilities
+
 ## Pending
 
 ### Pipeline Improvements
@@ -74,7 +95,6 @@
 - [ ] Batch import multiple products
 
 ### Frontend Enhancements
-- [ ] Loading states/skeletons
 - [ ] Error boundaries
 - [ ] Predictive search (as-you-type)
 - [ ] Collection filtering by vendor/price
@@ -92,6 +112,10 @@
 - [ ] Test checkout flow
 - [ ] Test account login/register
 - [ ] Mobile responsiveness audit
+
+### Products
+- [ ] Import more products from Taobao (10-15 for real catalog)
+- [ ] Set up proper collections in Shopify
 
 ### Future
 - [ ] Custom domain setup
@@ -111,3 +135,5 @@
 - Customer auth tokens stored in localStorage (should move to httpOnly cookies for production)
 - Images require `cdn.shopify.com` in `next.config.js` remotePatterns
 - Pipeline uses Taobao Global API (distributor.taobao.global), not regular taobao.com
+- Virtual collections (all, new-arrivals, outerwear, tops, bottoms) work without Shopify collections
+- Pipeline excluded from Next.js build via tsconfig.json
