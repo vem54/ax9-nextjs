@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | Axent',
+  title: 'Terms of Service',
   description: 'Read the terms and conditions for using Axent website and services.',
 };
 

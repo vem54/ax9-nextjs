@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Shipping Information | Axent',
+  title: 'Shipping',
   description: 'Learn about Axent shipping options, delivery times, and international shipping policies.',
 };
 

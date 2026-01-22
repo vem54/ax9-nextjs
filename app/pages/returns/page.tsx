@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Returns & Exchanges | Axent',
+  title: 'Returns & Exchanges',
   description: 'Learn about Axent return policy, exchange process, and refund information.',
 };
 

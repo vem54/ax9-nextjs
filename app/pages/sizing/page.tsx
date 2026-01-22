@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Size Guide | Axent',
+  title: 'Size Guide',
   description: 'Find your perfect fit with Axent size charts and measurement guides.',
 };
 
