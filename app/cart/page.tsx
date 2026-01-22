@@ -25,70 +25,107 @@ export default function CartPage() {
   if (lines.length === 0) {
     return (
       <div className="container py-10">
-        <div className="max-w-2xl mx-auto text-center">
+        <div className="max-w-md mx-auto text-center">
           <h1 className="text-2xl font-medium mb-4">Your Cart</h1>
-          <p className="text-gray-500 mb-6">Your cart is empty.</p>
-          <Link href="/collections/all" className="btn-primary inline-block">
-            Continue Shopping
-          </Link>
+          <div className="py-10">
+            <svg
+              className="w-16 h-16 mx-auto mb-6 text-gray-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1}
+                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+              />
+            </svg>
+            <p className="text-gray-500 mb-2">Your cart is empty.</p>
+            <p className="text-sm text-gray-500 mb-6">
+              Discover our curated selection of Chinese fashion.
+            </p>
+            <Link href="/collections/all" className="btn-primary inline-block">
+              Start Shopping
+            </Link>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="container py-10">
+    <div className="container py-6">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-2xl font-medium mb-8">Your Cart</h1>
+        <h1 className="text-2xl font-medium mb-6">Your Cart</h1>
 
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Cart items */}
           <div className="lg:col-span-2">
+            {/* Header - desktop only */}
+            <div className="hidden md:grid grid-cols-12 gap-4 pb-3 border-b border-gray-100 text-xs text-gray-500 uppercase tracking-wide">
+              <div className="col-span-6">Product</div>
+              <div className="col-span-2 text-center">Quantity</div>
+              <div className="col-span-2 text-right">Price</div>
+              <div className="col-span-2 text-right">Total</div>
+            </div>
+
             <ul className="divide-y divide-gray-100">
               {lines.map((line) => (
-                <li key={line.id} className="py-4 flex gap-4">
-                  {/* Image */}
-                  <Link
-                    href={`/products/${line.merchandise.product.handle}`}
-                    className="shrink-0"
-                  >
-                    {line.merchandise.product.featuredImage ? (
-                      <Image
-                        src={line.merchandise.product.featuredImage.url}
-                        alt={line.merchandise.product.title}
-                        width={100}
-                        height={133}
-                        className="object-cover aspect-product"
-                      />
-                    ) : (
-                      <div className="w-[100px] h-[133px] bg-gray-100" />
-                    )}
-                  </Link>
-
-                  {/* Details */}
-                  <div className="flex-1 min-w-0">
-                    <Link
-                      href={`/products/${line.merchandise.product.handle}`}
-                      className="font-medium hover:text-gray-500 block"
-                    >
-                      {line.merchandise.product.title}
-                    </Link>
-                    {line.merchandise.title !== 'Default Title' && (
-                      <p className="text-sm text-gray-500 mt-1">
-                        {line.merchandise.selectedOptions
-                          .map((opt) => opt.value)
-                          .join(' / ')}
-                      </p>
-                    )}
-                    <p className="text-sm mt-1">
-                      {formatPrice(
-                        line.merchandise.price.amount,
-                        line.merchandise.price.currencyCode
-                      )}
-                    </p>
+                <li key={line.id} className="py-4">
+                  <div className="grid md:grid-cols-12 gap-4 items-start">
+                    {/* Product info */}
+                    <div className="md:col-span-6 flex gap-4">
+                      <Link
+                        href={`/products/${line.merchandise.product.handle}`}
+                        className="shrink-0"
+                      >
+                        {line.merchandise.product.featuredImage ? (
+                          <Image
+                            src={line.merchandise.product.featuredImage.url}
+                            alt={line.merchandise.product.title}
+                            width={80}
+                            height={107}
+                            className="object-cover aspect-product"
+                          />
+                        ) : (
+                          <div className="w-20 h-[107px] bg-gray-100" />
+                        )}
+                      </Link>
+                      <div className="min-w-0">
+                        <Link
+                          href={`/products/${line.merchandise.product.handle}`}
+                          className="font-medium hover:text-gray-500 transition-colors block"
+                        >
+                          {line.merchandise.product.title}
+                        </Link>
+                        {line.merchandise.title !== 'Default Title' && (
+                          <p className="text-sm text-gray-500 mt-1">
+                            {line.merchandise.selectedOptions
+                              .map((opt) => opt.value)
+                              .join(' / ')}
+                          </p>
+                        )}
+                        {/* Mobile price */}
+                        <p className="text-sm mt-1 md:hidden">
+                          {formatPrice(
+                            line.merchandise.price.amount,
+                            line.merchandise.price.currencyCode
+                          )}
+                        </p>
+                        {/* Mobile remove */}
+                        <button
+                          onClick={() => removeLineItem(line.id)}
+                          disabled={isLoading}
+                          className="text-xs text-gray-500 hover:text-black mt-2 md:hidden disabled:opacity-50 transition-colors"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    </div>
 
                     {/* Quantity */}
-                    <div className="flex items-center gap-3 mt-3">
+                    <div className="md:col-span-2 flex justify-center">
                       <div className="flex items-center border border-black">
                         <button
                           onClick={() => {
@@ -99,7 +136,7 @@ export default function CartPage() {
                             }
                           }}
                           disabled={isLoading}
-                          className="w-8 h-8 text-sm hover:bg-gray-100 disabled:opacity-50"
+                          className="w-8 h-8 text-sm hover:bg-gray-100 disabled:opacity-50 transition-colors"
                         >
                           -
                         </button>
@@ -107,29 +144,37 @@ export default function CartPage() {
                         <button
                           onClick={() => updateLineItem(line.id, line.quantity + 1)}
                           disabled={isLoading}
-                          className="w-8 h-8 text-sm hover:bg-gray-100 disabled:opacity-50"
+                          className="w-8 h-8 text-sm hover:bg-gray-100 disabled:opacity-50 transition-colors"
                         >
                           +
                         </button>
                       </div>
+                    </div>
+
+                    {/* Price - desktop */}
+                    <div className="hidden md:block md:col-span-2 text-right text-sm">
+                      {formatPrice(
+                        line.merchandise.price.amount,
+                        line.merchandise.price.currencyCode
+                      )}
+                    </div>
+
+                    {/* Total - desktop */}
+                    <div className="hidden md:block md:col-span-2 text-right">
+                      <p className="font-medium">
+                        {formatPrice(
+                          (parseFloat(line.merchandise.price.amount) * line.quantity).toString(),
+                          line.merchandise.price.currencyCode
+                        )}
+                      </p>
                       <button
                         onClick={() => removeLineItem(line.id)}
                         disabled={isLoading}
-                        className="text-sm text-gray-500 hover:text-black disabled:opacity-50"
+                        className="text-xs text-gray-500 hover:text-black mt-1 disabled:opacity-50 transition-colors"
                       >
                         Remove
                       </button>
                     </div>
-                  </div>
-
-                  {/* Line total */}
-                  <div className="text-right">
-                    <p className="font-medium">
-                      {formatPrice(
-                        (parseFloat(line.merchandise.price.amount) * line.quantity).toString(),
-                        line.merchandise.price.currencyCode
-                      )}
-                    </p>
                   </div>
                 </li>
               ))}
@@ -139,10 +184,10 @@ export default function CartPage() {
           {/* Summary */}
           {cart && (
             <div className="lg:col-span-1">
-              <div className="border border-black p-4">
+              <div className="border border-black p-4 sticky top-20">
                 <h2 className="font-medium mb-4">Order Summary</h2>
 
-                <div className="space-y-2 mb-4">
+                <div className="space-y-3 mb-4">
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-500">Subtotal</span>
                     <span>
@@ -154,7 +199,7 @@ export default function CartPage() {
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-500">Shipping</span>
-                    <span>Calculated at checkout</span>
+                    <span className="text-gray-500">Calculated at checkout</span>
                   </div>
                 </div>
 
@@ -176,7 +221,7 @@ export default function CartPage() {
 
                 <Link
                   href="/collections/all"
-                  className="block text-center text-sm mt-3 text-gray-500 hover:text-black"
+                  className="block text-center text-sm mt-4 text-gray-500 hover:text-black transition-colors"
                 >
                   Continue Shopping
                 </Link>

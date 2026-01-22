@@ -1,29 +1,54 @@
-import { InputHTMLAttributes, forwardRef } from 'react';
+import { InputHTMLAttributes, TextareaHTMLAttributes, forwardRef } from 'react';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
+  hint?: string;
+}
+
+interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  label?: string;
+  error?: string;
+  hint?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className = '', label, error, id, ...props }, ref) => {
+  ({ className = '', label, error, hint, id, ...props }, ref) => {
+    const inputId = id || props.name;
+
     return (
       <div className="w-full">
         {label && (
-          <label htmlFor={id} className="block text-sm mb-2">
+          <label
+            htmlFor={inputId}
+            className="block text-sm font-medium mb-2"
+          >
             {label}
+            {props.required && <span className="text-gray-500 ml-1">*</span>}
           </label>
         )}
         <input
           ref={ref}
-          id={id}
-          className={`w-full px-3 py-3 text-sm border border-black bg-white placeholder:text-gray-500 focus:border-gray-500 ${
-            error ? 'border-red-500' : ''
-          } ${className}`}
+          id={inputId}
+          className={[
+            'w-full px-3 py-3 text-sm',
+            'bg-white border',
+            'placeholder:text-gray-500',
+            'transition-colors duration-200',
+            'focus:outline-none',
+            error
+              ? 'border-black bg-red-50'
+              : 'border-black focus:border-gray-500',
+            props.disabled ? 'opacity-50 cursor-not-allowed bg-gray-100' : '',
+            className,
+          ].join(' ')}
           {...props}
         />
+        {hint && !error && (
+          <p className="text-xs text-gray-500 mt-2">{hint}</p>
+        )}
         {error && (
-          <p className="text-xs text-red-500 mt-1">{error}</p>
+          <p className="text-xs text-black mt-2">{error}</p>
         )}
       </div>
     );
@@ -31,5 +56,52 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 );
 
 Input.displayName = 'Input';
+
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+  ({ className = '', label, error, hint, id, ...props }, ref) => {
+    const inputId = id || props.name;
+
+    return (
+      <div className="w-full">
+        {label && (
+          <label
+            htmlFor={inputId}
+            className="block text-sm font-medium mb-2"
+          >
+            {label}
+            {props.required && <span className="text-gray-500 ml-1">*</span>}
+          </label>
+        )}
+        <textarea
+          ref={ref}
+          id={inputId}
+          className={[
+            'w-full px-3 py-3 text-sm',
+            'bg-white border',
+            'placeholder:text-gray-500',
+            'transition-colors duration-200',
+            'focus:outline-none',
+            'resize-none',
+            error
+              ? 'border-black bg-red-50'
+              : 'border-black focus:border-gray-500',
+            props.disabled ? 'opacity-50 cursor-not-allowed bg-gray-100' : '',
+            className,
+          ].join(' ')}
+          rows={4}
+          {...props}
+        />
+        {hint && !error && (
+          <p className="text-xs text-gray-500 mt-2">{hint}</p>
+        )}
+        {error && (
+          <p className="text-xs text-black mt-2">{error}</p>
+        )}
+      </div>
+    );
+  }
+);
+
+Textarea.displayName = 'Textarea';
 
 export default Input;

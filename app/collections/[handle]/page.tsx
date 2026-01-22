@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { shopifyFetch } from '@/lib/shopify/client';
-import { GET_COLLECTION_BY_HANDLE } from '@/lib/shopify/queries';
+import { GET_COLLECTION_BY_HANDLE, GET_PRODUCTS } from '@/lib/shopify/queries';
 import { Collection, Product } from '@/lib/shopify/types';
 import ProductGrid from '@/components/product/ProductGrid';
 import CollectionFilters from '@/components/collection/CollectionFilters';
@@ -11,15 +11,56 @@ interface Props {
   searchParams: Promise<{ sort?: string; availability?: string }>;
 }
 
-async function getCollection(handle: string, sortKey?: string, reverse?: boolean): Promise<Collection | null> {
+// Special virtual collections that don't exist in Shopify
+const VIRTUAL_COLLECTIONS: Record<string, { title: string; description: string }> = {
+  all: {
+    title: 'All Products',
+    description: 'Browse our complete collection of curated Chinese fashion.',
+  },
+  'new-arrivals': {
+    title: 'New Arrivals',
+    description: 'The latest additions to our collection.',
+  },
+  outerwear: {
+    title: 'Outerwear',
+    description: 'Jackets, coats, and layers for every season.',
+  },
+  tops: {
+    title: 'Tops',
+    description: 'Shirts, sweaters, and essentials.',
+  },
+  bottoms: {
+    title: 'Bottoms',
+    description: 'Trousers, pants, and more.',
+  },
+};
+
+function getSortParams(sort?: string): { sortKey: string; reverse: boolean } {
+  switch (sort) {
+    case 'newest':
+      return { sortKey: 'CREATED_AT', reverse: true };
+    case 'price-asc':
+      return { sortKey: 'PRICE', reverse: false };
+    case 'price-desc':
+      return { sortKey: 'PRICE', reverse: true };
+    case 'title-asc':
+      return { sortKey: 'TITLE', reverse: false };
+    case 'title-desc':
+      return { sortKey: 'TITLE', reverse: true };
+    default:
+      return { sortKey: 'CREATED_AT', reverse: true };
+  }
+}
+
+async function getCollection(handle: string, sortKey: string, reverse: boolean): Promise<Collection | null> {
   try {
     const response = await shopifyFetch<{ collection: Collection }>({
       query: GET_COLLECTION_BY_HANDLE,
       variables: {
         handle,
         first: 48,
-        sortKey: sortKey || 'BEST_SELLING',
-        reverse: reverse || false,
+        sortKey: sortKey === 'CREATED_AT' ? 'CREATED' : sortKey,
+        reverse,
       },
       tags: ['collections', handle],
     });
@@ -30,16 +71,67 @@ async function getCollection(handle: string, sortKey?: string, reverse?: boolean
   }
 }
 
+async function getAllProducts(sortKey: string, reverse: boolean): Promise<Product[]> {
+  try {
+    const response = await shopifyFetch<{
+      products: { edges: { node: Product }[] };
+    }>({
+      query: GET_PRODUCTS,
+      variables: {
+        first: 48,
+        sortKey,
+        reverse,
+      },
+      tags: ['products'],
+    });
+    return response.data.products.edges.map((edge) => edge.node);
+  } catch (error) {
+    console.error('Failed to fetch products:', error);
+    return [];
+  }
+}
+
+async function getProductsByType(productType: string, sortKey: string, reverse: boolean): Promise<Product[]> {
+  // For category collections, we fetch all products and filter by productType
+  // In a production app, you'd use Shopify's query filter
+  const allProducts = await getAllProducts(sortKey, reverse);
+
+  const typeMapping: Record<string, string[]> = {
+    outerwear: ['jacket', 'coat', 'outerwear', 'blazer'],
+    tops: ['shirt', 'top', 'sweater', 'hoodie', 'cardigan', 'tee', 't-shirt'],
+    bottoms: ['pants', 'trousers', 'jeans', 'shorts', 'skirt'],
+  };
+
+  const types = typeMapping[productType] || [];
+  if (types.length === 0) return allProducts;
+
+  return allProducts.filter((product) => {
+    const pt = product.productType?.toLowerCase() || '';
+    const title = product.title?.toLowerCase() || '';
+    return types.some((t) => pt.includes(t) || title.includes(t));
+  });
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { handle } = await params;
-  const collection = await getCollection(handle);
+
+  // Check virtual collections first
+  const virtual = VIRTUAL_COLLECTIONS[handle];
+  if (virtual) {
+    return {
+      title: `${virtual.title} | Axent`,
+      description: virtual.description,
+    };
+  }
+
+  const collection = await getCollection(handle, 'BEST_SELLING', false);
 
   if (!collection) {
     return { title: 'Collection Not Found' };
   }
 
   return {
-    title: collection.title,
+    title: `${collection.title} | Axent`,
     description: collection.description || `Shop ${collection.title} at Axent`,
   };
 }
@@ -47,40 +139,41 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CollectionPage({ params, searchParams }: Props) {
   const { handle } = await params;
   const { sort, availability } = await searchParams;
+  const { sortKey, reverse } = getSortParams(sort);
 
-  let sortKey = 'BEST_SELLING';
-  let reverse = false;
+  // Check if this is a virtual collection
+  const virtual = VIRTUAL_COLLECTIONS[handle];
 
-  switch (sort) {
-    case 'newest':
-      sortKey = 'CREATED';
-      reverse = true;
-      break;
-    case 'price-asc':
-      sortKey = 'PRICE';
-      reverse = false;
-      break;
-    case 'price-desc':
-      sortKey = 'PRICE';
-      reverse = true;
-      break;
-    case 'title-asc':
-      sortKey = 'TITLE';
-      reverse = false;
-      break;
-    case 'title-desc':
-      sortKey = 'TITLE';
-      reverse = true;
-      break;
+  let title: string;
+  let description: string | undefined;
+  let products: Product[];
+
+  if (virtual) {
+    title = virtual.title;
+    description = virtual.description;
+
+    if (handle === 'all' || handle === 'new-arrivals') {
+      products = await getAllProducts(sortKey, reverse);
+    } else {
+      // Category collection (outerwear, tops, bottoms)
+      products = await getProductsByType(handle, sortKey, reverse);
+    }
+  } else {
+    // Real Shopify collection
+    const collection = await getCollection(
+      handle,
+      sortKey === 'CREATED_AT' ? 'CREATED' : sortKey,
+      reverse
+    );
+
+    if (!collection) {
+      notFound();
+    }
+
+    title = collection.title;
+    description = collection.description;
+    products = collection.products.edges.map((edge) => edge.node);
   }
-
-  const collection = await getCollection(handle, sortKey, reverse);
-
-  if (!collection) {
-    notFound();
-  }
-
-  let products = collection.products.edges.map((edge) => edge.node);
 
   // Filter by availability
   if (availability === 'in-stock') {
@@ -91,9 +184,9 @@ export default async function CollectionPage({ params, searchParams }: Props) {
     <div className="container py-6">
       {/* Header */}
       <div className="mb-6">
-        <h1 className="text-2xl font-medium mb-2">{collection.title}</h1>
-        {collection.description && (
-          <p className="text-sm text-gray-500 max-w-2xl">{collection.description}</p>
+        <h1 className="text-2xl font-medium mb-2">{title}</h1>
+        {description && (
+          <p className="text-sm text-gray-500 max-w-2xl">{description}</p>
         )}
       </div>
 
@@ -105,12 +198,14 @@ export default async function CollectionPage({ params, searchParams }: Props) {
       />
 
       {/* Products */}
-      <ProductGrid products={products} />
-
-      {/* Load More - if needed */}
-      {collection.products.pageInfo.hasNextPage && (
-        <div className="text-center mt-8">
-          <button className="btn-secondary">Load More</button>
+      {products.length > 0 ? (
+        <ProductGrid products={products} />
+      ) : (
+        <div className="text-center py-10">
+          <p className="text-gray-500 mb-4">No products found in this collection.</p>
+          <a href="/collections/all" className="text-sm underline hover:no-underline">
+            Browse all products
+          </a>
         </div>
       )}
     </div>
