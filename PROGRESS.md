@@ -137,7 +137,7 @@
 
 ### Header + Hero Video (Session 16 - 2026-01-22)
 - [x] Centered AXENT logo in header on desktop
-- [x] Added desktop hero video slot for axent_hero.mp4 (asset pending)
+- [x] Added desktop hero video slot for axent_hero.mp4
 
 ### Batch Product Import (Session 5 - 2026-01-22)
 - [x] Found Products.xlsx with 4,763 Taobao Item IDs mapped to Shopify products
@@ -163,7 +163,6 @@
 - [ ] Collection filtering by vendor/price
 - [ ] Wishlist functionality
 - [ ] Recently viewed products
-- [ ] Add `public/videos/axent_hero.mp4` asset for desktop hero
 
 ### SEO & Performance
 - [ ] robots.txt

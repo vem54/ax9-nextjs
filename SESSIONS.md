@@ -515,19 +515,17 @@ Centered the logo in the header and added a desktop hero video slot for axent_he
 ### Accomplishments
 - Centered AXENT logo in the header to match luxury site conventions
 - Added desktop hero video element for `axent_hero.mp4` with poster fallback
+- Added `axent_hero.mp4` asset to `public/videos`
 - Verified lint passes
-
-### Technical Discoveries
-- Hero video asset is not present in `public/` yet; needs to be added
 
 ### Files Modified
 - `components/layout/Header.tsx`
 - `app/page.tsx`
+- `public/videos/axent_hero.mp4`
 - `PROGRESS.md`
 - `SESSIONS.md`
 
 ### Next Session Priorities
-- Add `public/videos/axent_hero.mp4` asset (or provide URL) and validate hero playback
 - Continue homepage/collection polish toward 10/10 bar
 
 ---
