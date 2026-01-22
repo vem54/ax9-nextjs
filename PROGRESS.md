@@ -118,6 +118,12 @@
 ### Verification (Session 10 - 2026-01-22)
 - [ ] Live site still shows THB; USD verification pending deploy
 
+### Verification (Session 11 - 2026-01-22)
+- [ ] Deployed updates; live site still not showing PDP trust blocks or USD (likely Vercel cache/build pending)
+
+### Editorial Visuals (Session 11 - 2026-01-22)
+- [x] Added homepage editorial modules with stock imagery (atelier, fabric, city, lookbook)
+
 ### Batch Product Import (Session 5 - 2026-01-22)
 - [x] Found Products.xlsx with 4,763 Taobao Item IDs mapped to Shopify products
 - [x] Created batch-import.ts script for importing by brand

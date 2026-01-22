@@ -403,6 +403,55 @@ Verified live site currency and noted pending USD deployment.
 
 ---
 
+## Session 12 - 2026-01-22
+
+### Summary
+Added homepage editorial visuals using stock imagery for Axent-themed storytelling.
+
+### Accomplishments
+- Inserted editorial modules and a lookbook feature on the homepage
+- Added local editorial images (atelier, fabric, city, silhouette) for testing
+
+### Technical Discoveries
+- Used Unsplash NAPI endpoints to retrieve stable image URLs for local download
+
+### Files Modified
+- `app/page.tsx`
+- `public/images/editorial/atelier.jpg`
+- `public/images/editorial/fabric.jpg`
+- `public/images/editorial/urban.jpg`
+- `public/images/editorial/silhouette.jpg`
+- `PROGRESS.md`
+- `SESSIONS.md`
+
+### Next Session Priorities
+- Validate editorial image mix and replace with final licensed imagery
+- Add PDP provenance/detail modules if desired
+
+---
+
+## Session 13 - 2026-01-22
+
+### Summary
+Pushed latest changes and attempted live verification of PDP updates and USD pricing.
+
+### Accomplishments
+- Pushed latest PDP changes to GitHub
+- Verified `origin/main` advanced to new commit
+- Checked live PDP for trust blocks and new sections (not yet visible)
+
+### Technical Discoveries
+- Live site still serving older build; deploy or cache lag suspected
+
+### Files Modified
+- `PROGRESS.md`
+- `SESSIONS.md`
+
+### Next Session Priorities
+- Confirm Vercel deploy completion and re-check USD pricing and PDP blocks
+
+---
+
 *Template for future sessions:*
 
 ## Session N - YYYY-MM-DD
